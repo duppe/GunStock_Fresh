@@ -120,6 +120,14 @@
         <img src="assets/img/hytteLogo.png" width="200" /><br />
         Canari 1.a.1 (<a href="index_Test.html">GoTo DocSide</a>)
         <h2>Mapper</h2>
+        <label for="eier">Eier:</label>
+        <select id="eier" name="valg">
+            <option value="" disabled selected>-- velg --</option>
+            <option selected value="Verksted">Verksted</option>
+            <option value="965560149_Haavald">Haavald</option>
+            <option value="bønner">bønner</option>
+            <option value="kuk">kuk</option>
+        </select>
         <input type="text" id="folderSearch" placeholder="Søk mapper..." style="width: 100%; padding: 8px; margin-bottom: 10px;">
 
         <ul id="folderList"></ul>
@@ -142,6 +150,66 @@
 
 
     <script>
+
+        // Klikk: sett localStorage('firmID') = valgt verdi
+        document.getElementById('eier').addEventListener('click', function () {
+            const val = document.getElementById('eier').value;
+            localStorage.setItem('firmID', val);
+            // valgfritt: bekreft i konsollen
+            console.log("Lagret firmID:", val);
+            //GetUserfolders();
+            loadFolders();
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            GetUserfolders().catch(err => console.error('Uventet feil:', err));
+        });
+
+
+        async function GetUserfolders() {
+            try {
+
+                // Send forespørselen med FirmID som URL-parameter
+                const response = await fetch(`/api/GetUserfolders`);
+                if (!response.ok) {
+                    console.error("❌ Server svarte med feil:", response.status, response.statusText);
+                    return;
+                }
+                const folders = await response.json();
+
+                const select = document.getElementById('eier');
+                if (!select) throw new Error("Fant ikke elementet med id='eier'");
+
+                // Husk tidligere valgt verdi (hvis du fyller listen på nytt)
+                const previousValue = select.value;
+
+                // Tøm eksisterende alternativer
+                select.innerHTML = '';
+
+             
+
+
+                // Legg til en placeholder
+                const placeholder = document.createElement('option');
+                placeholder.value = '';
+                placeholder.textContent = 'Velg eier…';
+                select.appendChild(placeholder);
+
+                // Legg til alle mapper
+                folders.forEach(f => {
+                    const opt = document.createElement('option');
+                    opt.value = f.FirmID || '';       // Bruk folder ID som value
+                    opt.textContent = f.ClientName || ''; // Bruk visningsnavn som label
+                    select.appendChild(opt);
+                });
+            
+                loadFolders();
+              }
+             catch (error) {
+                console.error("🚨 Feil ved henting av mapper:", error);
+            }
+        }
+
         async function loadFolders() {
             try {
                 // Hent FirmID fra localStorage
@@ -169,8 +237,14 @@
                     li.onclick = () => loadImages(folder);
                     folderList.appendChild(li);
                 });
+
+              
+                document.getElementById('divShowItem').hidden = true;
+
             } catch (error) {
                 console.error("🚨 Feil ved henting av mapper:", error);
+           
+                document.getElementById('divShowItem').hidden = true;
             }
         }
 
@@ -180,7 +254,7 @@
             const iframeBody = iframe.contentWindow.document.body;
 
             const canvas = await html2canvas(iframeBody, {
-            scale: 2
+                scale: 2
             });
 
             const imgData = canvas.toDataURL('image/png');
@@ -198,10 +272,10 @@
             const formData = new FormData();
             formData.append('pdf', pdfBlob, fileName + '.pdf');
 
-                await fetch(`/api/upload-pdf/${folderName}`, {
+            await fetch(`/api/upload-pdf/${folderName}`, {
                 method: 'POST',
                 body: formData
-                });
+            });
 
             alert('PDF lagret!');
         }
@@ -266,7 +340,7 @@
         function openImage(url) {
             document.getElementById('divShowItem').hidden = false;
             document.getElementById('Editor').src = "Show_Item.html?url=" + url;
-          //  window.open("Show_Item.html?url=" + url, "_blank");
+            //  window.open("Show_Item.html?url=" + url, "_blank");
         }
 
         // Legg til eventListener for søkefeltet

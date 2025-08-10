@@ -35,6 +35,31 @@ using System;
         _ftpRootFolder = _configuration["FtpSettings:RootFolder"] ?? "Hyttetorget"; // Standard verdi
     }
 
+
+    [HttpGet("GetUserfolders")]
+    public IActionResult GetUserfolders()
+    {
+        /*
+        if (!Duppe_SQL.SessionOK())
+        {
+            return Unauthorized("Session NOT OK");
+        }
+      */
+        try
+        {
+            string users = IdanikaSoftware.Duppe_SQL.RunSQLQuery("select FirmID, ClientName, ClientAPI FROM dokumentasjon_eu_db.LogOn where  ClientAPI = '965560149';");
+            if (string.IsNullOrEmpty(users))
+            {   return NotFound("Ingen funnet."); }
+          
+            return Ok(users);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Feil ved henting av rotmapper.");
+            return StatusCode(500, "Kunne ikke hente rotmapper.");
+        }
+    }
+
     [HttpGet("getfolders")]
     public IActionResult GetFolders([FromQuery] string firmID)
     {
