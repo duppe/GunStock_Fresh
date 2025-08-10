@@ -168,7 +168,7 @@
 
         async function GetUserfolders() {
             try {
-
+               
                 // Send forespørselen med FirmID som URL-parameter
                 const response = await fetch(`/api/GetUserfolders`);
                 if (!response.ok) {
@@ -224,6 +224,7 @@
 
                 if (!response.ok) {
                     console.error("❌ Server svarte med feil:", response.status, response.statusText);
+                    document.getElementById("folderList").innerHTML = "";
                     return;
                 }
 
@@ -243,7 +244,7 @@
 
             } catch (error) {
                 console.error("🚨 Feil ved henting av mapper:", error);
-           
+                
                 document.getElementById('divShowItem').hidden = true;
             }
         }

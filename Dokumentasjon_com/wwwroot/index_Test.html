@@ -87,6 +87,8 @@
     <script>
         // Hent FirmID fra localStorage og sett verdien i input-feltet
         document.addEventListener("DOMContentLoaded", function () {
+
+            GetFirmID();
             const firmID = localStorage.getItem("firmID") || "Hyttetorget"; // Fallback hvis ikke finnes
             document.getElementById("FirmID").value = firmID;
 
@@ -96,6 +98,24 @@
 
             
         });
+
+        async function GetFirmID() {
+            try {
+                const clientE = localStorage.getItem("clientEmail") || "Hyttetorget";
+                // Send forespørselen med FirmID som URL-parameter
+                const response = await fetch(`/api/GetUserfolders?ClientEmail=` + clientE);
+                if (!response.ok) {
+                    console.error("❌ Server svarte med feil:", response.status, response.statusText);
+                    return;
+                }
+                const folders = await response.json();
+
+                //alert(folders[0]['FirmID']);
+                localStorage.setItem("firmID", String(folders[0]['FirmID']));
+
+            }
+            catch (error) { }
+        }
 
         // Forhåndsvisning av valgt bilde
         document.getElementById('file').addEventListener('change', function (event) {

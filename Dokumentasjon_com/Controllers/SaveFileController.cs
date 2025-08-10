@@ -37,7 +37,7 @@ using System;
 
 
     [HttpGet("GetUserfolders")]
-    public IActionResult GetUserfolders()
+    public IActionResult GetUserfolders([FromQuery] string ClientAPI = "965560149", string ClientEmail = "")
     {
         /*
         if (!Duppe_SQL.SessionOK())
@@ -47,7 +47,24 @@ using System;
       */
         try
         {
-            string users = IdanikaSoftware.Duppe_SQL.RunSQLQuery("select FirmID, ClientName, ClientAPI FROM dokumentasjon_eu_db.LogOn where  ClientAPI = '965560149';");
+            string strSQL;
+
+            if (!string.IsNullOrWhiteSpace(ClientEmail))
+            {
+                strSQL = "SELECT FirmID, ClientName, ClientAPI " +
+                         "FROM dokumentasjon_eu_db.LogOn " +
+                         "WHERE ClientEmail = '" + ClientEmail + "';";
+                // legg til @ClientEmail-parameter på kommandoen
+            }
+            else
+            {
+                strSQL = "SELECT FirmID, ClientName, ClientAPI " +
+                         "FROM dokumentasjon_eu_db.LogOn " +
+                         "WHERE ClientAPI = '" + ClientAPI + "';";
+                // legg til @ClientAPI-parameter (f.eks. "965560149")
+            }
+            //"select FirmID, ClientName, ClientAPI FROM dokumentasjon_eu_db.LogOn where  ClientAPI = '965560149';"
+            string users = IdanikaSoftware.Duppe_SQL.RunSQLQuery(strSQL);
             if (string.IsNullOrEmpty(users))
             {   return NotFound("Ingen funnet."); }
           
