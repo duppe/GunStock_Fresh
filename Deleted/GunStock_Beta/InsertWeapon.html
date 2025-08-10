@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+      <script type="text/javascript" src="Scripts/InsertWeapon.js?1500"></script>
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <link rel="icon" type="image/png" href="favicon.ico">
+  
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+    <style type="text/css">
+        .auto-style1 {
+            width: 196px;
+        }
+        .auto-style2 {
+        }
+        .auto-style3 {
+            width: 192px;
+        }
+        .auto-style4 {
+            width: 192px;
+            height: 22px;
+        }
+        .auto-style6 {
+            height: 22px;
+        }
+        .auto-style7 {
+            width: 192px;
+            height: 24px;
+        }
+        .auto-style8 {
+            height: 24px;
+        }
+        .auto-style9 {
+            text-align: center;
+        }
+        .auto-style11 {
+            width: 267px;
+            height: 48px;
+        }
+    </style>
+</head>
+<body style="background-color:#EFEDED">
+             <div id="Main1" onkeyup="parent.ResetTimeOutTimer()" onmouseover="parent.ResetTimeOutTimer()" class="article">
+
+                <div id="Insert" style="background-color:#EFEDED">
+                    <h1>Legg inn/oppdater våpen:</h1>
+                    
+                    <p class="roleNote">&nbsp;</p>
+
+                    <div id="divRegistrering" style="padding-left:10px;width:500px;" class="contentsPanel">
+                        <table style="width:500px;">
+                            <tr>
+                                <td class="auto-style4">Dato</td>
+                                <td style="padding-left:15px" colspan="3" class="auto-style6">
+                                   <div class="HelpText" > Serienummer<div>Skriv inn Serienummer.<br />Skal du skrive inn flere, husk å skill av med komma tegn.</div></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" ><input class="userInput" id="Mtxtdate" value="2013-01-08" type="date" name="Bday" /><br />
+                                    <br />
+                                    Bestilt Dato<br />
+                                    <input class="userInput" id="MtxtBestilt" value="2013-01-08" type="date" name="Bday0" /></td>
+                                <td style="padding-left:15px" colspan="3">
+                                    <textarea class="userInput" style=" width: 197px;height: 50px;" id="MtxtSerienummer" onkeyup="CheckIfExist();" onchange="document.getElementById('MSwitch').value='1';" placeholder="Serienummer"></textarea>
+                                    <br />
+                                    (Skill serienummer med komma ) <input id="MSwitch" value="1" type="hidden" /><input id="MtxtID" value="" type="hidden" />
+&nbsp;<br /></td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4"></td>
+                                <td class="auto-style6" colspan="3">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style3">Leverandor</td>
+                                <td style="padding-left:15px" class="auto-style2" colspan="3">
+                                    &nbsp;Merke
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <select  id="MdrpLeverandor" onclick="GjorHvit(this);"  class="IsItEmty" name="drpLeverandoren">
+                                        <option></option>
+                                    </select>
+                                    &nbsp;
+                                    <select class="IsItEmty" onclick="GjorHvit(this);" onchange="DoFill('MdrpModel', '41', document.getElementById('MdrpMerke').options[document.getElementById('MdrpMerke').selectedIndex].text)" id="MdrpMerke" name="D1" class="auto-style19">
+                                        <option></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4"></td>
+                                <td class="auto-style6" colspan="3">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style7">Modell</td>
+                                <td  style="padding-left:15px" colspan="3" class="auto-style8" >
+                                 
+                                LøpLengde</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="auto-style6">
+                                    <select id="MdrpModel" class="IsItEmty" onclick="GjorHvit(this);" name="drpLeverandoren0">
+                                        <option></option>
+                                    </select>
+                                </td>
+                                <td style="padding-left:15px">
+                                 
+                                    <input id="MtxtLopLengde" onclick="GjorHvit(this);" style="width:200px;" class="IsItEmty" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style3"></td>
+                               <td style="padding-left:15px" colspan="3">
+                                    &nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style4">Mekanisme</td>
+                                <td style="padding-left:15px" class="auto-style6" colspan="3">
+                                  
+                                    Caliber
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style3">
+                                    <select id="MdrpMekanisme" onclick="GjorHvit(this);" class="IsItEmty" onchange="CheckIfExist();" name="D2">
+                                        <option></option>
+                                    </select>
+                                </td>
+                                <td style="padding-left:15px" class="auto-style2" colspan="3">
+                                    <input class="IsItEmty" onclick="GjorHvit(this);" style="width:200px;" id="MtxtCaliber" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style3">&nbsp;</td>
+                                <td class="auto-style2" colspan="2">
+                                    &nbsp;
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style3">
+                                    &nbsp;
+                                    Våpen Staus<select id="MdrpStatus" onclick="GjorHvit(this);" class="IsItEmty" name="D14" >
+                            <option></option>
+                            </select></td>
+                                <td style="padding-left:15px" colspan="3">
+                                   
+                                    Eier <br /><input style="width:200px" id="MdrpEier" type="text" />&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">&nbsp;Status Oppdatert<br />
+                                    <input id="MtxtDateOppdatert"  value="" type="date"  name="BdayO" /><br />
+                                    <br />
+                                  <div id="Agree" class="auto-style9"> <input id="Mcheck" type="checkbox" value="1" />Jeg bekrefter at alt er riktig
+                                      <br />
+                                <input id="MPost" onclick="MDoPost();" type="button" class="IsItEmty" value="Registrer" /> </div> 
+                                </td>
+                            </tr>
+                        </table>
+                        <div id="Mresult" class="lavenderBox">
+                        Klar for Registrering.
+                    </div>
+                    </div>
+
+                    <div id="divShowSerials" class="contentsPanel" style="display: block;position: absolute;top: 120px;bottom: 0;left: 600px;width:600px; height:350px;z-index: 15;">
+                        <h2 id="divHeadSerial">&nbsp;</h2>
+                        <div id="divSerials"></div>
+                    </div>
+
+                </div>
+
+                <div id="Inserted" class="article" >
+                    <h1>Kvittering :</h1>
+                   
+                    <p class="roleNote">Følgende Ble registrert i Databasen :</p>
+
+                    <div id="divRegistrering2" style="padding-left:10px;width:600px;" class="contentsPanel">
+                        <table hidden="hidden" width="50%">
+                            <tr>
+                                <td>Dato</td>
+                                <td colspan="2">
+                                    Serienummer
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input id="M2txtdate" value="" type="date" name="Bday" style="border-style: dotted; border-color: #FFFFFF;" /></td>
+                                <td colspan="2">
+                                    <textarea disabled style="border-style: dotted; border-color: #FFFFFF;" placeholder="Serienummer" id="M2txtSerienummer" class="auto-style11"></textarea>
+                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style1">Leverandor</td>
+                                <td class="auto-style1">
+                                    &nbsp;Merke
+                                </td>
+                                <td class="auto-style1"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <input id="M2txtLeverandor" value="" disabled style="border-style: dotted; border-color: #FFFFFF;" placeholder="Serienummer" placeholder="Leverandør" type="text" />
+
+                                    &nbsp;
+                                    <input id="M2txtMerke" value="" disabled style="border-style: dotted; border-color: #FFFFFF;" placeholder="Serienummer" placeholder="Merke" type="text" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>Modell</td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <input id="M2txtModel" value="" disabled style="border-style: dotted; border-color: #FFFFFF;" placeholder="Serienummer" placeholder="Model" type="text" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style1"></td>
+                                <td class="auto-style1"></td>
+                                <td class="auto-style1"></td>
+                            </tr>
+                            <tr>
+                                <td>Mekanisme</td>
+                                <td>
+                                    &nbsp;
+                                    Caliber
+                                </td>
+                                <td>LøpLengde</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input id="M2txtMekanisme" value="" disabled style="border-style: dotted; border-color: #FFFFFF;" placeholder="Serienummer" placeholder="Mekanisme" type="text" />
+
+                                </td>
+                                <td style="width:200px;">
+                                    <input style="width:80px;" id="M2txtCaliber" disabled style="border-style: dotted; border-color: #FFFFFF;" placeholder="N/A" type="text" />
+                                </td>
+                                <td>
+                                    <input id="M2txtLopLengde" disabled style="border-style: dotted; border-color: #FFFFFF;" placeholder="N/A" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    <div id="M2result" class="lavenderBox">
+                        .
+                    </div>
+                        <button id="butRefresh" onclick="OnUpdated()" value="OK">OK</button>
+                    </div>
+
+                </div>
+
+              </div>
+  
+</body>
+</html>

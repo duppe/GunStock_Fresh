@@ -1,0 +1,176 @@
+﻿
+					<!-- start: page -->
+					   
+					     
+			
+				<div class="row">
+						<div class="col-md-4 col-lg-3">
+
+							<section class="panel">
+								<div class="panel-body">
+									<div class="thumb-info mb-md">
+										<img src="assets/images/mannebilde.jpg" class="rounded img-responsive" alt="John Doe">
+										<div class="thumb-info-title">
+											
+											<span class="thumb-info-inner"><div id="PicName"></div></span>
+											<span class="thumb-info-type">Kunde</span>
+										</div>
+									</div>
+
+						
+
+								</div>
+							</section>
+
+
+					
+
+							<section hidden="hidden" class="panel">
+								<header class="panel-heading">
+									<div class="panel-actions">
+										<a href="#" class="fa fa-caret-down"></a>
+										<a href="#" class="fa fa-times"></a>
+									</div>
+
+									<h2 class="panel-title">Våpen Til Kunde</h2>
+								</header>
+								<div id="LastHistory_old" class="panel-body">
+									
+								</div>
+							</section>
+
+						</div>
+						<div class="col-md-8 col-lg-6">
+							<div id="AlertBox" ></div>
+							<div class="tabs">
+								<ul class="nav nav-tabs tabs-primary">
+									<li >
+										<a href="#overview" data-toggle="tab">Våpen</a>
+									</li>
+									<li class="active">
+										<a href="#edit" data-toggle="tab">Kundekort</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div id="overview" class="tab-pane"> <!-- Remember to remove 'active' -->
+										<h4 class="mb-md">Oversikt over kundens våpen.</h4>
+
+
+										<select id="txtSelHistory" class="form-control input-sm mb-md" rows="20"  multiple="multiple" >
+                                         <option></option>
+                                     </select>
+
+								     <hr class="dotted tall">
+										<h4 class="mb-md">legg våpen til kunde.</h4>
+										Søk <input type="search"  autocomplete="sex" name="KundesearchInput" onkeyup="DoFillCostumerSearch('0_'+DoHTMLencode(document.getElementById('searchVapenInput').value))" id="searchVapenInput" size="12" />
+								<div id="VeponList"></div>
+										
+									</div>
+									<div id="edit" class="tab-pane active">
+
+										<form class="form-horizontal" method="get">
+											<h4 class="mb-xlg">Person Opplysninger</h4>
+											
+											<fieldset>
+
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileFirstName">Navn</label>
+													<div class="col-md-8">
+														<input type="text" onchange="DoPic()" class="form-control" id="txtSalgKundenavn">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="txtSalgKundeEtternavn">Etter Navn</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="txtSalgKundeEtternavn">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileAddress">Addresse</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="txtSalgAdresse">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileAddress">PostSted</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="txtSalgPoststed">
+													</div>
+												</div>
+
+
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Telefon</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="txtSalgTelefon">
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Epost</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" id="txtSalgEPostKunde">
+													</div>
+												</div>
+
+											</fieldset>
+											<hr class="dotted tall">
+											<h4 class="mb-xlg">Kundenotat</h4>
+											<fieldset>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileBio">Info</label>
+													<div class="col-md-8">
+														<textarea class="form-control" rows="3" id="txtSalgInfo"></textarea>
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-xs-3 control-label mt-xs pt-none">Aktiv Kjøper</label>
+													<div class="col-md-8">
+														<div class="checkbox-custom checkbox-default checkbox-inline mt-xs">
+															<input type="checkbox" checked="" id="profilePublic">
+															<label for="profilePublic"></label>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+											<!--  -->
+											<div class="panel-footer">
+												<div class="row">
+													<div class="col-md-9 col-md-offset-3">
+														<button type="button" onclick="DoPostCostumerUpdate()" class="btn btn-primary">Oppdater</button>
+
+													</div>
+
+													
+													 
+												</div>
+
+													</div>
+
+										
+										</form>
+
+									</div>
+
+									
+
+
+
+								</div>
+							</div>
+					
+				
+
+							
+												
+
+								</div>
+					</div>
+
+                     
+                    
+
+
+
+					<!-- end: page -->
+			

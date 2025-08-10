@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html >
+    
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <script type="text/javascript" src="Scripts/Inside.js?w=1500"></script>
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <link rel="icon" type="image/png" href="favicon.ico">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="_your description goes here_" />
+    <meta name="keywords" content="DuppeHesten" />
+    <meta name="author" content="GunStock" />
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+    
+      
+        
+    
+        <style type="text/css">
+            .auto-style1 {
+                height: 22px;
+            }
+        </style>
+   
+        
+    
+    </head>
+    <body style="background-color:  #efeded;">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://idanika.no/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+     
+		
+            <div onkeyup="parent.ResetTimeOutTimer()" onmouseover="parent.ResetTimeOutTimer()" id="Main3" class="mainsection2">
+         
+
+                <!-- Hjem -->
+                <!-- <embed type="text/html" style="width:100%;"  src="https://www.vg.no/index.html"/> -->
+                
+                <div id="Home" class="article">
+                    <h1>
+					<a href="/" ><img id="FirmLogo" style="width:150px;" src='' alt="logo"></a></h1>
+                    <div id="FrontFirmName" class="siteSub">The total Library</div>
+                    <script> document.getElementById('FrontFirmName').innerHTML = 'Velkommen ' + readCookie('FirmName');</script>
+         
+                    <p>&nbsp;</p>
+     
+                    <table style="width:100%; vertical-align:top;">
+                        <tr>
+                            <td style="vertical-align: top">
+                                &nbsp;</td>
+                            <td style="vertical-align: top">
+                                &nbsp;
+                                </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top" class="auto-style1">
+                                </td>
+                            <td style="vertical-align: top" class="auto-style1">
+                                </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top">
+                                <div class="DuppeSelected"  style="width:300px;">
+                                    <div class="contentsHeader">Hurtig Linker</div>
+                                    <p> Legg Inn Nytt våpen
+                                        <input id="txtShortNewV" placeholder="Serienummer" style="font-size: 75%;" type="text" /><input id="butShortNewV" style="font-size: 75%;" type="button" onclick="DoNew(document.getElementById('txtShortNewV').value)" value="Start" />
+                                    </p>
+                                 
+                                   
+                                    <p>
+                                        &nbsp;
+                                    <br /><br />
+                                    </p>
+
+                                </div>
+                                <br /><br /><br />
+                                            <div  class="DuppeSelected" style="width:400px;">
+                                                <div class="contentsHeader">Ønske / feil / meninger</div>
+                                                Gi tilbakemeldinger på ting på denne siden.<br />
+                                                <textarea id="txtFeedBack" style="width:390px;height:200px; background:white;border:0px;outline:0px; " cols="20" rows="2"></textarea>
+                                               <br />
+                                                <input onclick="SendFeedBack()" id="butFeedBack" type="button" value="Send inn" />
+                                            </div>
+                            </td>
+                            <td style="vertical-align: top">
+                                <div class="DuppeSelected" style="width:650px;height:350px;vertical-align:top;display: inline-block;">
+                                    <div class="contentsHeader" >Ut og inn levering Våpen</div>
+                                    <p style="vertical-align:top;">
+                                        <input placeholder="Serienummer" autocomplete="new-password" id="txtSerial" value=""  type="text" />
+                                        &nbsp;&nbsp;
+                                        <input id="Knappen" type="button" value="Søk" onclick="javascript: GetBySerial(document.getElementById('txtSerial').value);" />
+
+
+                                        <br />
+                                    </p>
+                                    <div id="Listing"></div>
+                                    <div id="Singel" style="display:none;vertical-align:top;">
+                                        <p class="block"><strong>Eier: </strong>&nbsp;<a href="#" id="AEier">Ukjent</a> </p>
+                                        <table style="width:91%;">
+                                            <tr>
+                                                <td class="auto-style1">Navn</td>
+                                                <td>
+                                                    <input id="txtNavn" type="text" />
+                                                    <input id="txtID" type="hidden" />
+                                                    <input id="txtKunde_ID" type="hidden" />
+                                                </td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style1">Modell</td>
+                                                <td>
+                                                    <input id="txtModell" type="text" />
+                                                </td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style1">Serie</td>
+                                                <td>
+                                                    <input id="txtSerie" type="text" />
+                                                </td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style1">Leverandor</td>
+                                                <td>
+                                                    <input id="txtLeverandor" type="text" />
+                                                </td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style2">Mekanisme</td>
+                                                <td class="auto-style3">
+                                                    <input id="txtMekanisme" type="text" />
+                                                </td>
+                                                <td class="auto-style3"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style2">Merke</td>
+                                                <td class="auto-style3">
+                                                    <input id="txtMerke" type="text" />
+                                                </td>
+                                                <td class="auto-style3">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style2">Caliber</td>
+                                                <td class="auto-style3">
+                                                    <input id="txtCaliber" type="text" />
+                                                </td>
+                                                <td class="auto-style3">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style2">LopLengde</td>
+                                                <td class="auto-style3">
+                                                    <input id="txtLopLengde" type="text" />
+                                                </td>
+                                                <td class="auto-style3">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style2">Dato</td>
+                                                <td class="auto-style3">
+                                                    <input id="txtDato" type="text" />
+                                                </td>
+                                                <td class="auto-style3">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                        <button hidden="hidden" type="button" onclick="DoReturnVapen(1, document.getElementById('txtMekanisme').value, document.getElementById('txtSerie').value, 0, 'Butikk', document.getElementById('txtID').value, document.getElementById('txtKunde_ID').value)" id="Retur" value="Returner">Returner</button>
+                                     <button hidden="hidden" type="button" onclick="UtleverUpdateVapen(3, document.getElementById('txtSerie').value, document.getElementById('txtKunde_ID').value, document.getElementById('txtMekanisme').value)" id="Utlever" value="Utlever">Utlever</button>
+
+                                    </div>
+
+                                     
+
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                   
+
+                    <div class="lavenderBox">
+                    </div>
+
+                </div>
+
+                <!-- /Hjem -->
+
+
+
+                </div> <!-- MainSection End -->
+    
+
+     
+		       <script>
+                   document.getElementById('FirmLogo').src = 'FirmLogos/' + readCookie('FirmLogo') + '.png';
+                 //  alert(readCookie('FirmLogo'));
+               </script>
+      
+    </body>
+</html>

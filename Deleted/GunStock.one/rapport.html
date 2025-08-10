@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+ <head>
+     <!--
+        <script type="text/javascript" src="Scripts/Rapport.js?1500"></script>-->
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script> 
+        <script>
+            DoLoadFile('Scripts/Rapport.js', 'js')
+            
+        </script>
+        <link rel="icon" type="image/png" href="favicon.ico">
+  
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+    
+    </head>
+<body style="background-color:#EFEDED">
+        <!-- ****************************** -->
+                <!-- ********   Rapport  ********** -->
+                <!-- ****************************** -->
+                <div id="Rapport" class="article">
+              
+                    <h1>Rapporter.</h1>
+                      
+                        <div id="RapportID0">Type Rapport
+                            <select id="drpRapportLager" name="D11" >
+                            <option></option>
+                            </select>&nbsp;Periode
+                            <select id="drpRapportPeriode" style="width:160px;" name="D12">
+                                <option value="1">Kvartal 1 (Jan - Mar)</option>
+                                <option value="2">Kvartal 2 (Apr - Jun)</option>
+                                <option value="3">Kvartal 3 (Jul - Sep)</option>
+                                <option value="4">Kvartal 4 (Okt - Des)</option>
+                                <option value="5">År</option>
+                            </select> År
+                            <select id="drpRapportAr" style="width:60px;" name="D13">
+                               <option value="2017">2017</option>  <option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option>
+                            </select><input id="Button3" onclick="DoFillRapport()" type="button" value="Skriv Skjerm" /><input id="Button2" onclick="DoPrintRapport()" type="button" value="Skriv ut" /><input id="Button4" onclick="DoMailRapport()" type="button" value="Send til mail" /></div>
+                      
+
+
+                    <h2>Rapport.</h2>
+                    <div id="Rapporten"></div>
+                </div>
+
+                <!-- ****************************** -->
+                <!-- *****   Rapport End ********** -->
+                <!-- ****************************** -->
+</body>
+</html>

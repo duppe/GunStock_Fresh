@@ -1,0 +1,238 @@
+
+<!doctype html>
+<html lang="en">
+
+<!--
+var_dump($_POST);
+-->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>TimerTesting</title>
+
+    <style>
+        .timerbox {
+            font-size:20px;
+            background-color: grey;
+            color: whitesmoke;
+            border: 1px;
+            width:100px;
+            position:absolute;
+            top:10px;
+            right:50px;
+            border: grey solid 2px;
+            border-radius: 4px;
+        }
+
+        .sdsid {
+            width:200px;
+        }
+        .sdsbox {
+            font-size:30px;
+            background-color:lightgrey;
+            color:black;
+            border:2px;
+            width:250px;
+            margin:auto;
+            border: grey solid 2px;
+            border-radius: 4px;
+            display:flex;
+            wrap:nowrap;
+        }
+
+        .time{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height:40px;
+        }
+
+
+        .timetable{
+            border:grey 2px solid;
+            border-radius: 4px;
+        }
+
+        .button{
+            width:200px;
+            height:40px;
+            font-size: 15px;
+        }
+
+        .buttonbox{
+            width:200px;
+            margin:auto;
+        }
+
+    </style>
+
+    <script>
+        var INITIAL_WAIT = 1000;
+        var INTERVAL_WAIT = 10000;
+        var ONE_SECOND = 1000;
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const SDSid = urlParams.get('SDSID');
+
+
+        var events = ["mouseup", "keydown", "scroll", "mousemove"];
+        var startTime = Date.now();
+        var endTime = startTime + INITIAL_WAIT;
+        var storedTime = Number(localStorage.getItem('Timer_'+SDSid));
+        storedTime = storedTime > 3600000 ? 1000 : storedTime;
+        var totalTime = storedTime > 0 ? storedTime : 1000;
+        var buttonClickCount = 0;
+        var clickCount = 0;
+        var linkClickCount = 0;
+        var keypressCount = 0;
+        var scrollCount = 0;
+        var mouseMovementCount = 0;
+        var linkClickCount = 0;
+        var timeString = "";
+
+        var timerInterval = setInterval(function () {
+            if (!document.hidden && startTime <= endTime) {
+                startTime = Date.now();
+                timeString = formatTime(totalTime);
+                totalTime += ONE_SECOND;
+                document.getElementById("timerbox").style.backgroundColor = "grey";
+                document.getElementById("sdsid").innerHTML = SDSid;
+                document.getElementById("timer").innerHTML = timeString;
+                document.getElementById("timer2").innerHTML = timeString;
+            }
+            if (startTime > endTime) {
+                localStorage.setItem('Timer_'+SDSid, totalTime);
+                document.getElementById("timerbox").style.backgroundColor = "red";
+            }
+        }, ONE_SECOND);
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            events.forEach(function (e) {
+                document.addEventListener(e, function () {
+                    endTime = Date.now() + INTERVAL_WAIT;
+                    if (e === "mouseup") {
+                        clickCount++;
+                        document.getElementById("click").innerHTML = clickCount;
+                        if (event.target.nodeName === 'BUTTON') {
+                            buttonClickCount++;
+                            document.getElementById("button").innerHTML = buttonClickCount;
+                        }
+                        else if (event.target.nodeName === 'A') {
+                            linkClickCount++;
+                            document.getElementById("link").innerHTML = linkClickCount;
+                        }
+                    }
+                    else if (e === "keydown") {
+                        keypressCount++;
+                        document.getElementById("keypress").innerHTML = keypressCount;
+                    }
+                    else if (e === "scroll") {
+                        scrollCount++;
+                        document.getElementById("scroll").innerHTML = scrollCount;
+                    }
+                    else if (e === "mousemove") {
+                        mouseMovementCount++;
+                        document.getElementById("mouse").innerHTML = mouseMovementCount;
+                    }
+                });
+            });
+        });
+
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+
+        function formatTime(ms) {
+
+            date = new Date(ms);
+
+            var minutes = addZero(date.getMinutes());
+            var seconds = addZero(date.getSeconds());
+
+            return minutes + ":" + seconds;
+        }
+
+        document.addEventListener('visibilitychange', function logData() {
+            if (document.visibilityState === 'hidden') {
+                localStorage.setItem('Timer_'+SDSid, totalTime);
+                document.getElementById("timerbox").style.backgroundColor = "grey";
+            }
+        });
+
+        function storeTime(){
+            localStorage.removeItem('Timer_'+SDSid);
+            document.getElementById("timerbox").style.backgroundColor = "green";
+            clearInterval(timerInterval);
+            totalTime=1000;
+        }
+
+    </script>
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <table class="timetable">
+        <tr>
+            <td><b>Time Spent</b></td>
+            <td id="timer">00:00</td>
+        </tr>
+        <tr>
+            <td><b>Scrolling</b></td>
+            <td id="scroll"></td>
+        </tr>
+        <tr>
+            <td><b>Mouse Clicks</b></td>
+            <td id="click"></td>
+        </tr>
+        <tr>
+            <td><b>Button Clicks</b></td>
+            <td id="button"></td>
+        </tr>
+        <tr>
+            <td><b>Link Clicks</b></td>
+            <td id="link"></td>
+        </tr>
+        <tr>
+            <td><b>Mouse Movement</b></td>
+            <td id="mouse"></td>
+        </tr>
+        <tr>
+            <td><b>Key Presses</b></td>
+            <td id="keypress"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button>Dummy Button</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <a href="javascript:void(0)">Dummy Link</a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<DIV id="timerbox" class="timerbox">
+    <div id="timer2" class="time">00:00</div>
+</DIV>
+
+<DIV id="sdsbox" class="sdsbox">
+    GUN: <div id="sdsid" class="sdsid"></div>
+</DIV>
+
+<div id="buttonbox" class="buttonbox">
+    <button onClick="storeTime()" class="button" id="storeButton">Lagre</button>
+</div>
+
+</body>
+</html>
+

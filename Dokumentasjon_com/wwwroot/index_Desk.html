@@ -1,0 +1,286 @@
+﻿<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bildedokumentasjon – multiopplasting</title>
+    <style>
+        body {
+            background-color: cornflowerblue;
+            font-family: system-ui, sans-serif;
+            color: #fff;
+        }
+
+        .custom-file-upload {
+            font-size: 20px;
+            min-width: 260px;
+            min-height: 56px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007bff;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid #0056b3;
+            padding: 10px 16px;
+            text-align: center;
+        }
+
+            .custom-file-upload:hover {
+                background-color: #0056b3;
+            }
+
+        #previewGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.08);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .thumb {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #1e3a8a;
+        }
+
+        .dropzone {
+            margin-top: 10px;
+            border: 3px dashed #e5e7eb;
+            border-radius: 14px;
+            padding: 18px;
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+        }
+
+            .dropzone.dragover {
+                background: rgba(255,255,255,0.22);
+                border-color: #fff;
+            }
+
+        #response {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 14px;
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"] {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 2px solid #0056b3;
+            font-size: 18px;
+        }
+
+        .muted {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+    // Dynamisk last Shared.js med cache-buster (valgfritt)
+    (function() {
+      var s = document.createElement('script');
+      s.src = 'js/Shared.js?v=' + Date.now();
+      document.head.appendChild(s);
+    })();
+    </script>
+</head>
+<body>
+    <img src="assets/img/hytteLogo.png" width="300" alt="Hytta" />
+    <a href="show.html" style="color:#fff; margin-left:12px; text-decoration:underline;">GoTo ShowSide</a>
+    <h1>Bildedokumentasjon</h1>
+
+    <div id="AltOk" class="hidden">
+        <input type="button" class="custom-file-upload" value="OK" onclick="AltOk_()" />
+    </div>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <div class="row">
+            <label for="vareNummer" style="font-size:18px;">Vare-/Ordrenummer:</label>
+            <input type="text" id="vareNummer" name="vareNummer" required placeholder="F.eks. 123456" />
+        </div>
+
+        <input hidden type="text" id="FirmID" name="FirmID" value="Hyttetorget" />
+        <input hidden type="text" id="ClientEmail" name="ClientEmail" value="Hyttetorget" />
+
+        <div class="row" style="margin-top:12px;">
+            <label for="files" class="custom-file-upload">Velg bilder/video (flere)</label>
+            <input id="files" name="files" type="file" accept="image/*,video/*" multiple hidden />
+            <span id="fileCount" class="muted"></span>
+        </div>
+
+        <div id="dropzone" class="dropzone">
+            Slipp filer her (bilder/video) eller klikk på knappen over.
+            <div class="muted">Støttes: .jpg, .png, .heic (hvis nettleser støtter), .mp4, .mov m.fl.</div>
+        </div>
+
+        <div id="previewGrid"></div>
+
+        <div class="row" style="margin-top:16px;">
+            <button class="custom-file-upload" type="submit">Last opp</button>
+            <button class="custom-file-upload" type="button" id="clearBtn" style="background:#6b7280; border-color:#4b5563;">Tøm utvalg</button>
+        </div>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+    const form = document.getElementById('uploadForm');
+    const filesInput = document.getElementById('files');
+    const dropzone = document.getElementById('dropzone');
+    const previewGrid = document.getElementById('previewGrid');
+    const fileCount = document.getElementById('fileCount');
+
+    // Init FirmID/ClientEmail fra localStorage (om finnes)
+    document.addEventListener("DOMContentLoaded", function () {
+      const firmID = localStorage.getItem("firmID") || "Hyttetorget";
+      const clientE = localStorage.getItem("clientEmail") || "Hyttetorget";
+      document.getElementById("FirmID").value = firmID;
+      document.getElementById("ClientEmail").value = clientE;
+    });
+
+    // Hjelper: vis valgt filantall + preview
+    function renderPreview(list) {
+      previewGrid.innerHTML = '';
+      const arr = Array.from(list);
+      fileCount.textContent = arr.length ? `${arr.length} fil(er) valgt` : '';
+      for (const f of arr) {
+        const card = document.createElement('div');
+        card.className = 'card';
+        const label = document.createElement('div');
+        label.className = 'muted';
+        label.textContent = f.name;
+
+        if (f.type.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.className = 'thumb';
+          const reader = new FileReader();
+          reader.onload = e => { img.src = e.target.result; };
+          reader.readAsDataURL(f);
+          card.appendChild(img);
+        } else if (f.type.startsWith('video/')) {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'thumb';
+          placeholder.style.display = 'grid';
+          placeholder.style.placeItems = 'center';
+          placeholder.textContent = '🎬 Video';
+          card.appendChild(placeholder);
+        } else {
+          const placeholder = document.createElement('div');
+          placeholder.className = 'thumb';
+          placeholder.style.display = 'grid';
+          placeholder.style.placeItems = 'center';
+          placeholder.textContent = '📄 Fil';
+          card.appendChild(placeholder);
+        }
+        card.appendChild(label);
+        previewGrid.appendChild(card);
+      }
+    }
+
+    // Når bruker velger via dialog
+    filesInput.addEventListener('change', (e) => {
+      renderPreview(e.target.files);
+    });
+
+    // Drag & drop
+    ;['dragenter','dragover'].forEach(evt =>
+      dropzone.addEventListener(evt, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.add('dragover'); })
+    );
+    ;['dragleave','drop'].forEach(evt =>
+      dropzone.addEventListener(evt, (e) => { e.preventDefault(); e.stopPropagation(); dropzone.classList.remove('dragover'); })
+    );
+    dropzone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      if (dt && dt.files && dt.files.length) {
+        // Slå sammen eksisterende + droppede filer
+        const current = Array.from(filesInput.files);
+        const incoming = Array.from(dt.files);
+        const merged = new DataTransfer();
+        [...current, ...incoming].forEach(f => merged.items.add(f));
+        filesInput.files = merged.files;
+        renderPreview(filesInput.files);
+      }
+    });
+
+    // Tøm utvalg
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      filesInput.value = '';
+      fileCount.textContent = '';
+      previewGrid.innerHTML = '';
+    });
+
+    // Submit (Fetch)
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const responseBox = document.getElementById('response');
+
+      const formData = new FormData();
+      formData.append('vareNummer', document.getElementById('vareNummer').value);
+      formData.append('FirmID', document.getElementById('FirmID').value);
+      formData.append('ClientEmail', document.getElementById('ClientEmail').value);
+
+      const files = filesInput.files;
+      if (!files || !files.length) {
+        responseBox.textContent = 'Velg minst én fil først.';
+        responseBox.style.color = 'yellow';
+        return;
+      }
+
+      // Viktig: bruk samme felt-navn "files" for alle filer
+      for (const f of files) formData.append('files', f, f.name);
+
+      try {
+        const res = await fetch('/api/savefile/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json().catch(() => null);
+
+        document.getElementById('uploadForm').classList.add('hidden');
+        document.getElementById('AltOk').classList.remove('hidden');
+        responseBox.textContent = 'Opplasting OK! ' + (json?.uploaded?.length ? `(${json.uploaded.length} fil(er))` : '');
+        responseBox.style.color = 'lime';
+        previewGrid.innerHTML = '';
+      } catch (err) {
+        responseBox.textContent = 'Feil ved opplasting: ' + err.message;
+        responseBox.style.color = 'red';
+      }
+    });
+
+    // "Alt OK" knapp
+    function AltOk_() {
+      document.getElementById('uploadForm').classList.remove('hidden');
+      document.getElementById('AltOk').classList.add('hidden');
+      document.getElementById('response').textContent = '';
+      filesInput.value = '';
+      fileCount.textContent = '';
+      previewGrid.innerHTML = '';
+    }
+    window.AltOk_ = AltOk_;
+    </script>
+</body>
+</html>

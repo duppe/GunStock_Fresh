@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+     <script type="text/javascript" src="Scripts/admin.js?1500"></script>
+    <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+      <link rel="stylesheet" href="style.css" />
+    <title>GunStock</title>
+    <style type="text/css">
+        .auto-style1 {
+            width: 250px;
+        }
+        .auto-style2 {
+            width: 237px;
+        }
+        .auto-style3 {
+            width: 1559px;
+            height: 641px;
+        }
+    </style>
+</head>
+<body style="background-color:#EFEDED;" >
+     <!-- ****************************** -->
+                <!-- *********  Config ************ -->
+                <!-- ****************************** -->
+                <div onkeyup="top.ResetTimeOutTimer()" onmouseover="top.ResetTimeOutTimer()" id="Config" class="article">
+                    <h1>Instillinger:</h1>
+ <div   style="display:block;">
+                        
+                            <a href="#" onclick="CloseAllConfig();document.getElementById('ConfigDiverse').style = 'display:block;';parent.ScrollMainToTop();">Diverse</a>
+                            |
+                            <a href="#" onclick="CloseAllConfig();document.getElementById('ConfigBrukere').style = 'display:block;';ScrollMainToTop();">Brukere</a>
+                            |
+                            <a href="#" onclick="CloseAllConfig();document.getElementById('ConfigLeverandorer').style = 'display:block;';ScrollMainToTop();">Leverandører</a>
+                            |
+                            <a href="#" onclick="CloseAllConfig();document.getElementById('ConfigMerMod').style = 'display:block;';ScrollMainToTop();" class="auto-style2">Merker, modeller og Mekanismer</a>
+                            |
+                            <a href="#" onclick="DoFillSletteListe();CloseAllConfig();document.getElementById('ConfigMekanismer').style = 'display:block;';ScrollMainToTop();" class="auto-style2">Sletteforespørsel</a> 
+                            | 
+                            <a href="#" onclick="CloseAllConfig();document.getElementById('CostumerUpdate').style = 'display:block;';ScrollMainToTop();">Oppdater Kundeliste</a>
+         
+                  </div>
+
+                <div style="width:900px; background-color:#EFEDED;  border-radius: 25px;   border: 2px solid #FAFAFA;  padding: 20px; ">
+                   
+                   
+                  
+
+                
+                    <!-- ConfigBrukere -->
+                    <div  id="ConfigBrukere">
+                        <table style="width:900px">
+                        <tr>
+                            <td style="padding-left:10px;" ><br />&nbsp;<div style="padding-top:20px; padding-left:10px;width:200px;height:250px;">
+                                <select onchange="DoGetUserSettings();" id="BrukerDrpDown" style="height:250px;" name="D15" multiple="multiple">
+                                    <option></option>
+                                </select><a class="block"><input style="font-size:smaller" onclick="AddNewUser()" id="BrukerButNew" type="button" value="Ny" /><input onclick="DoDeleteUser()" style="font-size: smaller" id="BrukerButDelete" type="button" value="Slett" />&nbsp;&nbsp;<input onclick="DoKickAllUsers()" style="font-size: smaller" id="butKickUsers" type="button" value="Kast ut alle" /></a><br />
+                               
+                                </div>
+                               </td>
+                            <td style="padding-top:50px;width:300px;vertical-align:top;">Bruker Nivå<br />
+                                <input onchange="alert('ert');" id="BrukerClientLevel" style="width:10px;" type="text" /><select id="BrukerClientLevelText2" name="D16" class="auto-style2">
+                                    <option value="0">Standard Bruker</option>
+                                    <option value="1">Administrator</option>
+                                </select><br />
+                                <br />
+                                Bruker Mail<br />
+                    <a  style="vertical-align:top;">
+                                <input id="BrukerClientEmail" type="text" class="auto-style1" /></a><br />
+                                <br />
+                                <input id="BrukerClinetEnable"  type="checkbox" /> Er Aktiv<br />
+                                <br />
+                                TimeOut<br />
+                                <input id="BrukerClientTimeOutValue" type="text" class="auto-style1"/><br /><br />
+                                <input id="butOpdateUser" onclick="DoUpdateUser()" type="button" value="Oppdater brukeren" /><input id="BrukerButSendPaassword" onclick="DoSendPassword(document.getElementById('BrukerClientEmail').value);" type="button" value="Autogenerer og Send nytt passord" /></td>
+                            <td>&nbsp;</td>
+                            <td style="vertical-align:top;padding-top:50px;">
+                                Navn<br />
+                                <input id="BrukerClientName" type="text" class="auto-style1" /><br />
+                                <br />
+                                Passord<br />
+                                <input id="BrukerClientPassword" type="password" class="auto-style1" /><br />
+                                </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <script>   </script>
+                            <td style="width: 277px;">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </table>
+                    </div>
+                    <!-- Diverse -->
+                    <div id="ConfigDiverse">
+                    
+                        <table class="contentsPanel" style="width:900px">
+                        <tr>
+                            <td style="padding-left:10px;" ><br /><br /><div class="contentsPanel" style="padding-left:10px"><b>Standard</b><br /><br /><input id="chkAdminSendLogg" type="checkbox" /> Send logg hver kveld<br /><br /><br />
+                              Administrator mail<br />   <input id="txtSettingAdminMail" style="width:160px;" type="text" value="" /><br />
+                                <br />
+                                TimeOut Value<br />
+                                <input id="txtSettingTimeOutValue" value="" type="text" /><br /><br /></div></td>
+                            <td style="padding-top:50px;">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <script>   </script>
+                            <td style="width: 277px;">&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </table>
+                   
+
+                    <hr />
+
+                    </div>
+                    <!-- /Diverse -->
+
+                    <!-- Leverandører -->
+                    <div id="ConfigLeverandorer" style="vertical-align:top;">
+                        <br />
+                       
+                       
+
+                        <table style="width:900px;">
+                            <tr>
+                                <td>
+                                    <div class="articleLeft">
+                                        Velg Leverandør :<br />
+                                        <p class="block">
+                                            <select onclick="DoFillLeverandorFields();return false;" style="height:200px;width:250px" id="txtListLeverandor" name="D4" multiple="multiple">
+                                                <option>a</option>
+                                            </select>
+                                        </p><br />
+                                        &nbsp;<input value="" id="txtEditLeverandorMerker" style="width:250px" type="hidden"><input id="butAddLev" onclick="DoMakeNewLeverandor()" type="button" style="visibility:visible" value="Legg til." /><input id="butDoDeleteLeverandor" style="visibility:visible;" onclick="DoDeleteLeverandor(document.getElementById('txtEditLeverandorID').value)" type="button" value="Slett" /><br />
+                                        &nbsp;<input value="" id="txtEditLeverandorID" style="width:250px" type="hidden">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="articleRight">
+
+
+                                        <table class="auto-style4">
+                                            <tr>
+                                                <td rowspan="2">
+
+                                                    <a style="background-color:#c0c0c0">Navn : <br /><input class="contentsHeader" value="" id="txtEditLeverandor" style="width:250px" disabled="disabled" type="text" /></a><br />
+
+                                                    <a style="background-color:#c0c0c0">Adresse : <br /><input value="" id="txtEditLeverandorAdresse" style="width:250px" type="text" /></a><br />
+
+                                                    <a style="background-color:#c0c0c0">PostSted : <br /><input value="" id="txtEditLeverandorPost" style="width:250px" type="text" /></a><br />
+                                                    <a style="background-color:#c0c0c0">Telefon : <br /><input value="" id="txtEditLeverandorTelefon" style="width:250px" type="text" /></a>
+                                                    <br />
+                                                    Text : <br /><textarea id="txtEditText" style="width:250px;height:50px;" cols="20" name="S2" rows="2"></textarea>
+                                                </td>
+                                                <td>
+                                                    &nbsp;<div>Merker :</div><select id="txtListLeverandorMerker" onchange="return false;" style="height:200px;width:250px" multiple="multiple" name="D5">
+                                                        <option></option>
+                                                    </select><br />
+                                                    <select id="drpEditLeverandorMerker" name="D6">
+                                                        <option></option>
+                                                    </select><input style="height:18px;width:50px;text-size-adjust:20%;" onclick="DoAddMerker(); DoInsertLeverandor();" id="Button1" type="button" value="Legg til" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input id="butUpdateLev" style="visibility:hidden;" onclick="DoInsertLeverandor()" type="button" value="Oppdater" />
+
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <!-- /Leverandører -->
+
+                    <!-- Leverandører -->
+                    <div id="ConfigMerMod">
+                    <table  style="width:900px">
+                        <tr>
+                            <td >&nbsp;</td>
+                            <td> &nbsp;</td>
+                            <td ><div class="contentsHeader" id="MidLev2">&nbsp;</div></td>
+                            <td ></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td  style="width:250px;vertical-align:top;" >
+                                <div class="contentsPanel">
+                                <p class="contentsHeader">Modeller og Merker</p><br />
+                                <p class="article">
+                                Velg Merke, og du kan redigere modellene merke har.<br />
+                                Du kan også legge til og fjerne Merker.</p></div>
+                                <br />
+                                <div class="contentsPanel">
+
+                                    <p class="block"> Mekanisme</p>
+                                    <select onclick="var e = document.getElementById('txtListMekanisme');var SelectedT = e.options[e.selectedIndex].text;var SelectedV = e.options[e.selectedIndex].value;txtEditMekanisme.value=SelectedT;txtEditMekanismeID.value=SelectedV;" style="height:200px;width:250px" id="txtListMekanisme" name="D3" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br /><input value="" id="txtEditMekanisme" style="width:250px;height:20px;" type="text" /><input value="" id="txtEditMekanismeID" style="width:250px;background-color:aqua;" type="hidden" />
+                                    <br /><input id="butEditMekanismeUpdate" onclick="DoInsertMekanisme()" type="button" value="Oppdater" />&nbsp;&nbsp;<input id="butEditMekanismeDelete" onclick="DoDeleteMekanisme(document.getElementById('txtEditMekanismeID').value)" type="button" value="Slett" />
+                                </div>
+
+                            </td>
+                            <td style="vertical-align:top;">
+
+                         &nbsp;</td>
+                            <td style="vertical-align:top;">
+                                <div id="divEditMerker" style="padding-left:10px;" class="contentsPanel">
+                                    <p class="block">Merker<br /> </p>
+                                    <select onclick="var e = document.getElementById('txtListMerke');var SelectedV = e.options[e.selectedIndex].text;txtEditMerke.value=SelectedV;DoFill('txtListModell', 41, SelectedV);txtEditMerkeID.value=SelectedV;document.getElementById('txtEditModell').disabled = true;" style="height:200px;width:250px" id="txtListMerke" name="D8" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br />
+                                    <input value="" id="txtEditMerke" style="width:250px" type="text" /><input value="" id="txtEditMerkeID" style="width:250px;background-color:aqua;" disabled="disabled" type="hidden" /><br /> <input id="butOpdateMerke" onclick="DoInsertMerke()" type="button" value="Oppdater" /><input id="butNyMerke" onclick="txtEditMerkeID.value = '';DoInsertMerke()" type="button" value="Ny" /><input id="butDeleteMerke" onclick="DoDeleteMerke(document.getElementById('txtEditMerkeID').value)" type="button" value="Slett" /><br />
+                                </div>
+                                <br />
+                                <br />
+                              
+                                   </td>
+                            
+                            <td style="vertical-align:top;">
+                                 <div id="divEditModell" style="padding-left:10px;" class="contentsPanel" >
+                                  <p> Modell</p>
+                                   <select onclick="var e = document.getElementById('txtListModell');var SelectedV = e.options[e.selectedIndex].text;txtEditModell.value=SelectedV;txtEditModellID.value=e.options[e.selectedIndex].value;document.getElementById('txtEditModell').disabled = false;" style="height:200px;width:250px" multiple="multiple" id="txtListModell" name="D7">
+                                    <option></option>
+                                </select><br /><br />Rediger :<br />
+                                <input value="" id="txtEditModell" disabled="disabled" style="width:250px" type="text" />
+                                <input value="" id="txtEditModellID" style="width:250px;background-color:aqua;" type="hidden" />
+                                <input id="butOpdateModell" onclick="DoInsertModell()" type="button" value="Oppdater" /><input id="butNyModell" onclick="txtEditModellID.value = ''; document.getElementById('txtEditModell').disabled = false; document.getElementById('txtEditModell').value = '';" type="button" value="Ny" /><input id="butDeleteModell" onclick="DoDeleteModell(document.getElementById('txtEditModellID').value)" type="button" value="Slett" />
+                                   </div>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    </div>
+                    <!-- /Leverandører -->
+
+                     <!-- ConfigMekanismer -->
+                    <div id="ConfigMekanismer">
+                    <table class="contentsPanel" style="width:900px">
+                        <tr>
+                            <td class="auto-style1">
+
+                                &nbsp;</td>
+                            <td >&nbsp;
+                                </td>
+                            <td class="auto-style1"></td>
+                            <td class="auto-style1"></td>
+                            <td class="auto-style1"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2">
+
+                                &nbsp;</td>
+                            <td rowspan="2">
+                                &nbsp;</td>
+                            <td style="vertical-align:top; height:50px;"> 
+                               <b>Slette liste.</b> <br />Enheter som er merket Slettet.<br />
+                                <div id="SletteListe">Ingenting</div>
+                                <br /></td>
+                            <td rowspan="2">&nbsp;</td>
+                            <td rowspan="2">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;</td>
+                        </tr>
+                    </table>
+                    </div>
+                    <!-- /ConfigMekanismer -->
+
+                     <!-- KundeUpdate -->
+                    <div id="CostumerUpdate">
+                    <table class="contentsPanel" style="width:900px">
+                        <tr>
+                            <td class="auto-style1">
+
+                                &nbsp;</td>
+                            <td >&nbsp;
+                                </td>
+                            <td class="auto-style1"></td>
+                            <td class="auto-style1"></td>
+                            <td class="auto-style1"></td>
+                        </tr>
+                        <tr>
+                           
+                            <td style="vertical-align:top; height:50px; padding-left:10px;"> 
+                               <b>Oppdater KundeListen.</b> <br />Her laster du opp den exporterte listen fra multicase.<br />
+                               <iframe width="600" height="300" style="border:none;" id="UploadPage" src="DoImportXLSX.aspx" ></iframe>
+                                <br /></td>
+                          
+                        </tr>
+                        <tr>
+                            <td>
+                                Husk å rette disse kolonnene i xls(x) filen før opplasting !!<br />
+                                <img alt="" class="auto-style3" src="img/Rette.png" /></td>
+                        </tr>
+                    </table>
+                    </div>
+                    <!-- /KundeUpdate -->
+
+
+
+                    </div>
+
+
+                </div>
+
+                <!-- ****************************** -->
+                <!-- *********  Config End ******** -->
+                <!-- ****************************** -->
+</body>
+</html>

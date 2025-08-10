@@ -1,0 +1,455 @@
+﻿<!doctype html>
+<head>
+
+		<!-- Basic -->
+		
+	     <script type="text/javascript" src="Scripts/Inside.js?w=1500"></script>	
+	   	<script type="text/javascript" src="Scripts/Rapport.js?1500"></script>
+
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+
+	  <script type="text/javascript" src="Scripts/CostumerList.js?1500"></script>
+
+	  <script type="text/javascript" src="Scripts/CostumerCard.js?1500"></script>
+
+	<script type="text/javascript" src="Scripts/StoreList.js?w=1500"></script>
+
+	 <script type="text/javascript" src="Scripts/InsertWeapon.js?1500"></script>
+
+	  <script type="text/javascript" src="Scripts/admin_Brands.js?1500"></script>
+
+	<script type="text/javascript" src="Scripts/admin_Supplyers.js?1500"></script>
+
+	<script type="text/javascript" src="Scripts/Admin_DeleteListing.js?1500"></script>
+
+	<script type="text/javascript" src="Scripts/Admin_Users.js?1500"></script>
+	
+
+        <link rel="icon" type="image/png" href="favicon.ico">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="The Number ONE Gun Stock of Norway" />
+    <meta name="keywords" content="DuppeHesten" />
+    <meta name="author" content="GunStock" />
+        <title>GunStock</title>
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Web Fonts  -->
+		<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css"> -->
+
+		<!-- Vendor CSS 
+				
+		
+		
+		<link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+			-->
+		<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+
+		<!-- Specific Page Vendor CSS 
+		<link rel="stylesheet" href="assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+		<link rel="stylesheet" href="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
+-->
+
+		<link rel="stylesheet" href="assets/vendor/morris/morris.css" />
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/skins/extension.css" />-->
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">-->
+
+		<!-- Head Libs -->
+		<script src="assets/vendor/modernizr/modernizr.js"></script>
+
+	    <style type="text/css">
+            .auto-style1 {
+                height: 26px;
+            }
+        </style>
+
+	</head>
+<html class="fixed">
+	
+	<body>
+		<section class="body">
+
+			<!-- start: header -->
+			<header class="header">
+				<div class="logo-container">
+					<a href="../" class="logo">
+						<img src="assets/images/logo.png" height="35" alt="Porto Admin" />
+					
+					</a>
+				
+					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+					</div>
+				</div>
+			 
+				<!-- start: search & user box -->
+				<div class="header-right">
+			        	
+					<form action="pages-search-results.html" class="search nav-form">
+						<div class="input-group input-search">
+							<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</form>
+			
+					<span class="separator"></span>
+
+
+		  
+					
+			
+			
+					<span class="separator"></span>
+			
+					<div id="userbox" class="userbox">
+						<a href="#" data-toggle="dropdown">
+							<figure class="profile-picture">
+								<img src="assets/images/!logged-user.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
+							</figure>
+							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+								<span id="User" class="name">Innlogget</span>
+								<span id="UserRole" class="role">Bruker</span>
+								<span id="LoggStatus" class="role">Ingen Status</span>
+							</div>
+			
+							<i class="fa custom-caret"></i>
+						</a>
+			
+						<div class="dropdown-menu">
+							<ul class="list-unstyled">
+								<li class="divider"></li>
+								<li hidden="hidden">
+									<a role="menuitem" tabindex="-1" href="pages-user-profile.html"><i class="fa fa-user"></i> My Profile</a>
+								</li>
+								<li hidden="hidden">
+									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
+								</li>
+								<li>
+									<a role="menuitem" tabindex="-1" onclick="DoLogOut()" href="#"><i class="fa fa-power-off"></i> Logout</a>
+								</li>
+								<li>
+									<a role="menuitem" tabindex="-1" onclick="" href="#"><i class="fa fa-power-off"></i> Versjon 1.0.a (<script>document.write(localStorage.getItem('BaseAKA')); </script> ) </a>
+								</li>
+							</ul>
+							
+						</div>
+					</div>
+				</div>
+	
+				<!-- end: search & user box -->
+			</header>
+
+			<!-- end: header -->
+
+			<div class="inner-wrapper">
+				<!-- start: sidebar -->
+
+				<aside id="sidebar-left" class="sidebar-left">
+				
+					<div class="sidebar-header">
+						<div class="sidebar-title">
+							<h4 style="color:coral;" id="divFirmName">Demo</h4>
+						</div>
+						<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+							<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+						</div>
+
+
+					</div>	
+
+<div class="nano">
+						<div class="nano-content">
+							<nav id="menu" class="nav-main" role="navigation">
+								<ul class="nav nav-main">
+									<li class="nav-active">
+										<a href="Gunstock.html?page=inside.html">
+											<i class="fa fa-home" aria-hidden="true"></i>
+											<span>Dashboard</span>
+										</a>
+									</li>
+									<li class="nav-active">
+										<a href="Gunstock.html?page=Rapport.html&HeadName=Rapport">
+											<i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+											<span>Rapport</span>
+										</a>
+									</li>
+							        <li class="nav-active">
+										<a href="Gunstock.html?page=CostumerList.html&HeadName=Kunde%20Oversikt">
+											<i class="fa fa-users" aria-hidden="true"></i>
+											<span>KundeOversikt</span>
+										</a>
+									</li>
+									 <li class="nav-active">
+										<a href="Gunstock.html?page=StoreList.html&HeadName=Våpen%20Oversikt">
+											<i class="fa fa-list-alt" aria-hidden="true"></i>
+											<span>Våpen oversikt</span>
+										</a>
+									</li>
+									
+									
+									<li class="nav-active">
+										<a href="Gunstock.html?page=InsertWeapon.html&HeadName=Registrering%20Av%20Våpen">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+											<span>Registrer våpen</span>
+										</a>
+									</li>
+
+									<li class="nav-parent">
+										<a>
+											<i class="fa fa-gears" aria-hidden="true"></i>
+											<span>Innstillinger</span>
+										</a>
+										<ul class="nav nav-children">
+											<li>
+												<a href="Gunstock.html?page=Admin_Brands.html&HeadName=Merke%20Og%20Modell">
+													 Merke/Modell/Mekanisme
+												</a>
+											</li>
+											<li>
+												<a href="Gunstock.html?page=Admin_Supplyers.html&HeadName=Leverandører">
+													 Supplyers
+												</a>
+											</li>
+											<li>
+												<a href="Gunstock.html?page=Admin_DeleteListing.html&HeadName=Slettede%20Enheter">
+													 Slettede Enheter.
+												</a>
+											</li>
+											<li>
+												<a href="Gunstock.html?page=Admin_Users.html&HeadName=BrukerStyring">
+													 BrukerStyring.
+												</a>
+											</li>
+										</ul>
+									</li>
+
+								</ul>
+							</nav>
+				
+							<hr class="separator" />
+				
+							<div class="sidebar-widget widget-tasks">
+								<div class="widget-header">
+									<h6>Mine Tjenester</h6>
+									<div class="widget-toggle">+</div>
+								</div>
+								<div class="widget-content">
+									<ul class="list-unstyled m-none">
+										<li><a href="Gunstock.html?page=inside.html">GunStock</a></li>
+										<li><a href="#">Dokumentasjonsportalen</a></li>
+										<li><a href="#">Idanika Guardian</a></li>
+									</ul>
+								</div>
+							</div>
+				
+							<hr class="separator" />
+				     
+							<iframe hidden="hidden" id="Debug" src="DebugInfo.html" ></iframe>
+
+					</div>
+
+</div>
+				
+				</aside>
+
+<!-- Box'es -->
+
+
+				<div id="modalSM" class="modal-block modal-block-sm mfp-hide">
+										<section class="panel">
+											<header class="panel-heading">
+												<h2 class="panel-title">Are you sure?</h2>
+											</header>
+											<div class="panel-body">
+												<div class="modal-wrapper">
+													<div class="modal-text">
+														<p>Are you sure that you want to delete this image?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="panel-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm">Confirm</button>
+														<button class="btn btn-default modal-dismiss">Cancel</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+				<div id="modalDUPPE" class="modal-block modal-block-sm mfp-hide">
+										<section class="panel">
+											<header class="panel-heading">
+												<h2 class="panel-title">Are you sure?</h2>
+											</header>
+											<div class="panel-body">
+												<div class="modal-wrapper">
+													<div class="modal-text">
+														<p>Are you sure that you want to delete this dream?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="panel-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button onclick="alert('test')" class="btn btn-primary modal-confirm">Confirm</button>
+														<button class="btn btn-default modal-dismiss">Cancel</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+				<!-- end: sidebar -->
+
+				<section role="main" class="content-body">
+					<header class="page-header">
+						<h2 id="HeadName">Dashboard</h2>
+					
+						<div  class="right-wrapper pull-right">  <!-- Side Flick -->
+							<ol class="breadcrumbs">
+								<li>
+									<a href="index.html">
+										<i class="fa fa-home"></i>
+									</a>
+								</li>
+								<li><span>Dashboard</span></li>
+							</ol>
+					
+							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+						</div>
+					</header>
+
+					
+
+					<!-- start: page -->
+						<div id="AlertBox"></div>
+					
+
+						<div id="MainContent" ></div>
+							<script>
+                                DoMainContent('inside.html')
+                            </script>
+								
+
+
+					<!-- end: page -->
+
+					<!-- SideBare -->
+					<aside id="sidebar-right" class="sidebar-right">
+	<div class="nano">
+		<div class="nano-content">
+			<a href="#" class="mobile-close visible-xs">
+				Collapse <i class="fa fa-chevron-right"></i>
+			</a>
+
+			<div class="sidebar-right-wrapper">
+
+				<div class="sidebar-widget widget-calendar">
+					<h6>Mine Saker</h6>
+					<div data-plugin-datepicker data-plugin-skin="dark"></div>
+
+					<ul>
+						<li>
+							<time datetime="19-04-2014T00:00+00:00">04/19/2014</time>
+							<span>C</span>
+						</li>
+					</ul>
+				</div>
+
+
+				<div class="sidebar-widget widget-friends">
+					<h6>Siste Hendelser</h6>
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+</aside>
+							<!-- SideBare End -->
+
+				</section>
+			</div>
+
+			
+		</section>
+
+		<!-- Vendor -->
+		<script src="assets/vendor/jquery/jquery.js"></script>
+		<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+		<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>  <!-- PopUp -->
+		
+		<!-- Specific Page Vendor
+			
+					<script src="assets/vendor/flot/jquery.flot.js"></script>
+		<script src="assets/vendor/flot-tooltip/jquery.flot.tooltip.js"></script>
+		<script src="assets/vendor/flot/jquery.flot.pie.js"></script>
+		<script src="assets/vendor/flot/jquery.flot.categories.js"></script>
+		<script src="assets/vendor/flot/jquery.flot.resize.js"></script>
+
+					<script src="assets/vendor/jqvmap/maps/jquery.vmap.world.js"></script>
+		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.africa.js"></script>
+		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.asia.js"></script>
+		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.australia.js"></script>
+		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.europe.js"></script>
+		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.north-america.js"></script>
+		<script src="assets/vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+			
+
+				<script src="assets/vendor/jquery-sparkline/jquery.sparkline.js"></script>
+		<script src="assets/vendor/raphael/raphael.js"></script>
+		<script src="assets/vendor/morris/morris.js"></script>
+		<script src="assets/vendor/gauge/gauge.js"></script>
+		<script src="assets/vendor/snap-svg/snap.svg.js"></script>
+		<script src="assets/vendor/liquid-meter/liquid.meter.js"></script>
+		<script src="assets/vendor/jqvmap/jquery.vmap.js"></script>
+		<script src="assets/vendor/jqvmap/data/jquery.vmap.sampledata.js"></script>
+
+					<script src="assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+		<script src="assets/vendor/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+		<script src="assets/vendor/jquery-appear/jquery.appear.js"></script>
+		<script src="assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+		<script src="assets/vendor/jquery-easypiechart/jquery.easypiechart.js"></script>
+			-->
+
+
+
+
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="assets/javascripts/theme.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="assets/javascripts/theme.custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="assets/javascripts/theme.init.js"></script>
+
+
+		<!-- Examples -->
+		<!-- <script src="assets/javascripts/dashboard/examples.dashboard.js"></script> -->
+		<script src="assets/javascripts/ui-elements/examples.modals.js"></script> <!-- PopUp -->
+
+		
+		
+	</body>
+</html>

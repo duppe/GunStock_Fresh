@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html >
+    
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <script type="text/javascript" src="Scripts/CostumerList.js?1500"></script>
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <link rel="icon" type="image/png" href="favicon.ico">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="_your description goes here_" />
+    <meta name="keywords" content="DuppeHesten" />
+    <meta name="author" content="GunStock" />
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+    
+    </head>
+    <body style="background-color:  #EFEDED;">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://idanika.no/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+     <script>
+
+         
+         
+
+         const urlParams = new URLSearchParams(window.location.search);
+         const PID = urlParams.get('TempUserID');
+
+         if (PID != null) {
+             parent.writeCookie('TempUserID', PID, 30);
+             // SendHistory(readCookie('CLientName'), 'CostumerCard.html?ID=' + SelectedV);
+             parent.DoFillForm('txtSalg', '1', PID);
+         }
+
+       
+     </script>
+
+          <div id="KundeList" class="article">
+                    <h1>Kundeoversikt:</h1>
+
+                    <p>Trykk på pakken til venstre for å redigere kunde (Lagrer man går det rett i basen).... i øyeblikket bre en av gangen.<br /> Hvis man trykker på et kunde navn, vil man få opp alle våpen knyttet til kunde (Virekr ikke ennu). <br />Du kan enten sortere ved å trykke på bokstav, eller begynne å skrive navn i søkefeltet.</p>
+
+
+                    <div id="Kunde" style="display:block;">
+                        <p class="block"><strong>Kunder: </strong>&nbsp; </p>
+                        <div id="simpleSearch">
+                                    <input type="text" name="KundesearchInput" onkeyup="if (this.value.length > 3){DoFillcostumer(document.getElementById('searchKundeInput').value)}" id="searchKundeInput" placeholder="Søk på kunde" size="12" /><input id="butAddUser" onclick="DoPostCostumerInsertNew()" type="button" value="Legg til dette navnet" />
+                                    <div id="submitKundeSearch"></div>
+                                </div>
+
+                        <div class="tabs clearfix">
+                            <div class="tabsLeft" style="display:block;">
+
+                                
+
+                                <ul>
+                                    <li><a onclick="DoFillcostumer('123');" href="#">&nbsp;&nbsp;123...&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('a');" href="#">&nbsp;&nbsp;&nbsp;A&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('b');" href="#">&nbsp;&nbsp;&nbsp;B&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('c');" href="#">&nbsp;&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('d');" href="#">&nbsp;&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('e');" href="#">&nbsp;&nbsp;&nbsp;E&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('f');" href="#">&nbsp;&nbsp;&nbsp;F&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('g');" href="#">&nbsp;&nbsp;&nbsp;G&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('h');" href="#">&nbsp;&nbsp;&nbsp;H&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('i');" href="#">&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('j');" href="#">&nbsp;&nbsp;&nbsp;J&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('k');" href="#">&nbsp;&nbsp;&nbsp;K&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('l');" href="#">&nbsp;&nbsp;&nbsp;L&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('m');" href="#">&nbsp;&nbsp;&nbsp;M&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('n');" href="#">&nbsp;&nbsp;&nbsp;N&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('o');" href="#">&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('p');" href="#">&nbsp;&nbsp;&nbsp;P&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('q');" href="#">&nbsp;&nbsp;&nbsp;Q&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('r');" href="#">&nbsp;&nbsp;&nbsp;R&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('s');" href="#">&nbsp;&nbsp;&nbsp;S&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('t');" href="#">&nbsp;&nbsp;&nbsp;T&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('u');" href="#">&nbsp;&nbsp;&nbsp;U&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('v');" href="#">&nbsp;&nbsp;&nbsp;V&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('w');" href="#">&nbsp;&nbsp;&nbsp;W&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('x');" href="#">&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('y');" href="#">&nbsp;&nbsp;&nbsp;Y&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('z');" href="#">&nbsp;&nbsp;&nbsp;Z&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('æ');" href="#">&nbsp;&nbsp;&nbsp;Æ&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('ø');" href="#">&nbsp;&nbsp;&nbsp;Ø&nbsp;&nbsp;&nbsp;</a></li>
+                                    <li><a onclick="DoFillcostumer('å');" href="#">&nbsp;&nbsp;&nbsp;Å&nbsp;&nbsp;&nbsp;</a></li>
+                                </ul>
+
+
+                            </div>
+
+                            <div class="tabsRight" style="display:none;">
+                                <ul>
+                                    <li><a href="#">One</a></li>
+                                    <li><a href="#">Two</a></li>
+                                    <li><a href="#">Fire</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div id="KundeListing"></div>
+                    </div>
+                </div>
+    
+    </body>
+</html>

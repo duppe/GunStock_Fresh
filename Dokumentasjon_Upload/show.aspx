@@ -1,0 +1,18 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="show.aspx.cs" Inherits="test" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form target="_self" id="form1" runat="server">
+        <div>
+        </div>
+    
+    </form>
+
+    <div id="Images"></div>
+</body>
+</html>

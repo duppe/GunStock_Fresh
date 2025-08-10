@@ -1,0 +1,450 @@
+﻿<!doctype html>
+<html class="fixed">
+	<head>
+
+		<!-- Basic -->
+			   <script type="text/javascript" src="Scripts/admin_Brands.js?1500"></script>
+    <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <link rel="icon" type="image/png" href="favicon.ico">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="_your description goes here_" />
+    <meta name="keywords" content="DuppeHesten" />
+    <meta name="author" content="GunStock" />
+        <title>GunStock</title>
+
+
+		<!-- Mobile Metas -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Web Fonts  -->
+		<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css"> -->
+
+		<!-- Vendor CSS -->
+		<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="assets/vendor/magnific-popup/magnific-popup.css" />
+		<link rel="stylesheet" href="assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+
+		<!-- PopUp test
+		<link rel="stylesheet" href="assets/vendor/pnotify/pnotify.custom.css">
+		-->
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/theme.css" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
+
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
+
+
+		<!-- Head Libs -->
+		<script src="assets/vendor/modernizr/modernizr.js"></script>
+
+	</head>
+	<body>
+
+
+
+
+
+		<section class="body">
+
+			<!-- start: header -->
+			<div header="header.html">
+			</div>
+			<script>
+                includeHTML('header');
+            </script>
+			<!-- end: header -->
+
+			<div class="inner-wrapper">
+				<!-- start: sidebar -->
+
+				<div menu="menu.html">
+				</div>
+				<script>
+                    includeHTML('menu');
+                </script>
+
+				<!-- end: sidebar -->
+			
+				<section role="main" class="content-body">
+					<header class="page-header">
+						<h2>Merke / Modell / Mekanisme</h2>
+					
+						<div class="right-wrapper pull-right">
+							<ol class="breadcrumbs">
+								<li>
+									<a href="index.html">
+										<i class="fa fa-home"></i>
+									</a>
+								</li>
+								<li><span>Pages</span></li>
+								<li><span>MeMoMe</span></li>
+							</ol>
+					
+							<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+						</div>
+					</header>
+
+					<!-- start: page -->
+					  
+
+					<div class="col-md-6">
+							<div class="tabs">
+								<ul class="nav nav-tabs">
+									<li class="active">
+										<a href="#popular" data-toggle="tab"><i class="fa fa-star"></i> Popular</a>
+									</li>
+									<li>
+										<a href="#recent" data-toggle="tab">Recent</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<!-- qqqqqqqq -->
+									<div id="popular" class="tab-pane active">
+										<p>Popular</p>
+										<p>
+											<div id="Rapport" class="article">
+					    <div class="row">
+
+						
+
+						<div class="col-md-6">
+							<div id="AlertBox" ></div>
+                   				  		<section class="panel">
+							<header class="panel-heading">
+								<div class="panel-actions">
+									<a href="#" class="fa fa-caret-down"></a>
+									<a href="#" class="fa fa-times"></a>
+								</div>
+						
+								<h2 class="panel-title">Merker</h2>
+							</header>
+								<div class="panel-body">	
+									<!-- Brand Start -->
+								   <div id="divEditMerker" >
+                                    <p class="block">Merker<br /> </p>
+                                    <select class="form-control" onclick="var e = document.getElementById('txtListMerke');var SelectedV = e.options[e.selectedIndex].text;txtEditMerke.value=SelectedV;document.getElementById('ModelBrand').innerHTML=SelectedV;DoFill('txtListModell', 41, SelectedV);txtEditMerkeID.value=SelectedV;document.getElementById('txtEditModell').disabled = true;" style="height:400px;" id="txtListMerke" name="D8" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br />
+                                   
+									
+									   <div class="input-group mb-md">
+										     <input class="form-control" value="" id="txtEditMerke" type="text" />
+									<input class="form-control" value="" id="txtEditMerkeID" disabled="disabled" type="hidden" /><br /> 
+														<div class="input-group-btn">
+															
+															<button tabindex="-1" class="btn btn-primary" id="butOpdateMerke" onclick="DoInsertMerke()" type="button">Oppdater</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+																<li><a onclick="GetBrandPopUp();" href="#">Ny</a></li>
+																<li><a onclick="DoDeleteMerke(document.getElementById('txtEditMerkeID').value)" href="#">Slett</a></li>															
+															</ul>
+														</div>
+														
+													</div>
+
+
+								
+
+                                </div>
+								<!-- Brand END -->
+								</div>
+						</section>
+						</div>
+
+							<!------------------------------------------------------>
+
+								<div class="col-md-6">
+                   				  		<section class="panel">
+							<header class="panel-heading">
+								<div class="panel-actions">
+									<a href="#" class="fa fa-caret-down"></a>
+									<a href="#" class="fa fa-times"></a>
+								</div>
+						
+								<h2 class="panel-title"><a id="ModelBrand"></a> Modell</h2>
+							</header>
+								<div class="panel-body">	
+								<!-- Recipt Start -->
+								        <div id="divEditModell" >
+                                  <p> Modell</p>
+                                   <select class="form-control" onclick="var e = document.getElementById('txtListModell');var SelectedV = e.options[e.selectedIndex].text;txtEditModell.value=SelectedV;txtEditModellID.value=e.options[e.selectedIndex].value;document.getElementById('txtEditModell').disabled = false;" style="height:400px;" multiple="multiple" id="txtListModell" name="D7">
+                                    <option></option>
+                                </select><br /><br />Rediger :<br />
+
+
+											<div class="input-group mb-md">
+												<input class="form-control" value="" id="txtEditModell" disabled="disabled" />
+												<input class="form-control" value="" id="txtEditModellID"  type="hidden" />
+                               															
+
+											<div class="input-group-btn">
+															
+															<button tabindex="-1" class="btn btn-primary" id="butOpdateModell" onclick="DoInsertModell()" type="button">Oppdater</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+															<!--	<li><a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default" href="#GetNewModel">Small</a></li> -->
+																<li><a id="butNyModell" onclick="GetModelPopUp()" href="#">Ny</a></li>
+																<li><a id="butDeleteModell" onclick="DoDeleteModell(document.getElementById('txtEditModellID').value)" href="#">Slett</a></li>															
+															</ul>
+														</div>
+												<!--  PopUp 
+												<div id="GetNewModel" class="modal-block modal-block-sm mfp-hide"></div>
+												<script>alert_Input_Single('Legg inn Ny Modell', 'Modell Navn ', 'GetNewModel', 'DoInsertModell');</script>
+												<script src="assets/vendor/pnotify/pnotify.custom.js"></script>
+												-->
+											</div>
+
+                                   </div>
+								<!-- Recipt END -->
+								</div>
+						</section>
+						</div>
+
+							<!------------------------------------------------------>
+
+							<div class="col-md-6">
+                      		<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+						
+										<h2 class="panel-title">Mekanisme</h2>
+									</header>
+									<div class="panel-body">
+								
+										<!-- Mechanism Start -->
+										  <p class="block"> Mekanisme</p>
+                                    <select class="form-control" onclick="var e = document.getElementById('txtListMekanisme');var SelectedT = e.options[e.selectedIndex].text;var SelectedV = e.options[e.selectedIndex].value;txtEditMekanisme.value=SelectedT;txtEditMekanismeID.value=SelectedV;" id="txtListMekanisme" name="D3" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br />
+										 <div class="input-group mb-md">
+											<input class="form-control" value="" id="txtEditMekanisme" type="text" /><input class="form-control" value="" id="txtEditMekanismeID" type="hidden" /><br />
+										
+												<div class="input-group-btn">
+															<button tabindex="-1" class="btn btn-primary" id="butEditMekanismeUpdate" onclick="DoInsertMekanisme()" type="button">Oppdater</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+																<li><a onclick="GetMechanismPopUp();" href="#">Ny</a></li>
+																<li><a id="butEditMekanismeDelete" onclick="DoDeleteMekanisme(document.getElementById('txtEditMekanismeID').value)" href="#">Slett</a></li>															
+															</ul>
+												</div>
+										</div>
+										<!-- Mechanism END -->
+								
+							      <section class="panel">
+								<header class="panel-heading">
+									<div class="panel-actions">
+										<a href="#" class="fa fa-caret-down"></a>
+										<a href="#" class="fa fa-times"></a>
+									</div>
+
+									<h2 class="panel-title">Sizes</h2>
+									<p class="panel-subtitle">Set the size of the modal using a CSS class.</p>
+								</header>
+								<div class="panel-body">
+
+									<!-- Modal XS -->
+									<a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default" href="#modalXS">Extra Small</a>
+
+									<div id="modalXS" class="modal-block modal-block-xs mfp-hide">
+										<section class="panel">
+											<header class="panel-heading">
+												<h2 class="panel-title">Are you sure?</h2>
+											</header>
+											<div class="panel-body">
+												<div class="modal-wrapper">
+													<div class="modal-text">
+														<p>Are you sure that you want to delete this image?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="panel-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm">Confirm</button>
+														<button class="btn btn-default modal-dismiss">Cancel</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+									<!-- Modal SM -->
+									<a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default" href="#modalSM">Small</a>
+
+									<div id="modalSM" class="modal-block modal-block-sm mfp-hide">
+										<section class="panel">
+											<header class="panel-heading">
+												<h2 class="panel-title">Are you sure?</h2>
+											</header>
+											<div class="panel-body">
+												<div class="modal-wrapper">
+													<div class="modal-text">
+														<p>Are you sure that you want to delete this image?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="panel-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm">Confirm</button>
+														<button class="btn btn-default modal-dismiss">Cancel</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+									<!-- Modal MD -->
+									<a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default" href="#modalMD">Medium</a>
+
+									<div id="modalMD" class="modal-block modal-block-md mfp-hide">
+										<section class="panel">
+											<header class="panel-heading">
+												<h2 class="panel-title">Are you sure?</h2>
+											</header>
+											<div class="panel-body">
+												<div class="modal-wrapper">
+													<div class="modal-text">
+														<p>Are you sure that you want to delete this image?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="panel-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm">Confirm</button>
+														<button class="btn btn-default modal-dismiss">Cancel</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+									<!-- Modal LG -->
+									<a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default" href="#modalLG">Large</a>
+
+									<div id="modalLG" class="modal-block modal-block-lg mfp-hide">
+										<section class="panel">
+											<header class="panel-heading">
+												<h2 class="panel-title">Are you sure?</h2>
+											</header>
+											<div class="panel-body">
+												<div class="modal-wrapper">
+													<div class="modal-text">
+														<p>Are you sure that you want to delete this image?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="panel-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm">Confirm</button>
+														<button class="btn btn-default modal-dismiss">Cancel</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+
+									<!-- Modal Full -->
+									<a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default" href="#modalFull">Full</a>
+
+									<div id="modalFull" class="modal-block modal-block-full mfp-hide">
+										<section class="panel">
+											<header class="panel-heading">
+												<h2 class="panel-title">Are you sure?</h2>
+											</header>
+											<div class="panel-body">
+												<div class="modal-wrapper">
+													<div class="modal-text">
+														<p>Are you sure that you want to delete this image?</p>
+													</div>
+												</div>
+											</div>
+											<footer class="panel-footer">
+												<div class="row">
+													<div class="col-md-12 text-right">
+														<button class="btn btn-primary modal-confirm">Confirm</button>
+														<button class="btn btn-default modal-dismiss">Cancel</button>
+													</div>
+												</div>
+											</footer>
+										</section>
+									</div>
+								</div>
+							</section>
+
+									</div>
+								</section>
+						</div>
+
+							<!------------------------------------------------------>
+
+						</div>
+                </div>
+
+
+										</p>
+									</div>
+									<!-- qqqqqqqq -->
+									<div id="recent" class="tab-pane active">
+										<p>Recent</p>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					<!-- end: page -->
+				</section>
+			</div>
+
+		<!-- SideBare -->
+							<div SideBar="SideBar.html"></div>
+							<script>
+                                includeHTML('SideBar');
+                            </script>
+							<!-- SideBare End -->
+
+		</section>
+
+		<!-- Vendor -->
+		<script src="assets/vendor/jquery/jquery.js"></script>
+		<script src="assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+		<script src="assets/vendor/magnific-popup/magnific-popup.js"></script>  <!-- PopUp -->
+		<script src="assets/javascripts/ui-elements/examples.modals.js"></script> <!-- PopUp -->
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="assets/javascripts/theme.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="assets/javascripts/theme.custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="assets/javascripts/theme.init.js"></script>
+
+		<script>DoLoadThings();</script>
+		
+	</body>
+</html>

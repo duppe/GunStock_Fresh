@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+      <script type="text/javascript" src="Scripts/StoreList.js?w=1500"></script>
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+    <style type="text/css">
+        .auto-style1 {
+            height: 22px;
+        }
+        .auto-style2 {
+            height: 22px;
+            width: 217px;
+        }
+        .auto-style3 {
+            width: 217px;
+            height: 24px;
+        }
+        .auto-style4 {
+            height: 24px;
+        }
+        .auto-style5 {
+            height: 22px;
+            width: 219px;
+        }
+        .auto-style6 {
+            width: 219px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body style="background-color:#EFEDED">
+  <!-- Lager list-->
+
+                <div id="LagerList" class="article">
+                    <h1>Lager oversikt:</h1>
+                    
+                    
+                    <p class="roleNote">&nbsp;</p>
+
+                    <div  id="simpleVapenSearch">
+                        Søk på serienummer : <input type="search"  autocomplete="sex" name="KundesearchInput" onkeyup="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="searchVapenInput" size="12" />
+                        <div id="submitVapenSearch"> <br /> 
+                            
+                            <table class="auto-style1">
+                            <tr>
+                             <td class="auto-style2">Filtere :</td>
+                            <td class="auto-style1"></td>
+                            <td class="auto-style5"></td>
+                             <td class="auto-style1"></td>
+                            </tr>
+                                <tr>
+                            <td class="auto-style2">Status</td>
+                             <td class="auto-style1">Leverandør</td>
+                            <td class="auto-style5">Merke</td>
+                             <td class="auto-style1">Modell</td>
+                             </tr>
+                                  <tr>
+                            <td class="auto-style3">
+                            <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpStatus" class="IsItEmty" name="D5">
+                                <option>alle</option>
+                            </select></td>
+                             <td class="auto-style4">
+                            <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpLeverandor" class="IsItEmty" name="D3">
+                                <option>alle</option>
+                            </select></td>
+                            <td class="auto-style6">
+                            <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpMerke" name="D1">
+                                <option>alle</option>
+                            </select></td>
+                             <td class="auto-style4">
+                            <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpModel" name="D4">
+                                <option>alle</option>
+                            </select></td>
+                             </tr>
+                             </table>
+
+                            </div>
+                    </div>
+
+
+                    <div id="Lager" style="display:block;">
+                        
+                        <div id="LagerListing"></div>
+                    </div>
+                </div>
+                <!-- /Lager list-->
+    <script>
+
+        DoFill("MdrpStatus", 31, '', 1);
+        DoFill("MdrpLeverandor", 1, '', 1);
+        DoFill("MdrpMerke", 3, '', 1);
+        DoFill("MdrpModel", 4, '', 1);
+        DoFillListing('0_' + document.getElementById('searchVapenInput').value);
+
+      
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿<script>
+    function generateCacheBuster() {
+        var timestamp = new Date().getTime();
+        return 'v=' + timestamp;
+    }
+
+    // Dynamisk laste inn Shared.js med cache-buster
+    var script = document.createElement('script');
+    script.src = 'js/Shared.js?' + generateCacheBuster();
+    document.head.appendChild(script);
+
+</script>
+
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bildedokumentasjon</title>
+    <style>
+        .custom-file-upload {
+            font-size: 25px;
+            width: 400px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #007bff;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            border: 2px solid #0056b3;
+        }
+
+            .custom-file-upload:hover {
+                background-color: #0056b3;
+            }
+
+        #response {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #preview {
+            margin-top: 20px;
+            max-width: 400px;
+            display: none;
+            border-radius: 10px;
+            border: 3px solid white;
+        }
+    </style>
+</head>
+
+<body style="background-color:cornflowerblue">
+    <img src="assets/img/hytteLogo.png" width="300" alt="Hytta" /><a href="show.html">GoTo ShowSide</a>
+    <h1>Bildedokumentasjon</h1>
+
+    <div id="AltOk" hidden>
+        <input type="button" class="custom-file-upload" value="OK" onclick="AltOk_()" />
+    </div>
+
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label style="font-size:25px;" for="vareNummer">VareNummer / Ordrenummer:</label><br />
+        <input class="custom-file-upload" type="text" id="vareNummer" name="vareNummer" required>
+        <br><br>
+
+        <label hidden for="FirmID">FirmID:</label>
+        <input hidden value="HytteTorget" type="text" id="FirmID" name="FirmID">
+        <input hidden value="HytteTorget" type="text" id="ClientEmail" name="ClientEmail">
+        <br><br>
+
+        <label for="file" class="custom-file-upload">Velg fil / Ta bilde:</label>
+        <input type="file" id="file" name="file" accept="image/*" capture="environment" required hidden>
+        <br><br>
+
+        <!-- Forhåndsvisning av valgt bilde -->
+        <img id="preview" alt="Forhåndsvisning av bilde">
+
+        <button class="custom-file-upload" type="submit">Send inn</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        // Hent FirmID fra localStorage og sett verdien i input-feltet
+        document.addEventListener("DOMContentLoaded", function () {
+            const firmID = localStorage.getItem("firmID") || "Hyttetorget"; // Fallback hvis ikke finnes
+            document.getElementById("FirmID").value = firmID;
+
+            const clientE = localStorage.getItem("clientEmail") || "Hyttetorget"; // Fallback hvis ikke finnes
+            document.getElementById("ClientEmail").value = clientE;
+
+
+            
+        });
+
+        // Forhåndsvisning av valgt bilde
+        document.getElementById('file').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('preview');
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Håndter opplasting av fil
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(document.getElementById('uploadForm'));
+
+            try {
+                //const response = await fetch('/api/savefile', {
+                const response = await fetch('/api/savefile/upload', {
+
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP-feil: ${response.status}`);
+                }
+
+                document.getElementById('uploadForm').hidden = true;
+                document.getElementById('AltOk').hidden = false;
+                document.getElementById('response').innerText = "Filen ble lastet opp riktig!";
+                document.getElementById('response').style.color = "green";
+                document.getElementById('preview').style.display = "none"; // Skjul forhåndsvisning etter opplasting
+            } catch (error) {
+                document.getElementById('response').innerText = "Feil: " + error.message;
+                document.getElementById('response').style.color = "red";
+            }
+        });
+
+        // Håndter "Alt OK"-knappen
+        function AltOk_() {
+            document.getElementById('uploadForm').hidden = false;
+            document.getElementById('AltOk').hidden = true;
+            document.getElementById('response').innerHTML = '';
+
+            // document.getElementById('vareNummer').value = '';
+
+        }
+    </script>
+</body>
+
+</html>

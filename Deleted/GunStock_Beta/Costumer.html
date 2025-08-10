@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   <script type="text/javascript" src="Scripts/CostumerCard.js?1500"></script>
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <link rel="icon" type="image/png" href="favicon.ico">
+  
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+                 <div id="test" onmouseover="document.getElementById('test').class='DuppeWindow1';" style="position:absolute;top: 100px;left: 10px;width:350px; height:260px;background-color:#FAFAFA;" class="contentsPanel">
+                    
+                                    <br />Kunde Navn :&nbsp;
+                                     <br />
+                                     <input id="txtSalgKundenavn" onkeyup="DoSearch()" type="text" style="width:300px;" autocomplete="off" /><input id="butBlankCostumer" onclick="DoBlankCostumer()"  style="visibility:hidden;font-size: small;" type="button" value="Ny" /><br />
+                                     <div id="divSelKunde" style="display:none;">
+                                         <select id="drpSelKunde" onclick="DoGetCostumer()" style=" width:400px; background:transparent;border:0px;outline:0px; overflow-y: no-content; " name="D9" multiple="multiple">
+                                             <option></option>
+
+                                         </select>
+                                     </div>
+                                     Adresse :<br />
+
+                                     <input id="txtSalgAdresse" type="text" style="width:300px;" autocomplete="off" />
+                                     <br />
+                                     PostSted<br />
+                                     <input id="txtSalgPoststed" type="text" style="width:300px;" autocomplete="off" /><br />
+                                     Telefon<br />
+                                     <input id="txtSalgTelefon" onclick="DoValidateFields()" type="text" style="width:300px;" autocomplete="off" /><br />
+                                     <input id="butSelNewCostumer" onclick="DoNewCostumer()" type="button" style="visibility:hidden" value="Lagre Som Ny Kunde" /><br /><br />
+                                      
+                 </div>
+                    
+
+                <div style="position:absolute;top: 100px;left: 450px;width:600px; height:260px;background-color:#FAFAFA;" class="contentsPanel">
+                    <div id="divSalgStory" style="background-color:#FAFAFA;" class="article">Våpen historie :<br />
+                     &nbsp;<select id="txtSelHistory"  style="width:550px;height:200px; background:transparent;border:0px;outline:0px;background-color:#FAFAFA;" multiple="multiple" name="D10">
+                                         <option></option>
+                                     </select>
+                    </div>
+    
+                </div>
+
+                <div style="position:absolute;top: 400px;left: 450px;width:350px; height:260px;background-color:#FAFAFA;" class="contentsPanel">
+                <div id="divSalgObs" style="background-color:#FAFAFA;" class="article">Kunde Info :<br />
+                                 <textarea id="txtSalgInfo" style="width:300px;height:190px; background:transparent;border:0px;outline:0px;background-color:#FAFAFA; " cols="20" rows="2"></textarea>
+                                
+                             </div>
+                </div> 
+
+
+    <script>
+
+           function DoSearch() {
+           // document.getElementById('drpSalgVapenMulti').style='display:none;';  
+               if (document.getElementById('txtSalgKundenavn').value.length > 3)
+               { DoFill('drpSelKunde', 1, document.getElementById('txtSalgKundenavn').value);document.getElementById('divSelKunde').style='display:block;';document.getElementById('butBlankCostumer').style = 'display:block;'; }
+            else
+                {document.getElementById('txtSalgAdresse').value='';document.getElementById('txtSalgPoststed').value='';document.getElementById('txtSalgTelefon').value='';document.getElementById('txtSalgInfo').value='';document.getElementById('txtSelHistory').innerHTML='';document.getElementById('drpSelKunde').innerHTML='';document.getElementById('divSelKunde').style='display:none;';document.getElementById('butBlankCostumer').style = 'display:none;';}
+           }
+       
+    </script>
+
+                </body>
+</html>

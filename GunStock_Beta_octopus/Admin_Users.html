@@ -1,0 +1,110 @@
+﻿	<div class="col-md-4 col-lg-3">
+
+							<section class="panel">
+								<div class="panel-body">
+									
+
+						
+
+									<hr class="dotted short">
+
+									<h6 class="text-muted">Brukere</h6>
+
+									<br />
+                                      
+									  <select onchange="DoGetUserSettings();" id="BrukerDrpDown" class="form-control valid"  name="D15" multiple="multiple" style="height: 375px">
+                                    <option></option>
+                                </select>
+									 <br />
+
+									<div class="input-group-btn">
+															
+															<button tabindex="-1" class="btn btn-primary" id="BrukerButNew" onclick="AddNewUser()" type="button">Ny</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+																<li><a onclick="DoDeleteUser();" href="#">Slett</a></li>
+																<li><a onclick="DoKickAllUsers()" href="#">Kast ut alle</a></li>															
+															</ul>
+									</div>
+
+
+										
+									
+                               
+                                </div>
+                            
+
+							
+							</section>
+
+						</div>
+						
+						<div class="col-md-8 col-lg-6">
+
+							<div class="tabs">
+								<ul class="nav nav-tabs tabs-primary">
+									<li class="active">
+										<a href="#overview" data-toggle="tab">BrukerKort</a>
+									</li>
+								
+								</ul>
+								<div class="tab-content">
+									<div id="overview" class="tab-pane active">
+										<h4 hidden="hidden" class="mb-md">Update Status</h4>
+										<br />
+										
+												 <fieldset>
+												<div class="form-group">
+													<label class="col-md-3 control-label"  for="profileFirstName">Navn</label>
+														<input id="BrukerClientName" type="text" class="form-control" />
+												</div>
+
+												<div class="form-group">
+													<label class="col-md-3 control-label"  for="profileFirstName">Email</label>
+														<input id="BrukerClientEmail" type="text" class="form-control" />
+												</div>
+
+
+												
+
+												<div class="input-group mb-md">
+														<span class="input-group-addon btn-success"><span onclick="DoSendPassword(document.getElementById('BrukerClientEmail').value);" title="Send Nytt Passord" class="icon"><i class="fa fa-key"></i></span></span>
+														<input id="BrukerClientPassword"  type="text" class="form-control" placeholder="Password">
+													</div>
+
+											
+
+												<div class="form-group">
+													<label class="col-md-3 control-label"  for="profileFirstName">TimeOut</label>
+														<input id="BrukerClientTimeOutValue" type="text" class="form-control" />
+												</div>
+
+												
+													 <div class="form-group">
+														 <label class="col-md-3 control-label"  for="profileFirstName">BrukerNivå</label>
+												  <input onchange="alert('ert');" id="BrukerClientLevel" style="width:0px;height0; height: 0px;" type="text" />
+													 <select id="BrukerClientLevelText2" name="D16" class="auto-style2">
+													<option value="0">Standard Bruker</option>
+													<option value="1">Administrator</option>
+													</select>
+												</div>
+
+												<div class="form-group">
+													<label class="col-md-3 control-label"  for="profileFirstName">Er Aktiv</label>
+														<input id="BrukerClinetEnable" type="checkbox" class="form-control" />
+												</div>
+												   <input class="btn btn-primary" id="butOpdateUser" onclick="DoUpdateUser()" type="button" value="Oppdater brukeren" /></td>
+                          
+											</fieldset>
+
+											
+                                        
+
+					
+									</div>
+							
+								</div>
+							</div>
+						</div>

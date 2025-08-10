@@ -1,0 +1,1575 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Parse.Net</name>
+    </assembly>
+    <members>
+        <member name="T:Quiksoft.EasyMail.Parse.HTMLStreamView">
+            <summary>
+            Provides properties and methods which allow you to output HTML content to streams for viewing in a browser.
+            </summary>
+            <remarks>This class does all of its work in its constructor.  Please see the remarks on the constructor for more information.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLStreamView.Dispose">
+            <summary>
+            Releases resources and closes the streams created by the <see cref="T:Quiksoft.EasyMail.Parse.HTMLStreamView"/> object.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLStreamView.Finalize">
+            <summary>
+            Ensures that resources are freed and other cleanup operations are performed when the garbage collector reclaims the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> object.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLStreamView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLStreamView.#ctor(Quiksoft.EasyMail.Parse.EmailMessage,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> class with the EMailMessage and directory to store the HTML files.
+            </summary>
+            <param name="Message">An <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object containing HTML data.</param>
+            <param name="URLPrefix">The prefix that should be added to all image URLs.  The stream index number will be added to the end of this parameter to form the new image tag.
+            For example.  If an img tag in the email message looked like img src="cid:dlfj23242" and URLPrefix was set to "http://localhost/getstream.asp?index="
+            then the final img tag would be img src="http://localhost/getstream.asp?index=1" where 1 is the stream index.
+            This makes it easy to retrieve the stream from a web page.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.NoHTMLPartException">Thrown if the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object has no HTML body part.</exception>
+            This constructor scans the specified <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object for an HTML body part. 
+            If an HTML body part is found it is saved to a memory stream.  
+            Any embedded items, such as images, sounds, etc... are also saved as memory streams.
+            The <see cref="P:Quiksoft.EasyMail.Parse.HTMLStreamView.Streams"/> property will contain an array of streams containing a stream for each embedded object.  
+            The first item in the array will be the root or "index" file which can be loaded into a browser.  The <see cref="P:Quiksoft.EasyMail.Parse.HTMLStreamView.Body"/> property will also contain a string
+            representation of the HTML part for easy access.
+            Any HTML "src" links to these embedded items are automatically translated in the root file to point
+            to the appropriate output stream index number.  All streams created by this constructor are closed when the object is destroyed or when
+            the <see cref="M:Quiksoft.EasyMail.Parse.HTMLStreamView.Dispose"/> method is called.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLStreamView.#ctor(Quiksoft.EasyMail.Parse.EmailMessage,System.String,System.Text.Encoding)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> class with the EMailMessage and directory to store the HTML files.
+            </summary>
+            <param name="Message">An <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object containing HTML data.</param>
+            <param name="URLPrefix">The prefix that should be added to all image URLs.  The stream index number will be added to the end of this parameter to form the new image tag.
+            For example.  If an img tag in the email message looked like img src="cid:dlfj23242" and URLPrefix was set to "http://localhost/getstream.asp?index="
+            then the final img tag would be img src="http://localhost/getstream.asp?index=1" where 1 is the stream index.
+            This makes it easy to retrieve the stream from a web page.</param>
+            <param name="CharsetEncoding">Optional charset encoding to use for decoding the body of the message.  
+            This can be used if you wish to force a specific charset encoding.  Default:  value of <see cref="P:Quiksoft.EasyMail.Parse.BodyPart.Charset"/> property.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.NoHTMLPartException">Thrown if the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object has no HTML body part.</exception>
+            This constructor scans the specified <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object for an HTML body part. 
+            If an HTML body part is found it is saved to a memory stream.  
+            Any embedded items, such as images, sounds, etc... are also saved as memory streams.
+            The <see cref="P:Quiksoft.EasyMail.Parse.HTMLStreamView.Streams"/> property will contain an array of streams containing a stream for each embedded object.  
+            The first item in the array will be the root or "index" file which can be loaded into a browser.  The <see cref="P:Quiksoft.EasyMail.Parse.HTMLStreamView.Body"/> property will also contain a string
+            representation of the HTML part for easy access.
+            Any HTML "src" links to these embedded items are automatically translated in the root file to point
+            to the appropriate output stream index number.  All streams created by this constructor are closed when the object is destroyed or when
+            the <see cref="M:Quiksoft.EasyMail.Parse.HTMLStreamView.Dispose"/> method is called.
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.HTMLStreamView.Streams">
+            <summary>
+            Gets or sets the files used to create the HTML stream view.  
+            </summary>
+            <value>An string array containing the files used for this view.  The first file is always the index file.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.HTMLStreamView.Body">
+            <summary>Gets the HTML body as a string.</summary>
+            <value>The HTML body as a string.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.HTMLStreamView.CharsetEncoding">
+            <summary>Gets the encoding of the HTML part.</summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.EmailMessagePartFlags">
+            <summary>
+            Flags that determines how the message part should be displayed.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.None">
+            <summary>
+            Part is unknown.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.RelatedToBody">
+            <summary>
+            Mime parts grouped with the body of the message. For example images that are part of an HTML body.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.Attachment">
+            <summary>
+            The MIME part is an attachment.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.Text">
+            <summary>
+            The MIME part is a plain text body.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.HTML">
+            <summary>
+            The MIME part is an HTML body.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.RTF">
+            <summary>
+            The MIME part is in rich text format.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.XML">
+            <summary>
+            The MIME part is an XML part.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.Multipart">
+            <summary>
+            The MIME part is a multipart.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.RFC822">
+            <summary>
+            The MIME part is an attached email.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.Enriched">
+            <summary>
+            The MIME part is an Enriched body.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.Signature">
+            <summary>
+            The MIME part is a digital signature.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.Encrypted">
+            <summary>
+            The MIME part is an encrypted envelope.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.EmailMessagePartFlags.AttachedSignature">
+            <summary>
+            The MIME part contains signed data.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Quiksoft.EasyMail.Internal.DateParser.ParseDate(System.String,System.Int32,System.Int32,System.Boolean,System.Int32@)" -->
+        <member name="M:Quiksoft.EasyMail.Internal.DateParser.ParseDate(System.String,System.String@)">
+            The same, but assumes GMT is the default timezone. 
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Quiksoft.EasyMail.Internal.DateParser.localZoneOffset" -->
+        <member name="T:Quiksoft.EasyMail.Parse.LicenseException">
+            <summary>
+            The exception that is thrown when the static class <see cref="T:Quiksoft.EasyMail.Parse.License"/> is not set with a valid license key.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.LicenseException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.LicenseException"/> class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.License">
+            <summary>
+            Provides a static property for setting the libraries license key.
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.License.Key">
+            <summary>
+            Gets and sets the license key.
+            </summary>
+            <value>This property holds the license key for the assembly. If this property is not assigned a valid license key, the object will throw a <see cref="T:Quiksoft.EasyMail.Parse.LicenseException"/> from most methods.</value>		
+            <remarks>
+            In addition to setting this property in your code you can also set it in the appSettings section of the Machine.config, App.Config and Web.Config files.
+            Just add a key value pair for Quiksoft.EasyMail.NetEdition3.License.Key. See example for more information.<BR/>
+            The <see cref="T:Quiksoft.EasyMail.Parse.License"/> object and the Key property are static.  You can not create an instance of the <see cref="T:Quiksoft.EasyMail.Parse.License"/> object.  For more information on license keys, see the remarks on the <see cref="T:Quiksoft.EasyMail.Parse.License"/> object.
+            </remarks>
+            <example>
+            Setting the license key in your code:
+            <code>
+            Quiksoft.EasyMail.Parse.License.Key = "Your Company/12F3234AB23E23"
+            </code>
+            Setting the license key in a config file:
+            <code>
+            
+            &lt;configuration&gt;
+            	&lt;appSettings&gt;
+            		&lt;add key="Quiksoft.EasyMail.NetEdition3.License.Key" value="Your Company/12F3234AB23E23" /&gt;
+            	&lt;/appSettings&gt;
+            &lt;/configuration&gt;
+            </code>
+            </example>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.NoHTMLPartException">
+             <summary>
+            The exception that is thrown when there is no valid HTML <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> found.
+             </summary>
+             
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.NoHTMLPartException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the NoHTMLPartException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.NoHTMLPartException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the NoHTMLPartException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.HTMLFileView">
+            <summary>
+            Provides properties and methods which allow you to output HTML content to files for viewing in a browser.
+            </summary>
+            <remarks>
+            This class does all of its work in its constructor.  Please see the remarks on the constructor for more information.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLFileView.Dispose">
+            <summary>
+            Releases resources and deletes the files created by the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> object.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLFileView.Dispose(System.Boolean)">
+            <summary>
+            Releases resources and deletes the files created by the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> object.
+            </summary>
+            <param name="DeleteFiles">A Boolean value that determines if the messages should be deleted.  Default: True</param>
+            <remarks>If the DeleteFiles parameter is set to false the files will be left after the object is destroyed.  If set to true the files will be deleted when the object is destroyed.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLFileView.Finalize">
+            <summary>
+            Ensures that resources are freed and other cleanup operations are performed when the garbage collector reclaims the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> object.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLFileView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLFileView.#ctor(Quiksoft.EasyMail.Parse.EmailMessage,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> class with the EMailMessage and directory to store the HTML files.
+            </summary>
+            <param name="Message">An <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object containing HTML data.</param>
+            <param name="Directory">The directory to store the output files.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.NoHTMLPartException">Thrown if the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object has no HTML body part.</exception>
+            This constructor scans the specified <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object for an HTML body part. 
+            If an HTML body part is found it is saved to the specified output directory.  
+            Any embedded items, such as images, sounds, etc... are also saved as files in the output directory.
+            The <see cref="P:Quiksoft.EasyMail.Parse.HTMLFileView.Files"/> property will contain a string array containing the name of each file created.  
+            The first item in the array will be the root or "index" file which can be loaded into a browser.  
+            Any HTML "href" links to these embedded items are automatically translated in the root file to point
+            to the appropriate output files.  All files created by this constructor are deleted when the object is destroyed or when
+            the <see cref="M:Quiksoft.EasyMail.Parse.HTMLFileView.Dispose"/> method is called.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.HTMLFileView.#ctor(Quiksoft.EasyMail.Parse.EmailMessage,System.String,System.Text.Encoding)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.HTMLFileView"/> class with the EMailMessage and directory to store the HTML files.
+            </summary>
+            <param name="Message">An <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object containing HTML data.</param>
+            <param name="Directory">The directory to store the output files.</param>
+            <param name="CharsetEncoding">Optional charset encoding to use for decoding the body of the message.  
+            This can be used if you wish to force a specific charset encoding.  Default:  value of <see cref="P:Quiksoft.EasyMail.Parse.BodyPart.Charset"/> property.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.NoHTMLPartException">Thrown if the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object has no HTML body part.</exception>
+            This constructor scans the specified <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object for an HTML body part. 
+            If an HTML body part is found it is saved to the specified output directory.  
+            Any embedded items, such as images, sounds, etc... are also saved as files in the output directory.
+            The <see cref="P:Quiksoft.EasyMail.Parse.HTMLFileView.Files"/> property will contain a string array containing the name of each file created.  
+            The first item in the array will be the root or "index" file which can be loaded into a browser.  
+            Any HTML "href" links to these embedded items are automatically translated in the root file to point
+            to the appropriate output files.  All files created by this constructor are deleted when the object is destroyed or when
+            the <see cref="M:Quiksoft.EasyMail.Parse.HTMLFileView.Dispose"/> method is called.
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.HTMLFileView.Files">
+            <summary>
+            Gets or sets the files used to create the HTML file view.  
+            </summary>
+            <value>An string array containing the files used for this view.  The first file is always the index file.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.Collection">
+            <summary>
+            An abstract class for a strongly typed collection.
+            </summary>
+            <remarks>This class is abstract.  It is inherited by the other collection classes and can not be instantiated directly.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Collection.#ctor">
+            <summary>
+            Initializes a new instance of the Collection class.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.Collection.pArray">
+            <summary>
+            Array that actually holds the collection objects
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.Collection.Position">
+            <summary>
+            Position at which collection is referencing
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Collection.GetEnumerator">
+            <summary>
+            Returns the enumerator.
+            </summary>
+            <returns>Object</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Collection.MoveNext">
+            <summary>
+            Moves to the next record.
+            </summary>
+            <returns>Returns true on success false if no more records are available.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Collection.Remove(System.Object)">
+            <summary>
+            Removes the first occurrence of a specific object from the collection.
+            </summary>
+            <param name="Obj">The object to remove from the collection.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Collection.Reset">
+            <summary>
+            Resets the index of the collection to the first object.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Collection.Clear">
+            <summary>
+            Removes all objects from the collection.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Collection.GetLastItem">
+            <summary>
+            Return the last item in the collection.
+            </summary>
+            <returns>A reference to the last object in the collection.</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Collection.Current">
+            <summary>
+            Returns current object
+            </summary>
+            <value>Current object in the collection</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Collection.Count">
+            <summary>
+            Gets the number of items in collection.
+            </summary>
+            <value>Number of items in the collection</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.HMAC_MD5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.digest">
+            Digest to be returned upon completion of the HMAC_MD5.
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.kIpad">
+            Inner Padding.
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.kOpad">
+            Outer Padding.
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.innerMD5">
+            Inner MD5 object.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.#ctor(System.Byte[])">
+            Constructor
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.clear">
+            Clear the HMAC_MD5 object.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.addData(System.Byte[])">
+             HMAC_MD5 function.
+            
+             @param text Text to process
+            
+             @param key Key to use for HMAC hash.
+            
+             @return hash
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.addData(System.Byte[],System.Int32,System.Int32)">
+             HMAC_MD5 function.
+            
+             @param text Text to process
+            
+             @param textStart   Start position of text in text buffer.
+             @param textLen Length of text to use from text buffer.
+             @param key Key to use for HMAC hash.
+            
+             @return hash
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.verify(System.Byte[])">
+             Validate a signature against the current digest.
+             Compares the hash against the signature.
+            
+             @param signature
+            
+             @return True if the signature matches the calculated hash.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.ToString">
+              Return the digest as a HEX string.
+            
+             @return a hex representation of the MD5 digest.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.#ctor">
+             MD5 initialization. Begins an MD5 operation, writing a new context.
+            
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.update(System.Byte[])">
+             MD5 block update operation. Continues an MD5 message-digest
+             operation, processing another message block, and updating the
+             context.
+            
+             @param input byte array of data
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.update(System.Byte[],System.Int32,System.Int32)">
+             MD5 block update operation.
+            
+             @param input byte array of data
+             @param offset offset into the array to start the digest calculation
+             @param inputLen byte count to use in the calculation
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.digest">
+             MD5 finalization. Ends an MD5 message-digest operation, writing the
+             the message digest and zeroizing the context.
+            
+             @return the digest
+            
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.InputStreamException">
+             <summary>
+            The exception that is thrown when there is an error related to the input stream.
+             </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.InputStreamException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the InputStreamException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.InputStreamException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the InputStreamException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.OutputStreamException">
+             <summary>
+            The exception that is thrown when there is an error related to the output stream.
+             </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.OutputStreamException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the OutputStreamException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.OutputStreamException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the OutputStreamException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.ParsingException">
+             <summary>
+            The exception that is thrown when there is an error parsing a message.
+             </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.ParsingException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the ParsingException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.ParsingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the ParsingException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.BodyPartFormat">
+            <summary>
+            Specifies the format of the body part.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.BodyPartFormat.Text">
+            <summary>
+            The body part format is plain text.
+            </summary>
+            <value>The text/plain content type is the generic subtype for plain text. It is the default specified by Request for Comments (RFC) 822.</value>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.BodyPartFormat.HTML">
+            <summary>
+            The body part format is HTML.
+            </summary>
+            <value>The text/html content type is an Internet Media Type as well as a Multipurpose Internet Mail Extensions (MIME) content type. It allows you to use the same richness as web pages use to displaying e-mail messages.</value>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.BodyPartFormat.RTF">
+            <summary>
+            The body part format is rich text.
+            </summary>
+            <value>The text/RTF content type is obsolete and not supported by many mail clients.  HTML should be used instead when possible.</value>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.BodyPartFormat.XML">
+            <summary>
+            The body part format is XML.
+            </summary>
+            <value>The text/XML content type can be used in custom applications when data needs to be transferred using the Multipurpose Internet Mail Extensions (MIME) standard.</value>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.BodyPartFormat.Enriched">
+            <summary>
+            The body part format is enriched.
+            </summary>
+            <value>The text/enriched content type is intended to be simple enough to make multifont, formatted e-mail widely readable. It uses a very limited set of formatting commands that all begin with <commandname> and end with </commandname>, affecting the formatting of the text between those two tokens.</value>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.BodyPartFormat.Unknown">
+            <summary>
+            The body part format is unknown. 
+            </summary>
+            <value>The content type was not recognized.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.UUDecode">
+            <summary>
+            Summary description for UUDecode.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.ValidateL">
+            <summary>
+            Summary description for ValidateL.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.Timestamp">
+            <summary>
+            The Timestamp class includes properties which can be used to examine information contained in timestamps associated with a message.
+            As a message is transmitted from sender to recipient, it will pass through one or more mail servers. 
+            Each mail server will usually prepend a timestamp header to the message, indicating the time that the particular mail server received the message, 
+            where the message came from, where it is going, and more.<br/><br/>
+            
+            The following is a timestamp header as it appears, in an e-mail message.<br/>
+            Received: from DELLOPTIPLEX (unverified [198.139.119.196]) by netserver.quiksoft.com<br/>
+            (Rockliffe SMTPRA 4.5.4) with SMTP id &lt;B0000634929@netserver.quiksoft.com&gt; for &lt;sales@quiksoftcorp.com&gt;;<br/>
+            Mon, 10 Sep 2001 11:31:03 -0400<br/><br/>
+            Timestamps can be used for many purposes including, tracing a message's path, 
+            finding out what time it was received by your mail server, and more.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Timestamp.#ctor">
+            <summary>
+             Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.Timestamp"/> class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Timestamp.Parse(System.String)">
+            <summary>
+            Parses a "Received" header and create a new Timestamp instance.
+            </summary>
+            <param name="Received">The "Received" header to parse.</param>
+            <returns>New <see cref="T:Quiksoft.EasyMail.Parse.Timestamp"/> object.</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Timestamp.By">
+            <summary>
+            Gets the host that received the message.
+            </summary>
+            <value>The host that received the message.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Timestamp.For">
+            <summary>
+            Gets the ultimate recipient of the message.
+            </summary>
+            <value>The ultimate recipient of the message.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Timestamp.From">
+             <summary>
+             Gets the host that sent the message.
+             </summary>
+            <value>The host that sent the message.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Timestamp.ID">
+            <summary>
+            Gets the unique ID given to the message by the receiving host.
+            </summary>
+            <value>The unique ID given to the message by the receiving host.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Timestamp.With">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Timestamp.Via">
+            <summary>
+            Gets the service that performed the transmission, such as TELNET, SMTP, etc...
+            </summary>
+            <value>The service that performed the transmission.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Timestamp.DateTime">
+            <summary>
+            Gets the date and time that the message was received by the host.
+            </summary>
+            <value>The date and time that the message was received by the host. In <see cref="T:Quiksoft.EasyMail.Parse.MailDate"/> format.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.TimestampCollection">
+             <summary>
+             Represents a collection of <see cref="T:Quiksoft.EasyMail.Parse.Timestamp"/> objects.
+             </summary>
+             <remarks>
+             The Timestamps object is a collection object used to manage the collection of timestamps associated with a message.
+             Each Timestamp object can be used to examine a timestamp associated with a message.
+             As a message is transmitted from sender to recipient,
+             it will pass through one or more mail servers. 
+             Each mail server will usually prepend a timestamp to the message, 
+             indicating the time that the particular mail server received the message, 
+             where the message came from, where it is going, and more. 
+             Timestamps can be used for many purposes including, 
+             tracing a message's path, finding out what time it was received by your mail server, and more. 
+             See the properties of the Timestamp object for a list of all information that is available in a timestamp.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.TimestampCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.TimestampCollection">TimestampCollection class</see>.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.TimestampCollection.Add(Quiksoft.EasyMail.Parse.Timestamp)">
+            <summary>
+            Adds an <see cref="T:Quiksoft.EasyMail.Parse.Timestamp"/> object to the collection.
+            </summary>
+            <param name="TimestampObj">The <see cref="T:Quiksoft.EasyMail.Parse.Timestamp"/> object to add to the collection.</param>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.TimestampCollection.Item(System.Int32)">
+            <summary>
+            Returns a reference to the <see cref="T:Quiksoft.EasyMail.Parse.Timestamp"/> Object at a specified position.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.Base64">
+            <summary>
+            Quiksoft Base64 decoder.  10000000000 times faster then FromBase64Transform class.
+            This class adds super fast internal buffering of input and output.
+            Don't forget to call FLUSH!
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.Base64.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes data to the stream.  Data will be base64 decoded.
+            White space will be ignored.
+            </summary>
+            <param name="data"></param>
+            <param name="offset"></param>
+            <param name="Length"></param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.MailStream">
+            <summary>
+            Summary description for MailStream.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MailStream.FillBuffer">
+            <summary>
+            Fills the buffer with data read from the stream.
+            </summary>
+            <returns>Number of bytes read.</returns>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.ParseFlags">
+            <summary>
+            Provides enumerated values that specify the available options when calling the
+            %EmailMessage.Parse% method.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.ParseFlags.None">
+            <summary>
+            No options specified.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.ParseFlags.HeaderOnly">
+            <summary>
+            Only parses the header of the message. All other data is ignored.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.ObjectAvailable">
+            <summary>
+            Internal Use only.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.ISMIMEDecode">
+            <summary>
+            Implements an SMIME interface.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.ISMIMEDecode.CreateMessage(System.Boolean,System.Int32)">
+            <summary>
+            Used to start an SMIME session.
+            </summary>	
+            <param name="Detached">Set to true if the message is detached.</param>
+            <param name="Capacity">The estimated size of decrypted data.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.ISMIMEDecode.SetFollowUPParameter(System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            Used to initialize and SMIME session.
+            </summary>
+            <param name="Obj1"></param>
+            <param name="Obj2"></param>
+            <param name="Obj3"></param>
+            <param name="Obj4"></param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.EmailMessage">
+            <summary>
+            Provides properties and methods that are used to examine the various parts of a parsed message.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.Reset">
+            <summary>
+            Resets the EmailMessage object to its original state.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.EmailMessage.m_strMessageID">
+            <summary>
+            Interal Variable for message ID
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.ParseMessageFromStream(System.IO.Stream,System.Boolean)">
+            <summary>
+            pass in file or memory stream for parsing.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.#ctor(System.IO.Stream,Quiksoft.EasyMail.Parse.ParseFlags,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> class with an e-mail message from a stream.
+            </summary>
+            <param name="InStream">A stream containing and RFC-822 message.  The stream must support seeking.</param>
+            <param name="Flags">One or more of the <see cref="T:Quiksoft.EasyMail.Parse.ParseFlags"/> values specifying how the message should be parsed.</param>
+            <param name="SMIMEDecoder">SMIME interface for decoding SMIME messages.  Must be obtained by calling the SMIME.GetSMIMEDecoder() method.</param>
+            <exception cref="T:System.NotSupportedException">Thrown if the stream specified does not support seeking.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.Parse.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading  error.</exception>
+            <exception cref="T:System.InvalidCastException">The SMIME interface passed in was not valid.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.#ctor(System.IO.Stream,Quiksoft.EasyMail.Parse.ParseFlags)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> class with an e-mail message from a stream.
+            </summary>
+            <param name="InStream">A stream containing and RFC-822 message.  The stream must support seeking.</param>
+            <param name="Flags">One or more of the <see cref="T:Quiksoft.EasyMail.Parse.ParseFlags"/> values specifying how the message should be parsed.</param>
+            <exception cref="T:System.NotSupportedException">Thrown if the stream specified does not support seeking.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.Parse.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading  error.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> class with an e-mail message from a stream.
+            </summary>
+            <param name="InStream">A stream containing and RFC-822 message.  The stream must support seeking.</param>
+            <exception cref="T:System.NotSupportedException">Thrown if the stream specified does not support seeking.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.Parse.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading  error.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.Parse(System.IO.Stream,Quiksoft.EasyMail.Parse.ParseFlags,System.Object)">
+            <summary>
+            Parses and e-mail message from a stream with additional options.
+            </summary>
+            <param name="InStream">A stream containing and RFC-822 message.  The stream must support seeking.</param>
+            <param name="Flags">One or more of the <see cref="T:Quiksoft.EasyMail.Parse.ParseFlags"/> values specifying how the message should be parsed.</param>
+            <param name="SMIMEDecoder">SMIME interface to use for parsing SMIME messages.</param>
+            <exception cref="T:System.NotSupportedException">Thrown if the stream specified does not support seeking.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.Parse.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading  error.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.Parse(System.IO.Stream,Quiksoft.EasyMail.Parse.ParseFlags)">
+            <summary>
+            Parses and e-mail message from a stream with additional options.
+            </summary>
+            <param name="InStream">A stream containing and RFC-822 message.  The stream must support seeking.</param>
+            <param name="Flags">One or more of the <see cref="T:Quiksoft.EasyMail.Parse.ParseFlags"/> values specifying how the message should be parsed.</param>
+            <exception cref="T:System.NotSupportedException">Thrown if the stream specified does not support seeking.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.Parse.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading  error.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.Parse(System.IO.Stream)">
+            <summary>
+            Parses an e-mail message from a stream.
+            </summary>
+            <param name="InStream">A stream containing and RFC-822 message.  The stream must support seeking.</param>
+            <exception cref="T:System.NotSupportedException">Thrown if the stream specified does not support seeking.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.Parse.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading  error.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.ParseMessageLine(System.String,Quiksoft.EasyMail.Parse.EmailMessagePart)">
+            <summary>
+            THis is used to parse each line of the message headers.
+            </summary>
+            <param name="strLine">Line of header</param>
+            <param name="pPart"></param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.GetParameter(System.String,System.String)">
+            <summary>
+            Parses out an RFC822 header and retrieves parameters.  I.e.  content-type: a/b; file="good"
+            File is an example of a parameter.
+            </summary>
+            <param name="strCT">Full header line</param>
+            <param name="name">name of parameter to find</param>
+            <returns>the parameter or an empty string</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.ParseContentType(System.String,System.String@,System.String@,System.String@,System.String@)">
+            <summary>
+            Breaks content type line in to it smaller parts.
+            </summary>
+            <param name="strCT">Full content type line</param>
+            <param name="strBoundary">returns boundary mark or empty string</param>
+            <param name="strCharset">filled with charset or empty string</param>
+            <param name="strSubType">filled with subtype or empty string</param>
+            <param name="strName">filled with name or empty string</param>
+            <returns>content type.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.GetHeaderLine(System.Int32)">
+            <summary>
+            Get a line from the message headers. Leaves the ending CRLF.
+            </summary>
+            <param name="Index">Starting index into the message headers.</param>
+            <returns> Returns header field value at the index specified 
+            or null if the index is out of range.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessage.GetHeaderField(System.String)">
+            <summary>
+            Returns the value of the specified header field.
+            </summary>
+            <param name="HeaderField">Header field to retrieve.</param>
+            <returns>Returns the header field value in a string array or null if the header field is not present.
+            If the message contains multiple header fields each value will be stored in the 
+            string array.</returns>
+            <exception cref="T:Quiksoft.EasyMail.Parse.ParsingException">Thrown if error parsing header field.</exception>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.Version">
+            <summary>
+            Gets the current version of this assembly.
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.BaseStream">
+            <summary>
+            Gets the underlying stream object.
+            </summary>
+            <value>The RFC-822 data stream associated with this message.</value>
+            <remarks>
+            The underlying RFC-822 stream is the original user-provided stream used to fill the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object.  The stream is used by the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object until it is destroyed or disposed.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.EmailMessageParts">
+            <summary>
+            Gets the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePartCollection"/> object.
+            </summary>
+            <value>A <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePartCollection"/> object.</value>
+            <remarks>
+            The <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePartCollection"/> is a collection containing every part of the message.
+            It is not normally necessary to access this collection, however it is available for advanced users.  
+            See the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePartCollection"/> class for more information.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.NonMIME">
+            <summary>
+            EmailMessage is None mime, don't use any mime formatting.
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.Date">
+            <summary>
+            Gets the <see cref="T:Quiksoft.EasyMail.Parse.MailDate"/> object specifying the date and time of the message.
+            </summary>
+            <value>A <see cref="T:Quiksoft.EasyMail.Parse.MailDate"/> object.</value>
+            <remarks>
+            The <see cref="T:Quiksoft.EasyMail.Parse.MailDate"/> object returned by this property is created from the "Date:" line in the RFC-822 header
+            of this message.  If the date format is not valid or if the date line does not exist in the header this will return a null value.
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.From">
+            <summary>
+            Gets the sender address or addresses specified in the message.
+            </summary>
+            <value>An <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection"/> object containing an <see cref="T:Quiksoft.EasyMail.Parse.Address"/> object for each sender address specified in the message.</value>
+            <remarks>
+            This property returns a collection of one or more <see cref="T:Quiksoft.EasyMail.Parse.Address"/> objects created from the "From:" line in the RFC-822 header
+            of this message.  Normally the "From:" header only contains one address, however it is possible for it to contain multiple addresses.
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.To">
+            <summary>
+            Gets the recipient address or addresses specified in the message.
+            </summary>
+            <value>An <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection"/> object containing an <see cref="T:Quiksoft.EasyMail.Parse.Address"/> object for each recipient address specified in the message.</value>
+            <remarks>
+            This property returns a collection of one or more <see cref="T:Quiksoft.EasyMail.Parse.Address"/> objects created from the "To:" line in the RFC-822 header
+            of this message.  
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.BCC">
+            <summary>
+            Gets the blind carbon copy address or addresses specified in the message.
+            </summary>
+            <value>An <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection"/> object containing an <see cref="T:Quiksoft.EasyMail.Parse.Address"/> object for each blind carbon copy address specified in the message.</value>
+            <remarks>
+            This property returns a collection of one or more <see cref="T:Quiksoft.EasyMail.Parse.Address"/> objects created from the "BCC:" line in the RFC-822 header
+            of this message.  
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.CC">
+            <summary>
+            Gets the carbon copy address or addresses specified in the message.
+            </summary>
+            <value>An <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection"/> object containing an <see cref="T:Quiksoft.EasyMail.Parse.Address"/> object for each carbon copy address specified in the message.</value>
+            <remarks>
+            This property returns a collection of one or more <see cref="T:Quiksoft.EasyMail.Parse.Address"/> objects created from the "CC:" line in the RFC-822 header
+            of this message.  
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.ReplyTo">
+            <summary>
+            Gets the "Reply-To" address or addresses specified in the message.
+            </summary>
+            <value>An <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection"/> object containing an <see cref="T:Quiksoft.EasyMail.Parse.Address"/> object for each "Reply-To" address specified in the message.</value>
+            <remarks>
+            This property returns a collection of one or more <see cref="T:Quiksoft.EasyMail.Parse.Address"/> objects created from the "Reply-To:" line in the RFC-822 header
+            of this message.  Normally the "Reply-To" header only contains one address, however it is possible for it to contain multiple addresses.
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.Timestamps">
+            <summary>
+            Gets the <see cref="T:Quiksoft.EasyMail.Parse.TimestampCollection"/> object.
+            </summary>
+            <value>A TimestampCollection Object.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.Attachments">
+            <summary>
+            Gets the <see cref="T:Quiksoft.EasyMail.Parse.AttachmentCollection"/> object.
+            </summary>
+            <value>An AttachmentCollection object.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.BodyParts">
+            <summary>
+            Gets the body parts of the message.
+            </summary>
+            <value>A <see cref="T:Quiksoft.EasyMail.Parse.BodyPartCollection"/> object containing a <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> object for each body part contained in the message.</value>
+            <remarks>
+            A message may have more than one body part, for example plain-text and HTML.  See the <see cref="T:Quiksoft.EasyMail.Parse.BodyPartCollection"/> class for more information.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.Subject">
+            <summary>
+            Gets the subject of the e-mail message.
+            </summary>
+            <value>A string representing the subject of the message.</value>
+            <remarks>
+            The value returned by this property is created from the "Subject:" line in the RFC-822 header
+            of this message.  
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.MessageID">
+            <summary>
+            Gets the message id of the e-mail message.
+            </summary>
+            <value>A string representing the message id.</value>
+            <remarks>
+            The value returned by this property is created from the "Message-ID:" line in the RFC-822 header
+            of this message.
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.Priority">
+            <summary>
+            Gets the priority of the e-mail message. 
+            </summary>
+            <value>A string representing the priority of this message.</value>
+            <remarks>
+            The value returned by this property is created from the "X-Priority:" line in the RFC-822 header
+            of this message.  Different mail readers may set or interpret the X-Priority setting differently.
+            Some may not set or interpret it at all. The popular readers set or interpret "4"=low, "3"=normal and "1"=high.
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessage.Header">
+            <summary>
+            Gets the header of the e-mail message. 
+            </summary>
+            <value>This property contains the entire unparsed message header.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.AddressCollection">
+             <summary>
+             Represents a collection of <see cref="T:Quiksoft.EasyMail.Parse.Address">Address</see> objects.
+             </summary>
+             <remarks>
+             AddressCollection objects are automatically created and are exposed by several properties of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object
+             such as: <see cref="P:Quiksoft.EasyMail.Parse.EmailMessage.To"/>, <see cref="P:Quiksoft.EasyMail.Parse.EmailMessage.From"/>, <see cref="P:Quiksoft.EasyMail.Parse.EmailMessage.CC"/>, and <see cref="P:Quiksoft.EasyMail.Parse.EmailMessage.BCC"/>.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.AddressCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection">AddressCollection class</see>.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.AddressCollection.Add(Quiksoft.EasyMail.Parse.Address)">
+            <summary>
+            Adds an <see cref="T:Quiksoft.EasyMail.Parse.Address"/> object to the collection.
+            </summary>
+            <param name="AddressObj">The <see cref="T:Quiksoft.EasyMail.Parse.Address"/> object to add to the collection.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.AddressCollection.ToString">
+            <summary>
+            Obtains the String representation of this instance.
+            </summary>
+            <returns>The string representation specifies which can be used to display the address collection.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.AddressCollection.CleanAddressName(System.String)">
+            <summary>
+            Removes and trims any illegal characters from address name.
+            </summary>
+            <param name="strName">Name to clean</param>
+            <returns>Cleaned address.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.AddressCollection.CleanAddress(System.String)">
+            <summary>
+            Removes and trims any illegal characters from an e-mail address.
+            </summary>
+            <param name="strAddress">Email Address</param>
+            <returns>Cleaned address as string.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.AddressCollection.Parse(System.String)">
+            <summary>
+            Parses a list of email addresses and returns an <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection"/> object holding the addresses.
+            </summary>
+            <param name="AddressLine">A semicolon-delimited list of e-mail addresses that should be parsed. </param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.ParsingException">Thrown if the address line could not be parsed.</exception>
+            <returns>An <see cref="T:Quiksoft.EasyMail.Parse.AddressCollection"/> object.</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.AddressCollection.Item(System.Int32)">
+            <summary>
+            Returns a reference to the <see cref="T:Quiksoft.EasyMail.Parse.Address"/> Object at a specified position.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.Address">
+            <summary>
+            Provides properties used to examine an e-mail address and related information.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Address.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.Address">Address class</see> with an e-mail address and name.
+            </summary>
+            <param name="Address">Email Address</param>
+            <param name="Name">Contains the friendly name of the address.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Address.ToString">
+            <summary>
+            Obtains the String representation of this instance.
+            </summary>
+            <returns>Returns a string representation of this instance.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Address.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.Address">Address class</see>
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.Address.m_strAddress">
+            <summary>
+            Email Address member string
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.Address.m_strName">
+            <summary>
+            Email Name
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Address.EmailAddress">
+            <summary>
+            Gets the e-mail address.
+            </summary>
+            <value>The e-mail address.  i.e. j.doe@domain.com</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Address.Name">
+            <summary>
+            Gets the friendly name of the address.
+            </summary>
+            <value>The friendly name of the addressee.  i.e. John Doe</value>
+            <remarks>This property is optional and will not always be set. </remarks>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.EmailMessagePartCollection">
+            <summary>
+            Represents a collection of <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> objects.
+            </summary>
+            <remarks>
+            The EmailMessagePartCollection contains explicit low-level details about every part of the message.  The <see cref="T:Quiksoft.EasyMail.Parse.AttachmentCollection"/> and <see cref="T:Quiksoft.EasyMail.Parse.BodyPartCollection"/> classes
+            provide a more friendly type of access to the most common message parts, therefore it is not normally necessary to access this collection and it 
+            exists solely for advanced users.  
+            This collection is automatically created and is exposed by the <see cref="P:Quiksoft.EasyMail.Parse.EmailMessage.EmailMessageParts"/> property
+            of an <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessagePartCollection.Add(Quiksoft.EasyMail.Parse.EmailMessagePart)">
+            <summary>
+            Adds a EmailMessagePart to the collection.
+            </summary>
+            <param name="EmailMessagePartObj">The <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> object to add to the collection.</param>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePartCollection.Item(System.Int32)">
+            <summary>
+            Returns a reference to the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> Object at a specified position.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.BodyPartCollection">
+             <summary>
+             Represents a collection of <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> objects.
+             </summary>
+             <remarks>
+             This collection is automatically created and is exposed by the <see cref="P:Quiksoft.EasyMail.Parse.EmailMessage.BodyParts"/> property
+             of an <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.BodyPartCollection.Add(Quiksoft.EasyMail.Parse.BodyPart)">
+            <summary>
+            Adds an <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> object to the collection.
+            </summary>
+            <param name="BodyPartObj"><see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> object to add to the collection.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.BodyPartCollection.GetBodyPart(Quiksoft.EasyMail.Parse.BodyPartFormat)">
+            <summary>
+            Returns the first <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> that matches the specified <see cref="T:Quiksoft.EasyMail.Parse.BodyPartFormat"/>.
+            </summary>
+            <param name="Format">The <see cref="T:Quiksoft.EasyMail.Parse.BodyPartFormat"/> you would like returned.</param>
+            <returns>If a <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> is found that matched the specified <see cref="T:Quiksoft.EasyMail.Parse.BodyPartFormat"/> that <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> it is returned.  If no matching <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> is found, null is returned.</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.BodyPartCollection.Item(System.Int32)">
+            <summary>
+            Returns a reference to the <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> Object at a specified position.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.BodyPart">
+            <summary>
+            The BodyPart object includes properties and methods used to examine and perform actions on a single body part.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.BodyPart.#ctor(Quiksoft.EasyMail.Parse.EmailMessagePart)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/> class with an <see cref="P:Quiksoft.EasyMail.Parse.BodyPart.EmailMessagePart"/> object.
+            </summary>
+            <param name="EmailMessagePartObj">A <see cref="P:Quiksoft.EasyMail.Parse.BodyPart.EmailMessagePart"/> object.</param>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.BodyPart.Charset">
+            <summary>
+            Gets the character set of the <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/>.
+            </summary>
+            <value>Contains the name of the character set that was used to compose the <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/>.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.BodyPart.Format">
+            <summary>
+            Gets the format of the <see cref="T:Quiksoft.EasyMail.Parse.BodyPart"/>.
+            </summary>
+            <value>One of the <see cref="T:Quiksoft.EasyMail.Parse.BodyPartFormat"/> values specifying the format of the body part.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.BodyPart.BodyText">
+            <summary>
+            Gets the text of the body part.
+            </summary>
+            <value>The text body of the part.</value>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading from the input stream.</exception>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.BodyPart.EmailMessagePart">
+            <summary>
+            Gets the underlying <see cref="P:Quiksoft.EasyMail.Parse.BodyPart.EmailMessagePart"/> object.
+            </summary>
+            <value>The underlying <see cref="P:Quiksoft.EasyMail.Parse.BodyPart.EmailMessagePart"/> object.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.Attachment">
+            <summary>
+            The Attachment object includes properties and methods used to examine and perform actions on a single attachment.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Attachment.#ctor(Quiksoft.EasyMail.Parse.EmailMessagePart)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> class with an <see cref="P:Quiksoft.EasyMail.Parse.Attachment.EmailMessagePart"/> object.
+            </summary>
+            <param name="Part">A <see cref="P:Quiksoft.EasyMail.Parse.Attachment.EmailMessagePart"/> object.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Attachment.GetEstimatedSize">
+            <summary>
+            Gets the estimated size of the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/>.
+            </summary>
+            <return>The estimated size in bytes of the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/>.</return>
+            <remarks>
+            The value reported by this property is the length of the data section of the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> object.
+            If the data is encoded, the value will be estimated depending on the encoding used.
+            If the size can not be estimated the value will contain the size of the data in its encoded state.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Attachment.Save(System.String,System.Boolean,System.Boolean@)">
+            <summary>
+            Decodes the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> and saves it to the specified file.
+            </summary>
+            <param name="Filename">The path and filename of the destination file.</param>
+            <param name="Overwrite">Set this parameter to true to overwrite the destination file if it already exists.</param>
+            <param name="Decoded">This out parameter will be set to false if the encoding scheme used on the attachment
+            is not supported, otherwise it will be set to true.  If the encoding scheme is not supported
+            the attachment will be saved in its encoded state.
+            </param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.OutputStreamException">Thrown if there is an error writing to the output stream.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading from the input stream.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Attachment.Save(System.IO.Stream,System.Boolean@)">
+            <summary>
+            Decodes an <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> to a stream.
+            </summary>
+            <param name="OutStream">Can be any stream available for writing.</param>
+            <param name="Decoded">This out parameter will be set to false if the encoding scheme used on the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> 
+            is not supported, otherwise it will be set to true.  If the encoding scheme is not supported
+            the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> will be streamed in its encoded state.
+            </param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown when there is an error reading the source stream, such as the stream being closed. </exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.OutputStreamException">Thrown when there is an error writing to the output stream.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Attachment.Save(System.IO.Stream)">
+            <summary>
+            Decodes an <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> to a stream.
+            </summary>
+            <param name="OutStream">Can be any stream available for writing.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown when there is an error reading the source stream, such as the stream being closed. </exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.OutputStreamException">Thrown when there is an error writing to the output stream.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Attachment.Save(System.String,System.Boolean)">
+            <summary>
+            Decodes the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> and saves it to the specified file.
+            </summary>
+            <param name="Filename">The path and filename of the destination file.</param>
+            <param name="Overwrite">Set this parameter to true to overwrite the destination file if it already exists.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.OutputStreamException">Thrown if there is an error writing to the output stream.</exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown if there is an error reading from the input stream.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.Attachment.GetValidFileName">
+            <summary>
+            Returns a valid file name that can be used when displaying and saving the attachment.  
+            </summary>
+            <remarks>It is sometimes hard to determine the suggested filename of an attachment.  This is because many mail clients use different header fields to store this data. 
+            This method will try and provide the best possible suggested file name for the attachment by searching all possible headers.
+            This method will also remove any invalid characters that are not supported by the current operating system.
+            If the attachment is an RFC822 message the subject will be used as the file name and it will have an .eml extension.
+            If there is no file name anywhere in the header this will return "unknown" as the file name.</remarks>
+            <returns>The suggested file name for the current attachment.</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Attachment.Filename">
+            <summary>
+            Gets the attachment file name.
+            </summary>
+            <value>The suggested Attachment file name taken from the headers.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Attachment.Length">
+            <summary>
+            Gets the length of the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/>.
+            </summary>
+            <value>The length in bytes of the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/>.</value>
+            <remarks>
+            The value reported by this property is the length of the data section of the <see cref="P:Quiksoft.EasyMail.Parse.Attachment.EmailMessagePart"/> object.
+            If the data is encoded, the value will contain the size of the data in its encoded state.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Attachment.Description">
+            <summary>
+            Gets the content description of the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/>.
+            </summary>
+            <value>A string containing a description of the attachment if available.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.Attachment.EmailMessagePart">
+            <summary>
+            Gets the underlying <see cref="P:Quiksoft.EasyMail.Parse.Attachment.EmailMessagePart"/> object.
+            </summary>
+            <value>The underlying <see cref="P:Quiksoft.EasyMail.Parse.Attachment.EmailMessagePart"/> object.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.AttachmentCollection">
+             <summary>
+             Represents a collection of <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> objects.
+             </summary>
+             <remarks>
+             This collection is automatically created and is exposed by the <see cref="P:Quiksoft.EasyMail.Parse.EmailMessage.Attachments"/> property
+             of an <see cref="T:Quiksoft.EasyMail.Parse.EmailMessage"/> object.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.AttachmentCollection.Add(Quiksoft.EasyMail.Parse.Attachment)">
+            <summary>
+            Adds an <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> object to the collection.
+            </summary>
+            <param name="AttachmetnObj">The <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> object to add to the collection.</param>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.AttachmentCollection.Item(System.Int32)">
+            <summary>
+            Returns a reference to the <see cref="T:Quiksoft.EasyMail.Parse.Attachment"/> Object at a specified position.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.SMIMETypeFlags">
+            <summary>
+            Internal Flags
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMETypeFlags.None">
+            <summary>
+            The part is not SMIME encapsulated.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMETypeFlags.Signed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.SMIMEPartFlags">
+            <summary>
+            Provides enumerated values that specify the SMIME status of an <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.None">
+            <summary>
+            The part is not SMIME
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.Signature">
+            <summary>
+            This part contains an SMIME Signature.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.SignedAndVerified">
+            <summary>
+            The part has been signed and the signature is valid.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.SignedButInvalid">
+            <summary>
+            The message part has been signed but the signature or message hash was not valid.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.Encrypted">
+            <summary>
+            The message part is an encrypted CMS message.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.Decrypted">
+            <summary>
+            The message part was encrypted and has been decrypted.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.Certificate">
+            <summary>
+            The message part contains a certificate.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.SMIMEPartFlags.DecodedSigned">
+            <summary>
+            The message part was encrypted and signed and has been decrypted and verified.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.EmailMessagePart">
+            <summary>
+            Provides properties and methods that represent a single part of a parsed message.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Parse.EmailMessagePart.EncryptedMessage">
+            <summary>
+            If the part is encrypted this is the unencrypted message.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessagePart.DecodePart(System.IO.Stream)">
+            <summary>
+            Decodes an <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> to a stream.
+            </summary>
+            <param name="OutStream">Can be any stream available for writing.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown when there is an error reading the source stream, such as the stream being closed. </exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.OutputStreamException">Thrown when there is an error writing to the output stream.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessagePart.DecodePart(System.IO.Stream,System.Boolean@)">
+            <summary>
+            Decodes an <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> to a stream.
+            </summary>
+            <param name="OutStream">Can be any stream available for writing.</param>
+            <param name="Decoded">This out parameter will be set to false if the encoding scheme used on the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> 
+            is not supported, otherwise it will be set to true.  If the encoding scheme is not supported
+            the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> will be streamed in its encoded state.
+            </param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown when there is an error reading the source stream, such as the stream being closed. </exception>
+            <exception cref="T:Quiksoft.EasyMail.Parse.OutputStreamException">Thrown when there is an error writing to the output stream.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessagePart.DecodePart(System.String@)">
+            <summary>
+            Decodes an <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> to a string.
+            </summary>
+            <param name="Text">Set to a string containing the decoded <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.  If the encoding is not support the string will contain the original data taken straight from the e-mail message without any decoding performed.</param>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown when there is an error reading the source stream, such as the stream being closed. </exception>
+            <remarks>
+            If the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> contains binary data only a portion of it may be copied to the Text parameter.  
+            You should check the <see cref="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentType"/> property to determine if the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> contains binary
+            data and use the proper overload of this method to save any binary data to a stream instead of a string.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.EmailMessagePart.DecodePart(System.String@,System.Boolean@)">
+            <summary>
+            Decodes a <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> to a string.
+            </summary>
+            <param name="Text">Set to a string containing the decoded <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.  If the encoding is not support the string will contain the original data taken straight from the e-mail message without any decoding performed.</param>
+            <param name="Decoded">This out parameter will be set to false if the encoding scheme used on the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> 
+            is not supported, otherwise it will be set to true.  If the encoding scheme is not supported
+            the Text parameter will contain the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> data in its encoded state.
+            </param>
+            <remarks>
+            If the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> contains binary data only a portion of it may be copied to the Text parameter.  
+            You should check the <see cref="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentType"/> property to determine if the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> contains binary
+            data and use the proper overload of this method to save any binary data to a stream instead of a string.
+            </remarks>
+            <exception cref="T:Quiksoft.EasyMail.Parse.InputStreamException">Thrown when there is an error reading the source stream, such as the stream being closed. </exception>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.SMIMEFlags">
+            <summary>
+            Gets or sets the SMIME part Flags.
+            </summary>
+            <value>One or more of the <see cref="T:Quiksoft.EasyMail.Parse.SMIMEPartFlags"/> specifying the SMIME status.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentLocation">
+            <summary>
+            Gets the content location of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The content location taken from the "Content-Location" header.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.Charset">
+            <summary>
+            Gets the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> character set.
+            </summary>
+            <value>Contains the name of the character set that was used to compose the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.Flags">
+            <summary>
+            Gets the Message Part flags.
+            </summary>
+            <value>One or more of the <see cref="T:Quiksoft.EasyMail.Internal.EmailMessagePartFlags"/> specifying the type of the message part.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart._f">
+            <summary>
+            Used for internal use only.
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.Headers">
+            <summary>
+            Gets the header of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>Contains the headers of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.Filename">
+            <summary>
+            Gets the file name of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The file name taken from the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> headers.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.Name">
+            <summary>
+            Gets the name of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The name specified in the header of the message part.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.Boundary">
+            <summary>
+            Gets the boundary mark of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The boundary mark taken from the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> headers.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentDisposition">
+            <summary>
+            Gets the content disposition of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The content disposition taken from the "Content-Disposition" headers.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentDescription">
+            <summary>
+            Gets the content description of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The content description taken from the "Content-Description" header.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentTransEncoding">
+            <summary>
+             Gets the transfer encoding of the message part.
+            </summary>
+            <value>Specifies the transfer encoding, taken from the "Content-Transfer-Encoding" header.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentID">
+            <summary>
+            Gets the content id of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The content id taken from the "Content-ID" header.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentSubType">
+            <summary>
+            Gets the content subtype of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The content subtype taken from the "Content-Type" header.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.ContentType">
+            <summary>
+            Gets the content type of the message part.
+            </summary>
+            <value>The content type of the message, taken from the "Content-Type" header.</value>
+            <remarks>This property only applies to MIME messages.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.EmailMessagePart.Length">
+            <summary>
+            Gets the length of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.
+            </summary>
+            <value>The length in bytes of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/>.</value>
+            <remarks>
+            The value reported by this property is the length of the data section of the <see cref="T:Quiksoft.EasyMail.Parse.EmailMessagePart"/> object.
+            If the data is encoded, the value will contain the size of the data in its encoded state.</remarks>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Parse.MailDate">
+            <summary>
+            Provides properties which can be used to examine the date contained within an e-mail message.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.MailDate.Parse(System.String)">
+            <summary>
+            Parses an RFC822 date and creates a new MailDate instance.
+            </summary>
+            <param name="Date">Date in RFC822 date format.</param>
+            <returns>New <see cref="T:Quiksoft.EasyMail.Parse.MailDate"/> object.</returns>
+            <remarks>The date should be in the RFC822 format.  i.e. Wed, 17 Apr 2002 09:25:09 -0400</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.MailDate.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.MailDate">MailDate class</see>.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.MailDate.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.Parse.MailDate">MailDate class</see> with a RFC822 date.
+            </summary>
+            <param name="Date">The RFC822 date to be parsed.</param>
+            <remarks>The date should be in the RFC822 format.  i.e. Wed, 17 Apr 2002 09:25:09 -0400</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Parse.MailDate.ToString">
+            <summary>
+            Returns the Date in RFC822 format.
+            </summary>
+            <returns>The date in RFC822 format.  i.e. Wed, 17 Apr 2002 09:25:09 -0400</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.MailDate.RFC822Date">
+            <summary>
+            Gets the original date.
+            </summary>
+            <value>The date in RFC822 format.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.MailDate.TimeZoneBias">
+            <summary>
+            Gets the TimeZoneBias.
+            </summary>
+            <value>Specifies the receiving host's offset from universal (GMT) time.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.Parse.MailDate.Date">
+            <summary>
+            Gets the date in <see cref="T:System.DateTime"/> format.
+            </summary>
+            <value>A <see cref="T:System.DateTime"/> type representing the date.  If the date can not be parsed this value will be null.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.ParseDecoder">
+            <summary>
+            Summary description for ParseDecoder.
+            </summary>
+        </member>
+    </members>
+</doc>

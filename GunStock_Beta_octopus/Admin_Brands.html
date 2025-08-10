@@ -1,0 +1,154 @@
+﻿					<!-- start: page -->
+					  
+
+
+
+			    <div id="Rapport" class="article">
+					    <div class="row">
+
+						
+
+						<div class="col-md-6">
+							<div id="AlertBox" ></div>
+                   				  		<section class="panel">
+							<header class="panel-heading">
+								<div class="panel-actions">
+									<a href="#" class="fa fa-caret-down"></a>
+									<a href="#" class="fa fa-times"></a>
+								</div>
+						
+								<h2 class="panel-title">Merker</h2>
+							</header>
+								<div class="panel-body">	
+									<!-- Brand Start -->
+								   <div id="divEditMerker" >
+                                    <p class="block">Merker<br /> </p>
+                                    <select class="form-control" onclick="var e = document.getElementById('txtListMerke');var SelectedV = e.options[e.selectedIndex].text;txtEditMerke.value=SelectedV;document.getElementById('ModelBrand').innerHTML=SelectedV;DoFill('txtListModell', 41, SelectedV);txtEditMerkeID.value=SelectedV;document.getElementById('txtEditModell').disabled = true;" style="height:400px;" id="txtListMerke" name="D8" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br />
+                                   
+									
+									   <div class="input-group mb-md">
+										     <input class="form-control" value="" id="txtEditMerke" type="text" />
+									<input class="form-control" value="" id="txtEditMerkeID" disabled="disabled" type="hidden" /><br /> 
+														<div class="input-group-btn">
+															
+															<button tabindex="-1" class="btn btn-primary" id="butOpdateMerke" onclick="DoInsertMerke()" type="button">Oppdater</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+																<li><a onclick="GetBrandPopUp();" href="#">Ny</a></li>
+																<li><a onclick="DoDeleteMerke(document.getElementById('txtEditMerkeID').value)" href="#">Slett</a></li>															
+															</ul>
+														</div>
+														
+													</div>
+
+
+								
+
+                                </div>
+								<!-- Brand END -->
+								</div>
+						</section>
+						</div>
+
+							<!------------------------------------------------------>
+
+								<div class="col-md-6">
+                   				  		<section class="panel">
+							<header class="panel-heading">
+								<div class="panel-actions">
+									<a href="#" class="fa fa-caret-down"></a>
+									<a href="#" class="fa fa-times"></a>
+								</div>
+						
+								<h2 class="panel-title"><a id="ModelBrand"></a> Modell</h2>
+							</header>
+								<div class="panel-body">	
+								<!-- Recipt Start -->
+								        <div id="divEditModell" >
+                                  <p> Modell</p>
+                                   <select class="form-control" onclick="var e = document.getElementById('txtListModell');var SelectedV = e.options[e.selectedIndex].text;txtEditModell.value=SelectedV;txtEditModellID.value=e.options[e.selectedIndex].value;document.getElementById('txtEditModell').disabled = false;" style="height:400px;" multiple="multiple" id="txtListModell" name="D7">
+                                    <option></option>
+                                </select><br /><br />Rediger :<br />
+
+
+											<div class="input-group mb-md">
+												<input class="form-control" value="" id="txtEditModell" disabled="disabled" />
+												<input class="form-control" value="" id="txtEditModellID"  type="hidden" />
+                               															
+
+											<div class="input-group-btn">
+															
+															<button tabindex="-1" class="btn btn-primary" id="butOpdateModell" onclick="DoInsertModell()" type="button">Oppdater</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+															<!--	<li><a class="mb-xs mt-xs mr-xs modal-sizes btn btn-default" href="#GetNewModel">Small</a></li> -->
+																<li><a id="butNyModell" onclick="GetModelPopUp()" href="#">Ny</a></li>
+																<li><a id="butDeleteModell" onclick="DoDeleteModell(document.getElementById('txtEditModellID').value)" href="#">Slett</a></li>															
+															</ul>
+														</div>
+												<!--  PopUp 
+												<div id="GetNewModel" class="modal-block modal-block-sm mfp-hide"></div>
+												<script>alert_Input_Single('Legg inn Ny Modell', 'Modell Navn ', 'GetNewModel', 'DoInsertModell');</script>
+												<script src="assets/vendor/pnotify/pnotify.custom.js"></script>
+												-->
+											</div>
+
+                                   </div>
+								<!-- Recipt END -->
+								</div>
+						</section>
+						</div>
+
+							<!------------------------------------------------------>
+
+							<div class="col-md-6">
+                      		<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+						
+										<h2 class="panel-title">Mekanisme</h2>
+									</header>
+									<div class="panel-body">
+								
+										<!-- Mechanism Start -->
+										  <p class="block"> Mekanisme</p>
+                                    <select class="form-control" onclick="var e = document.getElementById('txtListMekanisme');var SelectedT = e.options[e.selectedIndex].text;var SelectedV = e.options[e.selectedIndex].value;txtEditMekanisme.value=SelectedT;txtEditMekanismeID.value=SelectedV;" id="txtListMekanisme" name="D3" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br />
+										 <div class="input-group mb-md">
+											<input class="form-control" value="" id="txtEditMekanisme" type="text" /><input class="form-control" value="" id="txtEditMekanismeID" type="hidden" /><br />
+										
+												<div class="input-group-btn">
+															<button tabindex="-1" class="btn btn-primary" id="butEditMekanismeUpdate" onclick="DoInsertMekanisme()" type="button">Oppdater</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+																<li><a onclick="GetMechanismPopUp();" href="#">Ny</a></li>
+																<li><a id="butEditMekanismeDelete" onclick="DoDeleteMekanisme(document.getElementById('txtEditMekanismeID').value)" href="#">Slett</a></li>															
+															</ul>
+												</div>
+										</div>
+										<!-- Mechanism END -->
+				
+
+									</div>
+								</section>
+						</div>
+
+							<!------------------------------------------------------>
+
+						</div>
+                </div>
+
+
+					<!-- end: page -->

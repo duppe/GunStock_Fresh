@@ -1,0 +1,73 @@
+﻿
+					<!-- start: page -->
+					
+                   		<section class="panel">
+							<header class="panel-heading">
+								<div class="panel-actions">
+									<a href="#" onclick="StoreListToXLSX()" class="fa fa-print"></a>
+									<a href="#" hidden="hidden" class="fa fa-times"></a>
+								</div>
+						
+			
+
+                                <div class="input-group mb-md">
+													<input placeholder="Søk på serienummer" type="search" class="form-control" autocomplete="sex" name="KundesearchInput" onkeyup="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="searchVapenInput"  />
+														
+                            </div>
+
+
+
+
+								 <table class="text-muted mb-none">
+                           
+                                     <tr>
+                                         <td>Status</td>
+                                         <td>Leverandør</td>
+                                         <td>Merke</td>
+                                         <td class="auto-style2">Modell</td>
+                                         <td class="auto-style2">Lokasjon</td>
+                                     </tr>
+                                <tr>
+                                    <td>
+                                        <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpStatus" name="D5">
+                                            <option>alle</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpLeverandor" name="D3">
+                                            <option>alle</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpMerke" name="D1">
+                                            <option>alle</option>
+                                        </select>
+                                    </td>
+                                    <td class="auto-style2">
+                                        <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpModel" name="D4">
+                                            <option>alle</option>
+                                        </select>
+                                    </td>
+                                    <td class="auto-style2">
+                                        <select onchange="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="MdrpLokasjon" name="D6">
+                                            <option>alle</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                             </table>
+							
+
+							</header>
+							
+							<div id="LagerListing"></div>
+									
+						</section>
+
+
+                     
+                    
+       
+
+
+					<!-- end: page -->
+			

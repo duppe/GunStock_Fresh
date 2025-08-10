@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+         <script type="text/javascript" src="Scripts/admin_Brands.js?1500"></script>
+    <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+      <link rel="stylesheet" href="style.css" />
+    <title>GunStock</title>
+</head>
+<body>
+      <iframe src="SettingsTopMenu.html" width="800px" height="35px"></iframe>
+                        <!-- Leverandører -->
+                    <div id="ConfigMerMod">
+                    <table  style="width:900px">
+                        <tr>
+                            <td >&nbsp;</td>
+                            <td> &nbsp;</td>
+                            <td ><div class="contentsHeader" id="MidLev2">&nbsp;</div></td>
+                            <td ></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td  style="width:250px;vertical-align:top;" >
+                                <div class="contentsPanel">
+                                <p class="contentsHeader">Modeller og Merker</p><br />
+                                <p class="article">
+                                Velg Merke, og du kan redigere modellene merke har.<br />
+                                Du kan også legge til og fjerne Merker.</p></div>
+                                <br />
+                                <div class="contentsPanel">
+
+                                    <p class="block"> Mekanisme</p>
+                                    <select onclick="var e = document.getElementById('txtListMekanisme');var SelectedT = e.options[e.selectedIndex].text;var SelectedV = e.options[e.selectedIndex].value;txtEditMekanisme.value=SelectedT;txtEditMekanismeID.value=SelectedV;" style="height:200px;width:250px" id="txtListMekanisme" name="D3" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br /><input value="" id="txtEditMekanisme" style="width:250px;height:20px;" type="text" /><input value="" id="txtEditMekanismeID" style="width:250px;background-color:aqua;" type="hidden" />
+                                    <br /><input id="butEditMekanismeUpdate" onclick="DoInsertMekanisme()" type="button" value="Oppdater" />&nbsp;&nbsp;<input id="butEditMekanismeDelete" onclick="DoDeleteMekanisme(document.getElementById('txtEditMekanismeID').value)" type="button" value="Slett" />
+                               
+                                    </div>
+
+                            </td>
+                            <td style="vertical-align:top;">
+
+                         &nbsp;</td>
+                            <td style="vertical-align:top;">
+                                <div id="divEditMerker" style="padding-left:10px;" class="contentsPanel">
+                                    <p class="block">Merker<br /> </p>
+                                    <select onclick="var e = document.getElementById('txtListMerke');var SelectedV = e.options[e.selectedIndex].text;txtEditMerke.value=SelectedV;DoFill('txtListModell', 41, SelectedV);txtEditMerkeID.value=SelectedV;document.getElementById('txtEditModell').disabled = true;" style="height:200px;width:250px" id="txtListMerke" name="D8" multiple="multiple">
+                                        <option></option>
+                                    </select><br /><br />Rediger :<br />
+                                    <input value="" id="txtEditMerke" style="width:250px" type="text" /><input value="" id="txtEditMerkeID" style="width:250px;background-color:aqua;" disabled="disabled" type="hidden" /><br /> <input id="butOpdateMerke" onclick="DoInsertMerke()" type="button" value="Oppdater" /><input id="butNyMerke" onclick="txtEditMerkeID.value = '';DoInsertMerke()" type="button" value="Ny" /><input id="butDeleteMerke" onclick="DoDeleteMerke(document.getElementById('txtEditMerkeID').value)" type="button" value="Slett" /><br />
+                                </div>
+                                <br />
+                                <br />
+                              
+                                   </td>
+                            
+                            <td style="vertical-align:top;">
+                                 <div id="divEditModell" style="padding-left:10px;" class="contentsPanel" >
+                                  <p> Modell</p>
+                                   <select onclick="var e = document.getElementById('txtListModell');var SelectedV = e.options[e.selectedIndex].text;txtEditModell.value=SelectedV;txtEditModellID.value=e.options[e.selectedIndex].value;document.getElementById('txtEditModell').disabled = false;" style="height:200px;width:250px" multiple="multiple" id="txtListModell" name="D7">
+                                    <option></option>
+                                </select><br /><br />Rediger :<br />
+                                <input value="" id="txtEditModell" disabled="disabled" style="width:250px" type="text" />
+                                <input value="" id="txtEditModellID" style="width:250px;background-color:aqua;" type="hidden" />
+                                <input id="butOpdateModell" onclick="DoInsertModell()" type="button" value="Oppdater" /><input id="butNyModell" onclick="txtEditModellID.value = ''; document.getElementById('txtEditModell').disabled = false; document.getElementById('txtEditModell').value = '';" type="button" value="Ny" /><input id="butDeleteModell" onclick="DoDeleteModell(document.getElementById('txtEditModellID').value)" type="button" value="Slett" />
+                                   </div>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </table>
+                    </div>
+</body>
+</html>

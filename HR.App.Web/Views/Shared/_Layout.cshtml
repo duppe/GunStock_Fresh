@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] -Web</title>
+    <script src="~/dest/js/app.bundle.js" asp-append-version="true"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+</head>
+<body>
+    <div class="container-fluid content-holder">
+        <form>
+            <div class="row">
+                <main class="col-sm-9 ml-sm-auto col-md-10 pt-5 px-0" role="main">
+                  
+                    <div class="content-area mx-3">
+                        <div id="errorMessageDiv" class="alert alert-danger d-none" role="alert"></div>
+                        <div id="successMessageDiv" class="alert alert-success d-none" role="alert"></div>
+
+                        @RenderBody()
+                    </div>
+                </main>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        function showSuccessMessage(message) {
+            var successMessageDiv = document.getElementById('successMessageDiv');
+            if (successMessageDiv) {
+                successMessageDiv.innerHTML = message;
+
+                hideErrorMessage();
+                successMessageDiv.classList.remove('d-none');
+                successMessageDiv.classList.add('d-block');
+            }
+        }
+
+        function hideSuccessMessage() {
+            var successMessageDiv = document.getElementById('successMessageDiv');
+            if (successMessageDiv) {
+                successMessageDiv.classList.remove('d-block');
+                successMessageDiv.classList.add('d-none');
+            }
+        }
+
+        function showErrorMessage(message) {
+            var errorMessageDiv = document.getElementById('errorMessageDiv');
+            if (errorMessageDiv) {
+                errorMessageDiv.innerHTML = message;
+
+                hideSuccessMessage();
+                errorMessageDiv.classList.remove('d-none');
+                errorMessageDiv.classList.add('d-block');
+            }
+        }
+
+        function hideErrorMessage() {
+            var errorMessageDiv = document.getElementById('errorMessageDiv');
+            if (errorMessageDiv) {
+                errorMessageDiv.classList.remove('d-block');
+                errorMessageDiv.classList.add('d-none');
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1028 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>POP3.Net</name>
+    </assembly>
+    <members>
+        <member name="T:Quiksoft.EasyMail.Internal.BinaryString">
+            <summary>
+            Summary description for BinaryString.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.ParseException">
+            <summary>
+            Thrown when the cancel method is called.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.ProtocolException">
+            <summary>
+            Exception related to the Specific Protocol.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.ConnectionException">
+            <summary>
+            Exception related to the Specific Protocol.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.emSocket">
+            <summary>
+            Quiksoft Socket Class.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.IPOP3SSL">
+            <summary>
+            Internal SSL interface.  This should be ignored.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.recv(System.String@,System.Int32)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.send(System.String,System.Boolean)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.send(System.String,System.Boolean,System.Text.Encoding)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.send(System.Byte[],System.Int32)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.Flush">
+            <summary>
+            Should not be called externally.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.Close">
+            <summary>
+            Should not be called externally.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.connect(System.String,System.Int32)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.GetTimeoutValue">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.SetWriteToLog(System.Object)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.SetTimeoutValue(System.Int32)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.Shutdown(System.Net.Sockets.SocketShutdown)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <param name="c"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SSL.Receive(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)">
+            <summary>
+            Should not be called externally.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <param name="c"></param>
+            <param name="d"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.emSocket.BUFFER_SIZE">
+            <summary>
+            Size of buffers to use.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.emSocket.m_pWriteToLog">
+            <summary>
+            Allows class to write to a log file.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.emSocket.m_pNetStream">
+            <summary>
+            Holds the network stream.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.emSocket.Flush">
+            <summary>
+            Clears out stream buffers.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.emSocket.SetTimeoutValue(System.Int32)">
+            <summary>
+            Sets the timeout value of the socket.
+            </summary>
+            <param name="m_nMilliseconds">Millisecond timeout value</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.emSocket.recv(System.String@,System.Int32)">
+            <summary>
+            Receives one SMTP line of data from the socket.  
+            </summary>
+            <param name="strData">Data received</param>
+            <param name="nBufferSize">Max size to receive</param>
+            <returns>0 on success</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.emSocket.Quiksoft#EasyMail#POP3#IPOP3SSL#Close">
+            <summary>
+            Quiksoft Socket Class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.emSocket.Quiksoft#EasyMail#POP3#IPOP3SSL#Shutdown(System.Net.Sockets.SocketShutdown)">
+            <summary>
+            Quiksoft Socket Class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.emSocket.Quiksoft#EasyMail#POP3#IPOP3SSL#Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)">
+            <summary>
+            Quiksoft Socket Class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.emSocket.Quiksoft#EasyMail#POP3#IPOP3SSL#Receive(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags)">
+            <summary>
+            Quiksoft Socket Class.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.FastPOP3Stream">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.FastPOP3Stream.ReadTo(System.IO.Stream,System.String,Quiksoft.EasyMail.POP3.POP3DownloadStatus,System.Int32,System.Int32@)">
+            <summary>
+            
+            </summary>
+            <param name="Output"></param>
+            <param name="EOSMark"></param>
+            <param name="pDownloadStatusCallBack"></param>
+            <param name="MessageStatedSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.ValidateL">
+            <summary>
+            Summary description for ValidateL.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.MailStream">
+            <summary>
+            Summary description for MailStream.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MailStream.FillBuffer">
+            <summary>
+            Fills the buffer with data read from the stream.
+            </summary>
+            <returns>Number of bytes read.</returns>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.IO_TYPE">
+            <summary>
+            Type of IO objects currently supported.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3CancelException">
+            <summary>
+            Thrown when the cancel method is called and an operation is currently in progress.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3CancelException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the POP3CancelException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3CancelException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the POP3CancelException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3ParseException">
+            <summary>
+            The exception that is thrown when there is an error parsing a POP3 response.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3ParseException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the POP3ParseException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3ParseException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the POP3ParseException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">
+            <summary>
+            The exception that is thrown when there is a socket connection error.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3ConnectionException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the POP3ConnectionException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3ConnectionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the POP3ConnectionException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3AuthenticationException">
+            <summary>
+            The exception that is thrown when an authentication error is returned from the POP3 server.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3AuthenticationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the POP3AuthenticationException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3AuthenticationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the POP3AuthenticationException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">
+            <summary>
+            The exception that is thrown when a protocol error is returned from the POP3 server.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3ProtocolException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the POP3ProtocolException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3ProtocolException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the POP3ProtocolException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.OutputStreamException">
+             <summary>
+            The exception that is thrown when there is an error related to the output stream.
+             </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.OutputStreamException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the OutputStreamException class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.OutputStreamException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the OutputStreamException class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="Inner">The inner exception reference.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.Collection">
+            <summary>
+            An abstract class for a strongly typed collection.
+            </summary>
+            <remarks>This class is abstract.  It is inherited by the other collection classes and can not be instantiated directly.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.#ctor">
+            <summary>
+            Initializes a new instance of the Collection class.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.Collection.pArray">
+            <summary>
+            Array that actually holds the collection objects
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.Collection.Position">
+            <summary>
+            Position at which collection is referencing
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.GetEnumerator">
+            <summary>
+            Returns the enumerator.
+            </summary>
+            <returns>Object</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.MoveNext">
+            <summary>
+            Moves to the next record.
+            </summary>
+            <returns>Returns true on success false if no more records are available.</returns>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.Remove(System.Object)">
+            <summary>
+            Removes the first occurrence of a specific object from the collection.
+            </summary>
+            <param name="Obj">The object to remove from the collection.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.Reset">
+            <summary>
+            Resets the index of the collection to the first object.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.GetAsDataSet">
+            <summary>
+            Returns DataSet representation of collection.
+            </summary>
+            <remarks>
+            GetAsDataSet() will convert a collection object to a DataSet.  The DataSet
+            will contain a single table with the same name as the collection object.
+            The table will contain columns which are named after the collection objects properties.
+            </remarks>
+            <returns>Returns DataSet representation of the collection.  If collection is empty this method will return null.</returns>
+            <example>
+            <code>
+            MessageSizeCollection MessageSizeCollectionObj = pPop3.GetMessageSizeCollection();
+            System.Data.DataSet ds = MessageSizeCollectionObj.GetAsDataSet();
+            comboBox1.DataSource = ds.Tables["MessageSizeCollection"];
+            comboBox1.DisplayMember = "Size";
+            </code></example>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.Clear">
+            <summary>
+            Removes all objects from the collection.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.Collection.GetLastItem">
+            <summary>
+            Return the last item in the collection.
+            </summary>
+            <returns>A reference to the last object in the collection.</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.Collection.Current">
+            <summary>
+            Returns current object
+            </summary>
+            <value>Current object in the collection</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.Collection.Count">
+            <summary>
+            Gets the number of items in collection.
+            </summary>
+            <value>Number of items in the collection</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.MessageID">
+            <summary>
+            Provides properties to examine a messages ordinal position and its associated unique-id.
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.MessageID.UniqueID">
+            <summary>
+            The server assigned unique-id of the message.
+            </summary>
+            <value>The server assigned unique message id.</value>
+            <remarks>It should be noted that a message's unique-id is created and maintained by the server. This id uniquely identifies a message on the server and is not associated with any RFC-822 "MessageID:" header that may be found in the message.
+            The unique-id of a message is an arbitrary server-determined string, consisting of one to 70 characters in the range 0x21 to 0x7E, which uniquely identifies a message within a mailbox and which persists across sessions. It should be noted that a situation can arise where two identical copies of a message, in the same mailbox, have the same unique-id. For more information, see RFC-1939 (POP3 Protocol).</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.MessageID.OrdinalPosition">
+            <summary>
+            Gets the message's ordinal position in the mailbox.
+            </summary>
+            <value>The message's ordinal position in the mailbox.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.MessageSize">
+            <summary>
+            Provides properties to examine a message's original position and its size.
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.MessageSize.OrdinalPosition">
+            <summary>
+            Gets the message's ordinal position in the mailbox.
+            </summary>
+            <value>The message's ordinal position in the mailbox.</value>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.MessageSize.Size">
+            <summary>
+            Gets the size of the message in bytes.
+            </summary>
+            <value>The message size.</value>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.MessageIDCollection">
+            <summary>
+            Represents a collection of <see cref="T:Quiksoft.EasyMail.POP3.MessageID"/> objects.
+            </summary>
+            <remarks>
+            This collection is created with the <see cref="M:Quiksoft.EasyMail.POP3.POP3.GetMessageIDCollection"/> method.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.MessageIDCollection.Add(Quiksoft.EasyMail.POP3.MessageID)">
+            <summary>
+            Adds an <see cref="T:Quiksoft.EasyMail.POP3.MessageID"/> object to the collection.
+            </summary>
+            <param name="ID">The <see cref="T:Quiksoft.EasyMail.POP3.MessageID"/> object to add to the collection.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.MessageIDCollection.GetOrdinalPositionFromUID(System.String)">
+            <summary>
+            Returns the ordinal position of the message with the specified UID.  
+            </summary>
+            <param name="UID">The unique ID of a message to find the ordinal position of.</param>
+            <returns>The ordinal position of the message that matches the passed in UID.  If the UID cannot be found 0 will be returned.</returns>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.MessageIDCollection.Item(System.Int32)">
+            <summary>
+            Returns a reference to the <see cref="T:Quiksoft.EasyMail.POP3.MessageID"/> Object at a specified position.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.MessageSizeCollection">
+            <summary>
+            Represents a collection of <see cref="T:Quiksoft.EasyMail.POP3.MessageSize"/> objects.
+            </summary>
+            <remarks>
+            This collection is created with the <see cref="M:Quiksoft.EasyMail.POP3.POP3.GetMessageSizeCollection"/> method.
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.MessageSizeCollection.Add(Quiksoft.EasyMail.POP3.MessageSize)">
+            <summary>
+            Adds an <see cref="T:Quiksoft.EasyMail.POP3.MessageSize"/> object to the collection.
+            </summary>
+            <param name="Size">The <see cref="T:Quiksoft.EasyMail.POP3.MessageSize"/> object to add to the collection.</param>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.MessageSizeCollection.Item(System.Int32)">
+            <summary>
+            Returns a reference to the <see cref="T:Quiksoft.EasyMail.POP3.MessageSize"/> Object at a specified position.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.AuthMode">
+            <summary>
+            Provides enumerated values that control the method of authentication to use when logging in to the server.
+            </summary>
+            <remarks>Values may be combined to allow the assembly to recover from unsupported authentication errors.  If multiple values are combined authentication will be tried in the following order: CRAM-MD5 APOP AUTH-LOGIN Plain.</remarks>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.AuthMode.Plain">
+            <summary>
+            Use plain text authentication.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.AuthMode.AuthLogin">
+            <summary>
+            Use Auth Login authentication.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.AuthMode.APOP">
+            <summary>
+            Use APOP authentication.
+            </summary>
+            <remarks>APOP works like this: The server sends a unique string to the connecting client. The client appends the user's password to the string then runs the string threw a hashing algorithm, the resulting hash is sent back to the server. The server then compares the client's response with its own calculated hash. If there is a match, the client is then authenticated and logged on to the POP3 server.
+            The advantage of this method is that rather than the plaintext password being transmitted in the clear, all that is transferred is a hash which can not be reused and can not be decoded.</remarks>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.AuthMode.CramMD5">
+            <summary>
+            Use CRAM-MD5 authentication.
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.AuthMode.Degrade">
+            <summary>
+            Allow automatic degradation of the authentication mode to plain text.
+            </summary>
+            <remarks>Provided for backwards compatibility only; does the same as AuthMode.Plain.</remarks>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3DownloadStatus">
+            <summary>
+            Represents the method that will called with status data as messages and message headers are downloaded.
+            </summary>
+            <param name="Max">Total size of message data being downloaded.</param>
+            <param name="Value">Total size of message data already downloaded.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3ProtocolLog">
+            <summary>
+            Represents the method that will handle the <see cref="E:Quiksoft.EasyMail.POP3.POP3.ProtocolLog"/> event.
+            </summary>
+            <param name="Data">Protocol log data.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.IPOP3SASL">
+            <summary>
+            Used to implement a Simple Authentication and Security Layer (SASL) Interface.
+            </summary>
+            <remarks>
+            The SASL interface can be used to add custom authentication mechanisms to the EasyMail assemblies.
+            Any class that inherits from this interface will be referred to as a SASL mechanism.
+            The Simple Authentication and Security Layer (SASL) is a method for
+            adding authentication support to connection-based protocols.  To use
+            this specification, a protocol includes a command for identifying and
+            authenticating a user to a server and for optionally negotiating a
+            security layer for subsequent protocol interactions.
+            A list of currently registered SASL mechanisms can be found at the below URL.
+            http://www.iana.org/assignments/sasl-mechanisms
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SASL.Init(System.String,System.String)">
+            <summary>
+            Initializes the SASL mechanism.
+            </summary>
+            <param name="Account">Account name of user that is logging in.</param>
+            <param name="Password">Password of user that is logging in.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SASL.GetMechanismName">
+            <summary>
+            Gets the name of the mechanism.  
+            </summary>
+            <returns>Name of mechanism,</returns>
+            <remarks>Must be from 1 to 20 characters in	length, 
+            consisting of upper-case letters, digits, hyphens, and/or
+            underscores
+            </remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SASL.GetMechanismCommand(System.Int32)">
+            <summary>
+            Gets the command to initiate the authentication with the server.
+            </summary>
+            <param name="Protocol">The protocol which authentication is be requested for.<BR/>
+            1-SMTP<BR/>
+            2-POP3<BR/>
+            3-IMAP4<BR/>
+            </param>
+            <returns>A string containing the command to send to the server.</returns>
+            <remarks>
+            The default SASL command for POP3 and SMTP is "AUTH" and the default for IMAP4 is "AUTHENTICATE"</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.IPOP3SASL.DataAvailable(System.String)">
+            <summary>
+            Called when data is available from the server.
+            </summary>
+            <param name="Data">Data received from the connection.</param>
+            <returns>The response to send back to the server. 
+            The mechanism should return a null or empty value if no data is to be sent and the authentication was successful.<br/>
+            If an error occurs the mechanism should throw an exception that
+            will propagate the back to the caller. <br/>
+            <br/>
+            </returns>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.WriteToLog">
+            <summary>
+            Internal Delegate using for logging.
+            </summary>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.POP3">
+            <summary>
+            Provides properties and methods for downloading e-mail messages using Post Office Protocol 3 (POP3).
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.POP3.POP3.BUFFER_SIZE">
+            <summary>
+            Buffer size of strings
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.POP3.POP3"/> class.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Connect(System.String)">
+            <summary>
+            Attempts to connect to a POP3 mail server.
+            </summary>
+            <param name="POP3Server">The name or address of the POP3 mail server.</param>
+            <exception cref="T:Quiksoft.EasyMail.POP3.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.POP3.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Connect(System.String,System.Int32,System.Object)">
+            <summary>
+            Attempts to connect to a POP3 mail server.
+            </summary>
+            <param name="POP3Server">The name or address of the POP3 mail server.</param>
+            <param name="Port">Specifies the port on which to communicate with the remote server.  Default: 25.</param>
+            <param name="SSLInterface">Specifies the SSL Interface.</param>
+            <exception cref="T:Quiksoft.EasyMail.POP3.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.POP3.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+            <exception cref="!:Quiksoft.EasyMail.SSL.SSLConnectionException">Thrown if an SSL connection error occurs.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Connect(System.String,System.Int32)">
+            <summary>
+            Attempts to connect to a POP3 mail server.
+            </summary>
+            <param name="POP3Server">The name or address of the POP3 mail server.</param>
+            <param name="Port">Specifies the port on which to communicate with the remote server.  Default: 25.</param>
+            <exception cref="T:Quiksoft.EasyMail.POP3.LicenseException">Thrown if the static class <see cref="T:Quiksoft.EasyMail.POP3.License"/> is not set with a valid license key.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Login(System.String,System.String,Quiksoft.EasyMail.POP3.IPOP3SASL)">
+            <summary>
+            Logs in to a POP3 mailbox using an SASL mechanism.
+            </summary>
+            <param name="Account">The user account name on the mail server.</param>
+            <param name="Password">The password of the user account on the mail server.</param>
+            <param name="AuthMechanism">An <see cref="T:Quiksoft.EasyMail.POP3.IPOP3SASL"/> interface used for custom authentication.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Login(System.String,System.String,Quiksoft.EasyMail.POP3.AuthMode)">
+            <summary>
+            Logs in to a POP3 mailbox.
+            </summary>
+            <param name="Account">The user account name on the mail server.</param>
+            <param name="Password">The password of the user account on the mail server.</param>
+            <param name="AuthMode">One or more of the <see cref="T:Quiksoft.EasyMail.POP3.AuthMode"/> flags specifying the type of authentication to use.</param>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3AuthenticationException">Thrown if there is an error with the user name or password.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Disconnect">
+            <summary>
+            Disconnects from the POP3 server.
+            </summary>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.GetMessageCount">
+            <summary>
+            Gets the number of available messages in the mailbox.
+            </summary>
+            <returns>The total count of all messages.</returns>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.GetMessageCount(System.Int32@)">
+            <summary>
+            Gets the number of available messages in the mailbox, and their total size.
+            </summary>
+            <remarks>The methodGetMessageCount(Int32) method is obsolete and the method GetMessageCount(Int64) version should be used instead.</remarks>
+            <param name="MessageSize">Out parameter that will be set with the total size of all messages.</param>
+            <returns>The total count of all messages.</returns>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.GetMessageCount(System.Int64@)">
+            <summary>
+            Gets the number of available messages in the mailbox, and their total size.
+            </summary>
+            <param name="MessageSize">Out parameter that will be set with the total size of all messages.</param>
+            <returns>The total count of all messages.</returns>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.GetMessageID(System.Int32)">
+            <summary>
+            Gets the server's unique-id for the specified message.
+            </summary>
+            <param name="OrdinalPosition">The message's ordinal position in the mailbox.</param>
+            <returns>The unique-id as a string.</returns>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.GetMessageIDCollection">
+            <summary>
+            Creates a <see cref="T:Quiksoft.EasyMail.POP3.MessageIDCollection"/>, and fills it with the unique-ids of each message in the mailbox.
+            </summary>
+            <returns>A <see cref="T:Quiksoft.EasyMail.POP3.MessageIDCollection"/>.</returns>
+            <remarks>This method downloads data from the POP3 server to fill the <see cref="T:Quiksoft.EasyMail.POP3.MessageIDCollection"/> using the POP3 UIDL command.  The unique-id of a message is an arbitrary server-determined string, consisting of one to 70 characters in the range 0x21 to 0x7E, which uniquely identifies a message within a mailbox and which persists across sessions. It should be noted that a situation can arise where two identical copies of a message, in the same folder, have the same unique-id. For more information, see RFC-1939 (POP3 Protocol).
+            Any messages that are marked as deleted will not be included in the <see cref="T:Quiksoft.EasyMail.POP3.MessageIDCollection"/>.
+            If there are not any non-deleted messages in the mailbox, the returned <see cref="T:Quiksoft.EasyMail.POP3.MessageIDCollection"/> will be empty.</remarks>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.GetMessageSize(System.Int32)">
+            <summary>
+            Gets the size of a message on the server.
+            </summary>
+            <param name="OrdinalPosition">The message's ordinal position in the mailbox.</param>
+            <returns>The size of the message in bytes.</returns>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.GetMessageSizeCollection">
+            <summary>
+            Creates a <see cref="T:Quiksoft.EasyMail.POP3.MessageSizeCollection"/>, and fills it with the sizes of each message in the mailbox.
+            </summary>
+            <returns>A <see cref="T:Quiksoft.EasyMail.POP3.MessageSizeCollection"/>.</returns>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+            <remarks>This method downloads data from the POP3 server to fill the <see cref="T:Quiksoft.EasyMail.POP3.MessageSizeCollection"/> using the POP3 LIST command.  Any messages that are marked as deleted will not be included in the <see cref="T:Quiksoft.EasyMail.POP3.MessageSizeCollection"/>.
+            If there are not any non-deleted messages in the mailbox, the returned <see cref="T:Quiksoft.EasyMail.POP3.MessageSizeCollection"/> will be empty.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Last">
+            <summary>
+            Gets the ordinal position of the last message ever accessed in all prior transactions in the mailbox.
+            </summary>
+            <returns>The ordinal position of the last message ever accessed.</returns>
+            <remarks>May be useful for locating mail which has not been downloaded already.
+            If no messages in the mailbox have been accessed during previous transactions a zero is returned.  You can
+            assume that messages, if any, numbered greater than the number returned have
+            not yet been accessed by the client.</remarks>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ParseException">Thrown if there is an error parsing the servers response.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.DeleteMessage(System.Int32)">
+            <summary>
+            Flags the specified message for deletion, on the server.
+            </summary>
+            <param name="OrdinalPosition">The message's ordinal position in the mailbox.</param>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+            <remarks>Messages flagged for deletion are not actually purged until the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Disconnect"/> function is called. Prior to calling <see cref="M:Quiksoft.EasyMail.POP3.POP3.Disconnect"/>, you may use the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Reset"/> function to remove the deletion flag.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Noop">
+            <summary>
+            Issues a null command to the server.
+            </summary>
+            <remarks>This function is useful for keeping a connection from timing out when there is no real activity.</remarks>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Reset">
+            <summary>
+            Removes the deleted flag from any messages marked for deletion in the mailbox.
+            </summary>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.Cancel">
+            <summary>
+            Cancels any pending operations in progress and closes the POP3 connection.
+            </summary>
+            <remarks>This function will close any open connections with the server.
+            If a function is in progress when Cancel is called, that function will fail with an <see cref="T:Quiksoft.EasyMail.POP3.POP3CancelException"/>.
+            Some functions that are very quick, or ones that are almost complete when Cancel is called, may finish completely before they are cancelled, however the server connection will still be closed.</remarks>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.DownloadHeader(System.Int32,System.IO.Stream,System.Int32)">
+            <summary>
+            Downloads a message's headers and optional lines from the message body and writes it to a stream.  
+            </summary>
+            <param name="OrdinalPosition">The message's ordinal position in the mailbox.</param>
+            <param name="OutStream">Can be any stream available for writing.  If being used in conjunction with the EasyMail .Net Edition Parse Assembly you must use a stream that supports seeking.</param>
+            <param name="Lines">Number lines to download from the message body.  It is suggested that you do not set this value to zero for it may return a protocol error on some mail servers, therefore this value should be set to 1 to retrieve headers only.</param>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.OutputStreamException">Thrown if there is an error writing to the out stream.  i.e. The stream is closed.</exception>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.POP3.DownloadMessage(System.Int32,System.IO.Stream)">
+            <summary>
+            Downloads a message from the POP3 server and writes it to a stream.
+            </summary>
+            <param name="OrdinalPosition">The message's ordinal position in the mailbox.</param>
+            <param name="OutStream">Can be any stream available for writing.  If being used in conjunction with the EasyMail .Net Edition Parse Assembly you must use a stream that supports seeking.</param>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolException">Thrown if there is a POP3 protocol error.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3ConnectionException">Thrown if a connection error occurs.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.POP3CancelException">Thrown if the <see cref="M:Quiksoft.EasyMail.POP3.POP3.Cancel"/> method is called while this method is in progress.</exception>
+            <exception cref="T:Quiksoft.EasyMail.POP3.OutputStreamException">Thrown if there is an error writing to the out stream.  i.e. The stream is closed.</exception>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.POP3.Version">
+            <summary>
+            Gets the current version of this assembly.
+            </summary>
+        </member>
+        <member name="E:Quiksoft.EasyMail.POP3.POP3.ProtocolLog">
+            <summary>
+             Adds or removes a <see cref="T:Quiksoft.EasyMail.POP3.POP3ProtocolLog"/> delegate that is sent protocol data as the assembly communicates with the POP3 server.
+            </summary>
+        </member>
+        <member name="E:Quiksoft.EasyMail.POP3.POP3.DownloadStatus">
+            <summary>
+             Adds or removes a <see cref="T:Quiksoft.EasyMail.POP3.POP3DownloadStatus"/> delegate that is called when a message is being downloaded.
+            </summary>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.POP3.LogFile">
+            <summary>
+            Get or sets the path and filename of log file used to capture all transactions with the server.
+            </summary>
+            <remarks>Path to log file must already exist. The file will be created if it does not already exist, otherwise it will be appended to.</remarks>
+            <example>
+            <code>
+            The following example shows how to set this value using the appSettings section of a configuration file.
+            &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            	&lt;configuration&gt;
+            		&lt;appSettings&gt;
+            		&lt;add key=&quot;Quiksoft.EasyMail.POP3.POP3.LogFile&quot; value=&quot;C:\pop3.log&quot; /&gt;
+            		&lt;/appSettings&gt;
+            	&lt;/configuration&gt;
+            </code>
+            </example>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.POP3.Encoding">
+            <summary>
+            The default encoding to use when sending POP3 commands.
+            </summary>
+            <remarks>If any string values passed to the this object contain non-ASCII characters
+            this value should be set to the System.Text.Encoding that is being used.</remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.POP3.TimeOut">
+            <summary>
+            Gets or sets the connection timeout value. 
+            </summary>
+            <value>The connection time out value in seconds.  The default value is system dependant.  See remarks.</value>
+            <remarks>Sets the maximum amount of time that the component will wait for a response from the POP3 server, before returning an error. 
+            Some devices running the Compact Framework may not support the setting of a timeout.  If you are targeting the Compact Framework
+            You should check the default value of this property prior to setting it.  If the default value is less than zero,
+            then setting the timeout is not supported and any attempts to do so will result in a SocketException being thrown.
+            </remarks>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.LicenseException">
+            <summary>
+            The exception that is thrown when the static class <see cref="T:Quiksoft.EasyMail.POP3.License"/> is not set with a valid license key.
+            </summary>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.LicenseException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.POP3.LicenseException"/> class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+        </member>
+        <member name="M:Quiksoft.EasyMail.POP3.LicenseException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Quiksoft.EasyMail.POP3.LicenseException"/> class with a specified error message.
+            </summary>
+            <param name="Description">The error message string.</param>
+            <param name="InnerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:Quiksoft.EasyMail.POP3.License">
+            <summary>
+            Provides a static property for setting the libraries license key.
+            </summary>
+            <remarks>
+            
+            A license key is similar to a registration code, or serial number. It is a unique string that identifies the 
+            licensee and the type of license. The <see cref="P:Quiksoft.EasyMail.POP3.License.Key"/> property must be assigned a valid license key to unlock the assembly.
+            Both permanent and trial (temporary) license keys can be obtained from Quiksoft.
+            If a valid license key is not properly assigned to the <see cref="P:Quiksoft.EasyMail.POP3.License.Key"/> property, or if there is a error in the format
+            of the license key, the assembly will not be unlocked, and will throw a <see cref="T:Quiksoft.EasyMail.POP3.LicenseException"/> from most method calls.
+            When using a license key, please remember these important points:  
+            The license key is case sensitive.  The license key is unique to each licensee and product.  
+            The license key can not contain any line breaks.  Your license key must be assigned to the <see cref="P:Quiksoft.EasyMail.POP3.License.Key"/> property
+            exactly as you received it without modification of any sort.
+            The <see cref="P:Quiksoft.EasyMail.POP3.License.Key"/> property should be assigned before the assembly is used.
+            The License object is static, so there is no need to create an instance of it prior to assigning the <see cref="P:Quiksoft.EasyMail.POP3.License.Key"/> property.
+            </remarks>
+        </member>
+        <member name="P:Quiksoft.EasyMail.POP3.License.Key">
+            <summary>
+            Gets and sets the license key.
+            </summary>
+            <value>This property holds the license key for the assembly. If this property is not assigned a valid license key, the object will throw a <see cref="T:Quiksoft.EasyMail.POP3.LicenseException"/> from most methods.</value>		
+            <remarks>
+            In addition to setting this property in your code you can also set it in the appSettings section of the Machine.config, App.Config and Web.Config files.
+            Just add a key value pair for Quiksoft.EasyMail.NetEdition3.License.Key. See example for more information.<BR/>
+            The <see cref="T:Quiksoft.EasyMail.POP3.License"/> object and the Key property are static.  You can not create an instance of the <see cref="T:Quiksoft.EasyMail.POP3.License"/> object.  For more information on license keys, see the remarks on the <see cref="T:Quiksoft.EasyMail.POP3.License"/> object.
+            </remarks>
+            <example>
+            Setting the license key in your code:
+            <code>
+            Quiksoft.EasyMail.POP3.License.Key = "Your Company/12F3234AB23E23"
+            </code>
+            Setting the license key in a config file:
+            <code>
+            
+            &lt;configuration&gt;
+            	&lt;appSettings&gt;
+            		&lt;add key="Quiksoft.EasyMail.NetEdition3.License.Key" value="Your Company/12F3234AB23E23" /&gt;
+            	&lt;/appSettings&gt;
+            &lt;/configuration&gt;
+            </code>
+            </example>
+        </member>
+        <member name="T:Quiksoft.EasyMail.Internal.HMAC_MD5">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.digest">
+            Digest to be returned upon completion of the HMAC_MD5.
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.kIpad">
+            Inner Padding.
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.kOpad">
+            Outer Padding.
+        </member>
+        <member name="F:Quiksoft.EasyMail.Internal.HMAC_MD5.innerMD5">
+            Inner MD5 object.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.#ctor(System.Byte[])">
+            Constructor
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.clear">
+            Clear the HMAC_MD5 object.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.addData(System.Byte[])">
+             HMAC_MD5 function.
+            
+             @param text Text to process
+            
+             @param key Key to use for HMAC hash.
+            
+             @return hash
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.addData(System.Byte[],System.Int32,System.Int32)">
+             HMAC_MD5 function.
+            
+             @param text Text to process
+            
+             @param textStart   Start position of text in text buffer.
+             @param textLen Length of text to use from text buffer.
+             @param key Key to use for HMAC hash.
+            
+             @return hash
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.verify(System.Byte[])">
+             Validate a signature against the current digest.
+             Compares the hash against the signature.
+            
+             @param signature
+            
+             @return True if the signature matches the calculated hash.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.HMAC_MD5.ToString">
+              Return the digest as a HEX string.
+            
+             @return a hex representation of the MD5 digest.
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.#ctor">
+             MD5 initialization. Begins an MD5 operation, writing a new context.
+            
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.update(System.Byte[])">
+             MD5 block update operation. Continues an MD5 message-digest
+             operation, processing another message block, and updating the
+             context.
+            
+             @param input byte array of data
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.update(System.Byte[],System.Int32,System.Int32)">
+             MD5 block update operation.
+            
+             @param input byte array of data
+             @param offset offset into the array to start the digest calculation
+             @param inputLen byte count to use in the calculation
+        </member>
+        <member name="M:Quiksoft.EasyMail.Internal.MD5.digest">
+             MD5 finalization. Ends an MD5 message-digest operation, writing the
+             the message digest and zeroizing the context.
+            
+             @return the digest
+            
+        </member>
+    </members>
+</doc>

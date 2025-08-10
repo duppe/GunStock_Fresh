@@ -1,0 +1,142 @@
+﻿										<!-- start: page -->
+					  
+		<div class="row">
+						<div class="col-md-4 col-lg-3">
+
+							<section class="panel">
+								<div class="panel-body">
+									<div class="thumb-info mb-md">
+										<img src="img/Supplyers/0019749_remington_125.png" class="rounded img-responsive" alt="John Doe">
+										<div class="thumb-info-title">
+											<span hidden="hidden" class="thumb-info-inner"></span>
+											<span class="thumb-info-type" id="PicText">Firma</span>
+										</div>
+									</div>
+
+						
+
+									<hr class="dotted short">
+
+									<h6 class="text-muted"> Velg Leverandør :</h6>
+
+								
+                                       <br />
+                                        <p class="block">
+                                            <select onclick="DoFillLeverandorFields();return false;" class="form-control" style="height:300px;" rows="5" id="txtListLeverandor" name="D4" multiple="multiple">
+                                                <option>a</option>
+                                            </select>
+                                        </p><br />
+                                        &nbsp;<input value="" id="txtEditLeverandorMerker" style="width:250px" type="hidden">
+									
+													<div class="input group-btn">
+															
+															<button tabindex="-1" class="btn btn-primary" id="butAddLev" onclick="DoMakeNewLeverandor()" type="button">Ny</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+															
+																<li><a id="butDoDeleteLeverandor" onclick="DoDeleteLeverandor(document.getElementById('txtEditLeverandorID').value)" href="#">Slett</a></li>															
+															</ul>
+														</div>
+
+
+
+                                        &nbsp;<input value="" id="txtEditLeverandorID" style="width:250px" type="hidden">
+
+                            
+
+								</div>
+							</section>
+
+
+						</div>
+
+
+								<div class="col-md-8 col-lg-6">
+
+							<div class="tabs">
+								<ul class="nav nav-tabs tabs-primary">
+									<li class="active">
+										<a href="#overview" data-toggle="tab">FirmaKort</a>
+									</li>
+								
+								</ul>
+								<div class="tab-content">
+									<div id="overview" class="tab-pane active">
+										<h4 hidden="hidden" class="mb-md">Update Status</h4>
+										<br />
+										
+												 <fieldset>
+												<div class="form-group">
+													<label class="col-md-3 control-label"  for="profileFirstName">Navn</label>
+													<div class="col-md-8">
+														<input type="text" disabled class="form-control" id="txtEditLeverandor">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileLastName">Adresse</label>
+													<div class="col-md-8">
+														<input type="text" onfocusout="DoInsertLeverandor()" class="form-control" id="txtEditLeverandorAdresse">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileAddress">PostSted</label>
+													<div class="col-md-8">
+														<input type="text" onfocusout="DoInsertLeverandor()" class="form-control" id="txtEditLeverandorPost">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Telefon</label>
+													<div class="col-md-8">
+														<input onfocusout="DoInsertLeverandor()" type="text" class="form-control" id="txtEditLeverandorTelefon">
+													</div>
+												</div>
+
+
+												     Notater på leverandøren : <br /><textarea class="form-control"  onfocusout="DoInsertLeverandor()" rows="5" id="txtEditText" cols="20" name="S2" rows="2"></textarea>
+
+											</fieldset>
+										     
+										<hr class="dotted short"><input id="butUpdateLev" onclick="DoInsertLeverandor()" type="button" value="Oppdater" />
+
+											
+                                                    &nbsp;<div>Denne Leverandørens Merker :</div><select class="form-control" rows="5" id="txtListLeverandorMerker" onchange="return false;" multiple="multiple" name="D5">
+                                                        <option></option>
+                                                    </select><br />
+                                                    <select id="drpEditLeverandorMerker" name="D6">
+                                                        <option></option>
+
+                                                    </select>
+										
+										
+								
+                                               <div class="input group-btn">
+															
+															<button tabindex="-1" class="btn btn-primary" id="Button1" onclick="DoAddMerker(); " type="button">Ny</button>
+															<button tabindex="-1" data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+																<span class="caret"></span>
+															</button>
+															<ul role="menu" class="dropdown-menu">
+															
+																<li><a id="D" onclick="DoRemoveBrand()" href="#">Slett</a></li>															
+															</ul>
+														</div>
+                                               
+
+									
+
+										<h4 hidden="hidden" class="mb-xlg">Timeline</h4>
+
+					
+									</div>
+							
+								</div>
+							</div>
+						</div>
+				        
+
+					</div>
+
+
+					<!-- end: page -->

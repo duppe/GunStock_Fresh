@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Viewer & Tekstlagring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        img {
+            max-width: 300px;
+            display: block;
+            margin: 20px auto;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 150px;
+            margin: 10px auto;
+            display: block;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            button:hover {
+                background: #0056b3;
+            }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <select onchange="location.href = this.value;" id="valgmeny">
+            <option value="Show_Item.html">Rediger</option>
+            <option value="Show_Item2.html" selected>Multi</option>
+            <option value="Show_Item3.html">KundeMail</option>
+        </select>
+
+
+        <h1><div id="caseID"></div></h1>
+
+        <h2 style="display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0;">
+            <img id="dynamicImage" src="" alt="Bilde lastes inn..." style="display: block; margin: 0; padding: 0;">
+            <input type="text" id="filenameR" name="filenameR" value="" style="display: block; margin: 0; padding: 0;">
+        </h2>
+
+        <!-- Skilt ut filnavnet og imageUrl i skjulte felt -->
+        <form id="uploadForm">
+            <input type="hidden" id="filename" name="filename" value="">
+
+            <input type="hidden" id="imageUrl" name="imageUrl" value="">
+            <textarea id="description" placeholder="Skriv inn beskrivelse eller kommentar her..."></textarea>
+            <button type="submit">Lagre</button>
+        </form>
+    </div>
+
+    <script>
+
+        let CaseID;
+
+        // Hent querystring-parameter
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Sjekk om URL-en er gyldig (håndterer relative og absolutte URL-er)
+        function isValidURL(url) {
+            try {
+                new URL(url, window.location.origin);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+
+        // Funksjon for å hente tekstfilen fra API-et
+        async function fetchTextFileContent(imageUrlValue, filenameValue) {
+            const getUrl = `/api/get-text?imageUrl=${encodeURIComponent(imageUrlValue)}&filename=${encodeURIComponent(filenameValue)}`;
+            try {
+                const response = await fetch(getUrl);
+                if (response.ok) {
+                    const textContent = await response.text();
+                    document.getElementById("description").value = textContent;
+                } else {
+                    console.warn("Ingen eksisterende fil funnet eller feil ved henting:", response.status);
+                }
+            } catch (error) {
+                console.error("Feil ved henting av tekstfil:", error);
+            }
+        }
+
+
+
+
+        window.onload = function () {
+            let imageUrl = getQueryParam("url");
+            //let parts = imageUrl.split('/')[imageUrl.split('/').length - 2];
+            CaseID = imageUrl ? imageUrl.split('/').at(-2) : null;
+            document.getElementById('caseID').innerHTML = 'Sak : ' + CaseID;
+
+            const Valgmeny = document.getElementById('valgmeny');
+
+            for (let i = 0; i < Valgmeny.options.length; i++) {
+                let base = Valgmeny.options[i].value.split('?')[0]; // fjerner gamle parametre hvis de finnes
+                Valgmeny.options[i].value = `${base}?url=${encodeURIComponent(imageUrl)}&CaseID=${encodeURIComponent(CaseID)}`;
+            }
+
+            window.parent.document.getElementById('Editor').style.height = '800px';
+            window.parent.document.getElementById('Editor').style.width = '800px';
+            window.parent.document.getElementById('Editor').style.position = 'relative'; 
+           // window.parent.document.getElementById('Editor').style.backgroundColor = '#ffffff'; // Mørk grå
+
+
+            // Hvis imageUrl finnes og inneholder '/api/images/', sett hidden imageUrl-feltet til resten av stien
+            if (imageUrl && imageUrl.includes("/api/images/")) {
+                let parts = imageUrl.split('/api/images/');
+                document.getElementById("imageUrl").value = parts.length > 1 ? parts[1] : "";
+            }
+
+            const imgElement = document.getElementById("dynamicImage");
+            const filenameInput = document.getElementById("filename");
+
+
+            if (imageUrl) {
+                // Sørg for at URL-en er absolutt
+                if (!imageUrl.startsWith("http")) {
+                    imageUrl = new URL(imageUrl, window.location.origin).href;
+                }
+                if (isValidURL(imageUrl)) {
+                    imgElement.src = imageUrl;
+                    imgElement.alt = "Lastet bilde";
+                    imgElement.onclick = function () {
+                        window.open(imageUrl, "_blank");
+                    };
+                    imgElement.style.cursor = 'pointer';
+                    // Utled filnavnet fra bildet og legg til .txt
+                    const derivedFilename = imageUrl.split('/').pop().replace(/\.[^/.]+$/, "") + ".txt";
+                    filenameInput.value = derivedFilename;
+                   // document.getElementById("filenameR").value = derivedFilename.split('_')[3].split('.')[0];
+                    //document.getElementById("filenameR").value = decodeURIComponent(derivedFilename.split('_')[3].split('.')[0]);
+                    document.getElementById("filenameR").value = (() => { try { return decodeURIComponent(document.getElementById("dynamicImage").src.split('/').pop().split('_')[3].split('.')[0]); } catch { return ''; } })();
+
+
+                } else {
+                    imgElement.alt = "Ugyldig eller ingen URL angitt";
+                }
+            }
+
+            // Når både imageUrl (den skjulte versjonen) og filename er satt, hent eksisterende filinnhold.
+            const hiddenImageUrl = document.getElementById("imageUrl").value;
+            const filenameValue = document.getElementById("filename").value;
+            if (hiddenImageUrl && filenameValue) {
+                fetchTextFileContent(hiddenImageUrl, filenameValue);
+            }
+        };
+
+
+        document.getElementById("uploadForm").onsubmit = async function (event) {
+            event.preventDefault();
+
+            const filename = document.getElementById("filename").value;
+            const filenameR = document.getElementById("filename").value;
+            const fileContent = document.getElementById("description").value.trim();
+            const imageUrl = document.getElementById("imageUrl").value;
+            const oldFileName = imageUrl.split('_').pop();
+            const newFileName = document.getElementById("filenameR").value + '.' + oldFileName.split('.').pop();
+
+            let parts = imageUrl.split('/');  // Splitt strengen til et array
+            parts.pop();                // Fjern den siste delen
+            let newUrl = parts.join('/') + '/';  // Sett sammen de resterende delene og legg til '/'
+
+            const folderPath = newUrl;
+
+            if (!filename) {
+                alert("Ingen gyldig filnavn funnet!");
+                return;
+            }
+            if (!fileContent) {
+                alert("Vennligst skriv inn noe tekst for å lagre i filen!");
+                return;
+            }
+
+            const payload = {
+                filenameR: filename,
+                filename: filename,
+                content: fileContent,
+                imageUrl: imageUrl,
+
+                oldFileName: oldFileName,
+                newFileName: newFileName,
+                folderPath: folderPath
+
+            };
+
+            try {
+                const response = await fetch("/api/upload-text", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                //alert(result.message);
+                window.parent.document.getElementById('divShowItem').hidden = true;
+
+            } catch (error) {
+                console.error("Feil ved opplasting:", error);
+                alert("Opplasting feilet!" + error);
+            }
+
+            try {
+                const response = await fetch("/api/renameFile", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                //alert(result.message);
+                window.parent.document.getElementById('divShowItem').hidden = true;
+
+            } catch (error) {
+                console.error("Feil ved opplasting:", error);
+               // alert("Opplasting feilet!" + error);
+            }
+
+            top.loadImages(CaseID);
+        };
+    </script>
+
+</body>
+</html>

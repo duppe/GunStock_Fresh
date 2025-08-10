@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html >
+    
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+       
+        <link rel="icon" type="image/png" href="favicon.ico" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="_your description goes here_" />
+    <meta name="keywords" content="DuppeHesten" />
+    <meta name="author" content="GunStock" />
+       
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+
+         <script>
+             DoLoadFile('Scripts/Inside.js', 'js')
+           
+        </script>
+
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+    
+         
+    
+        
+    
+        <style type="text/css">
+            .MenuIconSize {
+                width: 48px;
+                height: 48px;
+                padding-left:8px;
+                padding-top:15px;
+                cursor: pointer;
+            }
+        </style>
+    
+         
+    
+        
+    
+        </head>
+
+
+
+
+    <body style="background: url(img/body-top.png) repeat-x top left; background-color:#efeded; ">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://idanika.no/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <input id="txtSessionTimeOut" value="0" type="hidden" />
+                <input id="DoDo_IsRunning" value="1" type="hidden" />
+				<input id="Knappen0" hidden="hidden" type="button" value="Søk"  />
+       
+		<div id="Main1" onkeyup="ResetTimeOutTimer()" onmouseover="ResetTimeOutTimer()" style="background:#efeded;" class="wrapAll clearfix">
+           
+            <div style="background-color: #03363D;display: block;position: absolute;top: 0;bottom: 0;left: 0;width: 60px;z-index: 19;">
+                 <div style="position: absolute;width:50px;bottom:50px;font-size:small;">Ver. :1.1A Canari 160521</div>
+                <img alt="" onclick="DeleteAllCookies();document.location.reload();" style="position: absolute;width:50px;bottom:0;" src="img/logoSquare.bmp" />
+                <img onclick="DoNewBrowserTab('Front.html', null, 'Hjem')" alt="" title="Hjem" class="MenuIconSize" onmouseover="this.src='img/hjem.png'" onmouseout="this.src='img/hjem.png'" src="img/hjem.png" />
+                
+               
+                <img onclick="DoNewBrowserTab('CostumerCard.html', null, 'Kunde kort')" title="KundeListe"   onmouseover="img/this.src='kundekort.png'" onmouseout="this.src='img/kundekort.png'" src="img/kundekort.png" class="MenuIconSize" />
+              
+                
+
+                <img onclick="DoNewBrowserTab('CostumerList.html',null,'AdresseBok')" alt="KundeListe" title="AdresseBok" class="MenuIconSize" src="img/adressebok.png" />
+                <img onclick="DoNewBrowserTab('InsertWeapon.html',null,'Våpen')" alt="Legg inn Våpen" title="Legg inn Våpen" class="MenuIconSize" src="img/vapen.png" />
+                <img onclick="DoNewBrowserTab('StoreList.html',null,'Lager')" alt="Lager" title="Lager" class="MenuIconSize" src="img/lager.png" />
+                <img onclick="DoNewBrowserTab('Rapport.html',null,'Rapport')" alt="Rapport Utskrift" title="Rapport Utskrift" class="MenuIconSize" src="img/rapport.png" />
+                
+
+                <img id="AdminMenu" alt="" onclick="DoNewBrowserTab('Admin.html',null,'System Settings')" class="MenuIconSize" title="KontrollPanel" src="img/system.png" />
+                <div>Image 1 Text</div>
+
+            </div>
+
+				<div  class="logo">
+					<img src="img/GunStockOne.gif" />
+				</div>
+               
+            <!-- Hjem -->
+              <div  style = "display: block;position: absolute;top: 0px;right: 0px;width:20%;height:48px;";>
+                   <div style="font-size:xx-small;" id="LoggStatus"></div> <div id="simpleSearch_TOP" style="z-index: 20;">
+                        <input type="text" hidden="hidden" name="searchInput_TOP" style="background-color:#FAFAFA" id="searchInput_TOP" onkeypress="HotKay(event)" placeholder="Skitt it's a Frisøk" size="12" />
+                        <div id="submitSearch"></div>
+                    </div>
+                  <a id="User">Ikke Innlogget</a>   <a onclick=" DoLogOut()" href="#">Logg ut</a>
+                   
+                </div>
+                 <div id="Main3" class="mainsection" style="background:#efeded; display: block;position: absolute;top: 60px;left: 120px;width: 80%;padding-left:5px;z-index: 15;" >
+                </div>
+              
+
+                <!-- /Hjem -->
+           
+		
+        </div>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+﻿<!doctype html>
+<script type="text/javascript" src="Scripts/DoLogThings.js?1500"></script>
+<html lang="no">
+<head>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>GunStock_One</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+        * {
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        html {
+            color: #888;
+            display: table;
+            font-family: sans-serif;
+            height: 100%;
+            text-align: center;
+            width: 100%;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
+            margin: 2em auto;
+        }
+
+        h1 {
+            color: #555;
+            font-size: 2em;
+            font-weight: 400;
+        }
+
+        p {
+            margin: 0 auto;
+            width: 380px;
+        }
+
+        @media only screen and (max-width: 280px) {
+
+            body, p {
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.5em;
+                margin: 0 0 0.3em;
+            }
+
+
+        }
+
+        .auto-style1 {
+            bottom: 11px;
+            position: absolute;
+            left: 1px;
+            width: 77px;
+        }
+
+        .auto-style2 {
+            width: 92px;
+            height: 23px;
+        }
+
+        </style>
+</head>
+<body onKeyUp="HandleEvent(this, event)">
+    <img style="width:250px;" src="img/GunStockOne.png" />
+    <h3>
+        <img class="auto-style2" src="img/mobil.gif" />LogIn</h3><br />
+     <h4 >Bruker&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="Bruker" type="text" /> <br /><br />
+    Passord&nbsp;&nbsp;&nbsp;&nbsp;<input id="Passord" type="password" onKeyUp="HandleEvent(this, event)"  /></h4><br />
+    <input id="butDoLogin" onclick="LogIn()" type="button" value="Logg inn" /><br />
+    
+   <div id="Result">
+				<br />
+        <br />
+        <br />
+        <img alt="" class="auto-style1" src="img/logoSquare.bmp" /></div>
+    <div  id ="divChangePassword" style="position: absolute; left: 40%; top: 40%"> </div>
+    <p>
+</body>
+</html>

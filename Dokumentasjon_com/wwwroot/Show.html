@@ -1,0 +1,291 @@
+﻿
+<script>
+    function generateCacheBuster() {
+        var timestamp = new Date().getTime();
+        return 'v=' + timestamp;
+    }
+
+</script>
+<script type="text/javascript" src="js/Shared.js?${generateCacheBuster()}"></script>
+<script src="js/html2canvas.min.js"></script>
+<script src="js/jspdf.umd.min.js"></script>
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP Bilder</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        #sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #007bff;
+            color: white;
+            padding: 20px;
+        }
+
+        #topbar {
+            position: fixed; /* Gjør at div-en holder seg fast i vinduet */
+            top: 0; /* Plasserer den øverst */
+            right: 0; /* Plasserer den til høyre */
+            width: 200px;
+            height: 10px;
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        #folderList {
+            list-style: none;
+            padding: 0;
+        }
+
+            #folderList li {
+                padding: 10px;
+                cursor: pointer;
+            }
+
+                #folderList li:hover {
+                    background: #0056b3;
+                }
+
+        #content {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #imageContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .image-thumbnail {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+            .image-thumbnail:hover {
+                transform: scale(1.1);
+            }
+
+        .download-link {
+            display: block;
+            margin-top: 5px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .download-link:hover {
+                text-decoration: underline;
+            }
+
+        .container {
+            width: 80%;
+            height: 90%;
+            max-width: 800px;
+            margin: 20px auto; /* Sentrerer container horisontalt */
+            padding: 1px;
+            background: #fff;
+            border: none;
+            //box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+            /* Eksempel hvis du skal vise innhold med iframe */
+            .container iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Venstre meny for mapper -->
+    <div id="sidebar">
+        <img src="assets/img/hytteLogo.png" width="200" /><br />
+        Canari 1.a.1 (<a href="index_Test.html">GoTo DocSide</a>)
+        <h2>Mapper</h2>
+        <input type="text" id="folderSearch" placeholder="Søk mapper..." style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+        <ul id="folderList"></ul>
+    </div>
+
+    <div id="topbar">
+        test
+
+    </div>
+
+    <!-- Hovedinnhold (bilder) -->
+    <div id="content">
+        <h2><div id="caseID"></div></h2>
+        <div id="imageContainer"></div>
+    </div>
+
+    <div hidden="hidden" id="divShowItem" class="container">
+        <iframe style="border:none;" frameborder="0" id="Editor" src="show_item.html"></iframe>
+    </div>
+
+
+    <script>
+        async function loadFolders() {
+            try {
+                // Hent FirmID fra localStorage
+                const firmID = localStorage.getItem("firmID");
+                if (!firmID) {
+                    console.error("❌ Ingen FirmID funnet i localStorage!");
+                    return;
+                }
+
+                // Send forespørselen med FirmID som URL-parameter
+                const response = await fetch(`/api/getfolders?firmID=${firmID}`);
+
+                if (!response.ok) {
+                    console.error("❌ Server svarte med feil:", response.status, response.statusText);
+                    return;
+                }
+
+                const folders = await response.json();
+                const folderList = document.getElementById("folderList");
+                folderList.innerHTML = "";
+
+                folders.forEach(folder => {
+                    const li = document.createElement("li");
+                    li.textContent = folder;
+                    li.onclick = () => loadImages(folder);
+                    folderList.appendChild(li);
+                });
+            } catch (error) {
+                console.error("🚨 Feil ved henting av mapper:", error);
+            }
+        }
+
+
+        async function saveIframeAsPdf(folderName) {
+            const iframe = document.getElementById('Editor');
+            const iframeBody = iframe.contentWindow.document.body;
+
+            const canvas = await html2canvas(iframeBody, {
+            scale: 2
+            });
+
+            const imgData = canvas.toDataURL('image/png');
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+            const pdfBlob = pdf.output('blob');
+
+            const formData = new FormData();
+            formData.append('pdf', pdfBlob, fileName + '.pdf');
+
+                await fetch(`/api/upload-pdf/${folderName}`, {
+                method: 'POST',
+                body: formData
+                });
+
+            alert('PDF lagret!');
+        }
+
+
+        async function loadImages(folder) {
+            try {
+                const firmID = localStorage.getItem("firmID");
+
+                const response = await fetch(`/api/getfiles?firmID=${firmID}&folder=${folder}`);
+                const images = await response.json();
+                const imageContainer = document.getElementById("imageContainer");
+                imageContainer.innerHTML = "";
+                document.getElementById('caseID').innerHTML = 'Sak : ' + folder;
+                document.getElementById('divShowItem').hidden = true;
+                images.forEach(image => {
+                    const div = document.createElement("div");
+                    div.style.textAlign = "center";
+
+                    const img = document.createElement("img");
+                    img.src = `/api/thumbnails/${firmID}/${folder}/${image}`;
+                    img.classList.add("image-thumbnail");
+                    img.onclick = () => openImage(`/api/images/${firmID}/${folder}/${image}`);
+
+                    const downloadLink = document.createElement("a");
+                    downloadLink.href = `/api/image-to-pdf/${firmID}/${folder}/${image}`;
+                    downloadLink.classList.add("download-link");
+                    downloadLink.innerText = "Last ned som PDF";
+                    downloadLink.setAttribute("download", image.replace(/\.[^/.]+$/, ".pdf"));
+
+                    const lbl = document.createElement("label");
+                    lbl.innerHTML = " ";
+
+                    const txt = document.createElement("label");
+                    txt.innerHTML = image.split('_')[1] + ' ';  // setter selve tekstinnholdet
+                    txt.style.width = "25px";
+
+                    const txtNmae = document.createElement("label");
+                    txtNmae.innerHTML = image.split('_').at(-1).split('.')[0];
+                    txtNmae.style.width = "25px";
+                    //txtNmae.type = "text";
+                    //txtNmae.value = image.split('_').at(-1).split('.')[0];
+                    //txtNmae.style.width = 150;
+
+
+
+
+                    div.appendChild(img);
+                    /*  div.innerHTML += "<br />";*/
+                    div.appendChild(document.createElement("br"));
+                    div.appendChild(lbl);
+                    div.appendChild(txt);
+                    div.appendChild(txtNmae);
+                    div.appendChild(downloadLink);
+                    imageContainer.appendChild(div);
+                });
+            } catch (error) {
+                console.error("Feil ved henting av bilder:", error);
+            }
+        }
+
+        function openImage(url) {
+            document.getElementById('divShowItem').hidden = false;
+            document.getElementById('Editor').src = "Show_Item.html?url=" + url;
+          //  window.open("Show_Item.html?url=" + url, "_blank");
+        }
+
+        // Legg til eventListener for søkefeltet
+        document.getElementById('folderSearch').addEventListener('input', function () {
+            const searchValue = this.value.toLowerCase();
+            const folderItems = document.querySelectorAll('#folderList li');
+
+            folderItems.forEach(item => {
+                // Hvis mappenavnet inneholder søketeksten, vis den, ellers skjul den.
+                if (item.textContent.toLowerCase().includes(searchValue)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        loadFolders();
+    </script>
+
+</body>
+</html>

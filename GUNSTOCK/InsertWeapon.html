@@ -1,0 +1,227 @@
+﻿					<!-- start: page -->
+
+
+
+
+					<head>
+                        <style type="text/css">
+                            #Dokumentasjon {
+                                width: 407px;
+                            }
+                        </style>
+                    </head>
+
+
+
+
+					<div id="Rapport" class="article">
+						<div class="row">
+
+							<div class="col-md-6">
+
+								<div id="AlertBox"></div>
+								<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+
+										<h2 class="panel-title">Våpenkort</h2>
+
+										<p class="panel-subtitle">
+											Legg inn Nytt våpen, eller rediger.
+										</p>
+									</header>
+
+									<div class="panel-body">
+
+										<div class="row form-group">
+											<div class="col-lg-4">
+												Dato
+												<input type="date" id="Mtxtdate" disabled name="Bday" value="2013-01-08" placeholder="Dato" class="form-control">
+											</div>
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+											
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+										</div>
+
+										<div class="row">
+											<div class="col-lg-12">
+												<textarea id="MtxtSerienummer" onkeyup="CheckIfExist();" onchange="document.getElementById('MSwitch').value='1';" class="form-control" name="IsItEmty" placeholder="Serienummer.   For å skrive inn flere brukt kommma ."></textarea>
+											</div>
+										</div>
+
+										<div class="row form-group">
+											<div class="col-lg-4">
+												Leverandør
+												<select id="MdrpLeverandor" name="IsItEmty" onclick="GjorHvit(this);" class="form-control" name="drpLeverandoren">
+													<option></option>
+												</select>
+
+											</div>
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+											<div class="col-lg-4">
+												Merke.
+												<select class="form-control" onclick="GjorHvit(this);" onchange="DoFill('MdrpModel', '41', document.getElementById('MdrpMerke').options[document.getElementById('MdrpMerke').selectedIndex].text)" id="MdrpMerke" name="IsItEmty">
+													<option></option>
+												</select>
+
+											</div>
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+											<div class="col-lg-4">
+												Modell.
+
+												<select class="form-control" id="MdrpModel" onclick="GjorHvit(this);" name="drpLeverandoren0">
+													<option></option>
+												</select>
+											</div>
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+										</div>
+
+										<div class="row form-group">
+											<div class="col-lg-4">
+												Mekanisme.
+												<select id="MdrpMekanisme" class="form-control" onclick="GjorHvit(this);" onchange="CheckIfExist();" name="IsItEmty">
+													<option></option>
+												</select>
+											</div>
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+											<div class="col-lg-4">
+												Løp Lengde.
+												<input id="MtxtLopLengde" onclick="GjorHvit(this);" type="text" name="IsItEmty" class="form-control" />
+											</div>
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+											<div class="col-lg-4">
+												Kaliber.
+												<input class="form-control" onclick="GjorHvit(this);" name="IsItEmty" id="MtxtCaliber" type="text" />
+											</div>
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+										</div>
+
+										<div class="row">
+											<div class="col-lg-12">
+												VåpenInfo.
+												<textarea class="form-control" rows="5" id="MtxtItemText" placeholder="Informasjon om våpenet , tilstand etc."></textarea>
+											</div>
+										</div>
+										<div class="mb-md hidden-lg hidden-xl"></div>
+										<div class="row form-group">
+
+											<div class="col-lg-4">
+												Våpen status.
+												<select class="form-control" placeholder="Status" id="MdrpStatus" onclick="GjorHvit(this);" name="IsItEmty">
+													<option></option>
+												</select>
+											</div>
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+
+											
+
+											<div class="mb-md hidden-lg hidden-xl"></div>
+								
+											<div class="col-lg-4">
+												Status oppdatert.
+												<input type="date" id="MtxtDateOppdatert" name="BdayO" disabled placeholder="Sist Oppdatert" class="form-control">
+											</div>
+
+											<div class="col-lg-4">
+												Innkjøpsdato
+												<input id="MtxtBestilt" value="2013-01-08" type="date" onchange="document.getElementById('Mtxtdate').value=this.value;document.getElementById('MtxtDateOppdatert').value=this.value;" name="Bday0" placeholder="Last Name" class="form-control">
+											</div>
+
+											
+
+											<div class="col-lg-4">
+												Eier
+												<input id="MdrpEier" type="text" placeholder="Eier" class="form-control">
+											</div>
+
+										</div>
+
+									</div>
+									<footer class="panel-footer">
+										<div id="Agree">
+											<input id="Mcheck" onclick="document.getElementById('MPost').disabled = false;" type="checkbox" value="1" />Jeg bekrefter at alt er riktig
+											<br />
+										</div>
+
+										<input class="btn btn-primary" id="MPost" onclick="MDoPost();" type="button" value="Registrer" />
+										<div id="Mresult">  Klar for Registrering.   </div>
+
+										<input id="MSwitch" value="1" type="hidden" /><input id="MtxtID" value="" type="hidden" />
+									</footer>
+								</section>
+
+
+
+							</div>
+
+							<!------------------------------------------------------>
+
+							<div class="col-md-6">
+								<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+
+										<h2 id="divHeadSerial" class="panel-title">Serienummer</h2>
+									</header>
+									<div class="panel-body">
+										<!-- Show Serials Start -->
+
+										<div id="divSerials"></div>
+									</div>
+								</section>
+								<!-- Show Serials END -->
+							</div>
+
+
+
+							<div id="DokumentationFrame" class="col-md-6">
+								<section class="panel">
+									<header class="panel-heading">
+										<div class="panel-actions">
+											<a href="#" class="fa fa-caret-down"></a>
+											<a href="#" class="fa fa-times"></a>
+										</div>
+
+										<h2 id="divDokumentasjon" class="panel-title">Dokumentasjon av våpen (Canari Test)</h2>
+									</header>
+									<div class="panel-body">
+										<!-- Show Dokumentasjon Start -->
+
+										<div id="divDokTest">
+											<h3 id="NoDokumentation"> For å bruke denne modulen må du ha tjenesten Dokumentasjonsportalen.</h3> 
+											<iframe id="ShowPics" style="height:400px;width:100%;border:none;" src=""  ></iframe>
+											<iframe id="Dokumentasjon" style="height:400px;width:100%;border:none;" src=""  ></iframe>
+										</div>
+										<!-- Show Dokumentasjon END -->
+									</div>
+								</section>
+
+							</div>
+
+
+						</div>
+					</div>
+
+
+					<!-- end: page -->

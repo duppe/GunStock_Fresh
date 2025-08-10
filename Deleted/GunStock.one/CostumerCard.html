@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html >
+    
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <script type="text/javascript" src="Scripts/CostumerCard.js?1500"></script>
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <link rel="icon" type="image/png" href="favicon.ico">
+  
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+    
+    </head>
+    <body style="background-color:  #efeded;" onclick="DoFillHistory()" onfocus="DoFillHistory()">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://idanika.no/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+     <script>
+
+        
+
+         const urlParams = new URLSearchParams(window.location.search);
+         const PID = urlParams.get('TempUserID');
+
+         if (PID != null) {
+             parent.writeCookie('TempUserID', PID, 30);
+             // SendHistory(readCookie('CLientName'), 'CostumerCard.html?ID=' + SelectedV);
+             DoFillForm('txtSalg', '1', PID);
+         }
+
+       
+     </script>
+            <div onkeyup="parent.ResetTimeOutTimer()" onmouseover="parent.ResetTimeOutTimer()" id="Main3" class="mainsection2">
+            
+        <div id="Main2"  style="display: block; background:#efeded;position: absolute;top: 0px;bottom: 0;left: 0px;width: 200px;padding-left:5px;z-index: 15;">
+			                  
+                <div id="LastHistory" >
+                        <div id="test" onmouseover="document.getElementById('test').class='DuppeNoSelected';"  class="DuppeSelected">No History</div>
+                </div>
+            
+			</div>
+
+        <div  id="Main" class="article" style="display: block; background:#efeded;position: absolute;top: 0px;bottom: 0;left: 200px;width: 1000px;padding-left:5px;z-index: 15;">
+                <h1>KundeKort.</h1>
+                 <div id="test" onmouseover="document.getElementById('test').class='DuppeWindow1';" style="position:absolute;top: 100px;left: 10px;width:350px; height:260px;background-color:#FAFAFA;" class="contentsPanel">
+                    
+                                    <br />Kunde Navn :&nbsp;
+                                     <br />
+                                     <input id="txtSalgKundenavn" onkeyup="javascript:document.getElementById('drpSalgVapenMulti').style='display:none;';  if (this.value.length > 3) { DoFill('drpSelKunde', 5, this.value);document.getElementById('divSelKunde').style='display:block;';document.getElementById('butBlankCostumer').style = 'display:block;'; }else{document.getElementById('txtSalgAdresse').value='';document.getElementById('txtSalgPoststed').value='';document.getElementById('txtSalgTelefon').value='';document.getElementById('txtSalgInfo').value='';document.getElementById('txtSelHistory').innerHTML='';document.getElementById('drpSelKunde').innerHTML='';document.getElementById('divSelKunde').style='display:none;';document.getElementById('butBlankCostumer').style = 'display:none;';};" type="text" style="width:300px;" autocomplete="off" /><input id="butBlankCostumer" onclick="DoBlankCostumer()"  style="visibility:hidden;font-size: small;" type="button" value="Ny" /><br />
+                                     <div id="divSelKunde" style="display:none;">
+                                         <select id="drpSelKunde" onclick="DoGetCostumer()" style=" width:400px; background:transparent;border:0px;outline:0px; overflow-y: no-content; " name="D9" multiple="multiple">
+                                             <option></option>
+
+                                         </select>
+                                     </div>
+                                     Adresse :<br />
+
+                                     <input id="txtSalgAdresse" type="text" style="width:300px;" autocomplete="off" />
+                                     <br />
+                                     PostSted<br />
+                                     <input id="txtSalgPoststed" type="text" style="width:300px;" autocomplete="off" /><br />
+                                     Telefon<br />
+                                     <input id="txtSalgTelefon" onclick="DoValidateFields()" type="text" style="width:300px;" autocomplete="off" /><br />
+                                     <input id="butSelNewCostumer" onclick="DoNewCostumer()" type="button" style="visibility:hidden" value="Lagre Som Ny Kunde" /><br /><br />
+                                      
+                 </div>
+
+                <div id="SerieNummer" onmouseover="document.getElementById('test').class='DuppeWindow1';" style=" position:absolute;top: 400px;left: 10px;width:350px; height:260px;background-color:#FAFAFA; " class="contentsPanel">
+                    <h1>SerieNummer&nbsp; :</h1><br />
+                                 <input  id="txtSalgSerienummer" onfocusout="SendHistory(parent.readCookie('CLientName'), 'CostumerCard.html?TempUserID=' + parent.readCookie('TempUserID'), 'Kunde kort <br /> ' + getElementById('txtSalgKundenavn').value);" onkeyup="document.getElementById('butSalgSalg').style='display:none;';" onclick="DoValidateFields(); " type="text" value="" style="width:200px;" autocomplete="off" />
+                    <input style="width:50px;" onclick=" DoGetWeaponSerials(document.getElementById('txtSalgSerienummer').value);" id="butSalgCheck" type="button" value="Sjekk" />              
+                    <select id="drpSalgVapenMulti" onclick="GetVapenSerial();" style="width:400px;display:none;" multiple="multiple" ></select> 
+                                 <br />
+                                 <input style="visibility:hidden;" id="txtDateReserved" type="date"  /> <input style="width:100px;visibility:hidden;" onclick="DoUpdateVapen(2, document.getElementById('txtSalgMekanisme').value, document.getElementById('txtSalgSerienummer').value, document.getElementById('txtSalgid').value, document.getElementById('txtSalgKundenavn').value, document.getElementById('txtSalgid').value, document.getElementById('txtDateReserved').value)" id="butSalgSalg" type="button" value="Godkjenn Salg" />
+                   <br />
+                                    
+                                     <input id="txtSalgid" type="text" value="" hidden="hidden" />
+                                     <input id="txtSalgNotOK" type="text" hidden="hidden" />
+                                     <input id="txtSalgMekanisme" type="text" hidden="hidden" />
+
+                       <input type="hidden" id="txtSelVapenID" value="" />
+                                 <div id="txtSelVapen" style="width:250px;" ></div>
+                                             <img alt="" style="width:0px;height:0px;"  id="imgSelVapen" src="img/GunBlank_200x100.png" />
+
+
+                </div>
+
+                <div style="position:absolute;top: 100px;left: 450px;width:600px; height:260px;background-color:#FAFAFA;" class="contentsPanel">
+                    <div id="divSalgStory" style="background-color:#FAFAFA;" class="article">Våpen historie :<br />
+                     &nbsp;<select id="txtSelHistory"  style="width:550px;height:200px; background:transparent;border:0px;outline:0px;background-color:#FAFAFA;" multiple="multiple" name="D10">
+                                         <option></option>
+                                     </select>
+                    </div>
+    
+                </div>
+
+                <div style="position:absolute;top: 400px;left: 450px;width:350px; height:260px;background-color:#FAFAFA;" class="contentsPanel">
+                <div id="divSalgObs" style="background-color:#FAFAFA;" class="article">Kunde Info :<br />
+                                 <textarea id="txtSalgInfo" style="width:300px;height:190px; background:transparent;border:0px;outline:0px;background-color:#FAFAFA; " cols="20" rows="2"></textarea>
+                                
+                             </div>
+                  </div> 
+
+        </div>
+
+
+                
+            </div> 
+    
+    </body>
+</html>

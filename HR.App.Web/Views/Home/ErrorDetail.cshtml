@@ -1,0 +1,24 @@
+﻿@model BCF.TimeEntryApp.Web.Models.ErrorMessage
+
+@section breadcrumb {
+    <span class="align-middle">&gt;</span>
+    <span class="align-middle">&nbsp;Error Details</span>
+}
+<div id="view" v-cloak>
+    <div class="card">
+        <div class="card-header">
+            <h5>Error Details</h5>
+        </div>
+        <div class="card-body">
+          @*  @Model.ErrorDescription*@
+            <div class="row">
+                <div class="col-11">
+                    <div class="form-group">
+                        <font color="red">@Model.ErrorDescription</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/dest/js/errorDetail.bundle.js" asp-append-version="true"></script>

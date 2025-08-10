@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+.zoom {
+ 
+  
+  /*background-color: green;
+     width: 32px;
+  height: 32px;
+
+
+  */
+  transition: transform 1s;
+  width: 44px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(3.5); 
+  document.getElementById('w').style.visibility = hidden;
+}
+</style>
+
+
+
+
+
+
+</head>
+<body>
+
+    <div class="zoom"><div id="w">erter</div></div>
+                <div style="background-color: #03363D;display: block;position: absolute;top: 0;bottom: 0;left: 0;width: 60px;z-index: 19;">
+                 <div style="position: absolute;width:50px;bottom:50px;font-size:small;">Ver. :1.1.1.1.A Canari</div>
+                <img alt="" onclick="DeleteAllCookies();document.location.reload();" style="position: absolute;width:50px;bottom:0;" src="img/logoSquare.bmp" />
+                <img onclick="DoNewBrowserTab('Front.html', null, 'Hjem')" alt="" style="padding-left:10px;padding-top:15px;" onmouseover="this.src='img/home2.gif'" onmouseout="this.src='img/home.gif'" src="img/home.gif" />
+                <img onclick="DoNewBrowserTab('CostumerCard.html', null, 'Kunde kort')" alt="" style="padding-left:10px;padding-top:15px;" onmouseover="img/this.src='user.gif'" onmouseout="this.src='img/user.gif'" src="img/user.gif" />
+                <img onclick="DoNewBrowserTab('CostumerList.html',null,'AdresseBok')" alt="KundeListe" title="Legg inn Våpen" style="padding-left:10px;padding-top:15px;" src="img/addressbook.gif" />
+                <img onclick="DoNewBrowserTab('InsertWeapon.html',null,'Våpen')" alt="Legg inn Våpen" style="padding-left:10px;padding-top:15px;" src="img/edit.gif" />
+
+                <div class="zoom">
+                <img onclick="DoNewBrowserTab('StoreList.html',null,'Lager')" alt="Lager" style="padding-left:10px;padding-top:15px;" src="img/cart.gif" />
+                </div>
+
+
+                <img onclick="DoNewBrowserTab('Rapport.html',null,'Rapport')" alt="Rapport Utskrift" title="Rapport Utskrift" style="padding-left:10px;padding-top:15px;" src="img/document.gif" />
+                <img id="AdminMenu" alt="" onclick="DoNewBrowserTab('Admin.html',null,'System Settings')" style="padding-left:10px;padding-top:15px;" src="img/equalizer.gif" />
+
+            </div>
+
+
+
+
+
+</body>
+</html>

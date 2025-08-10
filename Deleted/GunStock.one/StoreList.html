@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+      <script type="text/javascript" src="Scripts/StoreList.js?w=1500"></script>
+        <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+        <title>GunStock</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+        <link rel="stylesheet" href="style.css" />
+</head>
+<body style="background-color:#EFEDED">
+  <!-- Lager list-->
+
+                <div id="LagerList" class="article">
+                    <h1>Lager oversikt:</h1>
+                    
+                    
+                    <p class="roleNote">&nbsp;</p>
+
+                    <div  id="simpleVapenSearch">
+                        Søk på serienummer : <input type="search"  autocomplete="sex" name="KundesearchInput" onkeyup="DoFillListing('0_'+document.getElementById('searchVapenInput').value)" id="searchVapenInput" size="12" />
+                        <div id="submitVapenSearch"></div>
+                    </div>
+
+
+                    <div id="Lager" style="display:block;">
+                        
+                        <div id="LagerListing"></div>
+                    </div>
+                </div>
+                <!-- /Lager list-->
+</body>
+</html>

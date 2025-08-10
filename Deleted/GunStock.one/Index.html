@@ -1,0 +1,135 @@
+<!doctype html>
+
+<script>
+
+    if ((window.innerWidth <= 800) && (window.innerHeight <= 600)) {
+    location.href = "_MOB_Index.html";
+}
+if (detectM()) {
+    location.href = "_MOB_Index.html";
+}
+
+
+    function detectM() {
+    const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i
+    ];
+
+    return toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+    });
+}
+
+
+</script>
+<script type="text/javascript" src="Scripts/DoLogThings.js?1500"></script>
+<html lang="no">
+<head>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>GunStock_One</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style>
+
+        * {
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        html {
+            color: #888;
+            display: table;
+            font-family: sans-serif;
+            height: 100%;
+            text-align: center;
+            width: 100%;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
+            margin: 2em auto;
+        }
+
+        h1 {
+            color: #555;
+            font-size: 2em;
+            font-weight: 400;
+        }
+
+        p {
+            margin: 0 auto;
+            width: 380px;
+        }
+
+        @media only screen and (max-width: 280px) {
+
+            body, p {
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.5em;
+                margin: 0 0 0.3em;
+            }
+
+
+        }
+
+        .auto-style1 {
+            bottom: 11px;
+            position: absolute;
+            left: 1px;
+            width: 77px;
+        }
+
+        .auto-style2 {
+            font-weight: bold;
+        }
+        .auto-style3 {
+            font-size: small;
+        }
+
+        </style>
+</head>
+    <script>
+
+
+     
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const q = urlParams.get('q');
+
+        if (q != null) {
+     
+            CheckSessionPass(q);
+        }
+
+
+    </script>
+<body onKeyUp="HandleEvent(this, event)">
+    
+		 
+
+    <img style="width:250px;" src="img/GunStock_LOGO.png" />
+    <h3>LogIn</h3><br />
+     <h4 >Bruker&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="Bruker" type="text" /> <br /><br />
+    Passord&nbsp;&nbsp;&nbsp;&nbsp;<input id="Passord" type="password" onKeyUp="HandleEvent(this, event)"  /></h4><br />
+    <input id="butDoLogin" onclick="LogIn()" type="button" value="Logg inn" /><br />
+    
+   <div id="Result">
+     
+        <br />
+        <br />
+        <img alt="" class="auto-style1" src="img/logoSquare.bmp" /></div>
+    <div  id ="divChangePassword" style="position: absolute; left: 40%; top: 40%"> </div>
+    <p>
+</body>
+</html>

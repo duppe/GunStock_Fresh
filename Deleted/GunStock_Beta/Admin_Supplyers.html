@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+         <script type="text/javascript" src="Scripts/admin_Supplyers.js?1500"></script>
+    <script type="text/javascript" src="Scripts/Shared.js?1500"></script>
+      <link rel="stylesheet" href="style.css" />
+    <title>GunStock</title>
+</head>
+<body>
+
+    <iframe src="SettingsTopMenu.html" width="800px" height="35px"></iframe>
+
+
+
+
+    <!-- Leverandører -->
+                    <div id="ConfigLeverandorer" style="vertical-align:top;">
+                        <br />
+                       
+                       
+
+                        <table style="width:900px;">
+                            <tr>
+                                <td>
+                                    <div class="articleLeft">
+                                        Velg Leverandør :<br />
+                                        <p class="block">
+                                            <select onclick="DoFillLeverandorFields();return false;" style="height:200px;width:250px" id="txtListLeverandor" name="D4" multiple="multiple">
+                                                <option>a</option>
+                                            </select>
+                                        </p><br />
+                                        &nbsp;<input value="" id="txtEditLeverandorMerker" style="width:250px" type="hidden"><input id="butAddLev" onclick="DoMakeNewLeverandor()" type="button" style="visibility:visible" value="Legg til." /><input id="butDoDeleteLeverandor" style="visibility:visible;" onclick="DoDeleteLeverandor(document.getElementById('txtEditLeverandorID').value)" type="button" value="Slett" /><br />
+                                        &nbsp;<input value="" id="txtEditLeverandorID" style="width:250px" type="hidden">
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="articleRight">
+
+
+                                        <table class="auto-style4">
+                                            <tr>
+                                                <td rowspan="2">
+
+                                                    <a style="background-color:#c0c0c0">Navn : <br /><input class="contentsHeader" value="" id="txtEditLeverandor" style="width:250px" disabled="disabled" type="text" /></a><br />
+
+                                                    <a style="background-color:#c0c0c0">Adresse : <br /><input value="" id="txtEditLeverandorAdresse" style="width:250px" type="text" /></a><br />
+
+                                                    <a style="background-color:#c0c0c0">PostSted : <br /><input value="" id="txtEditLeverandorPost" style="width:250px" type="text" /></a><br />
+                                                    <a style="background-color:#c0c0c0">Telefon : <br /><input value="" id="txtEditLeverandorTelefon" style="width:250px" type="text" /></a>
+                                                    <br />
+                                                    Text : <br /><textarea id="txtEditText" style="width:250px;height:50px;" cols="20" name="S2" rows="2"></textarea>
+                                                </td>
+                                                <td>
+                                                    &nbsp;<div>Denne Leverandørens Merker :</div><select id="txtListLeverandorMerker" onchange="return false;" style="height:200px;width:250px" multiple="multiple" name="D5">
+                                                        <option></option>
+                                                    </select><br />
+                                                    <select id="drpEditLeverandorMerker" name="D6">
+                                                        <option></option>
+                                                    </select><input style="height:18px;width:50px;text-size-adjust:20%;" onclick="DoAddMerker(); DoInsertLeverandor();" id="Button1" type="button" value="Legg til" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input id="butUpdateLev" style="visibility:hidden;" onclick="DoInsertLeverandor()" type="button" value="Oppdater" />
+
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <!-- /Leverandører -->
+</body>
+</html>

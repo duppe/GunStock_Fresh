@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Editor</title>
+</head>
+<body>
+    <h1>JSON Editor</h1>
+    <div>
+        <label for="jsonInput">JSON-streng:</label>
+        <textarea id="jsonInput" rows="10"></textarea>
+        <button id="loadButton">Last inn JSON</button>
+    </div>
+    <div>
+        <label for="arraySelector">Velg en array:</label>
+        <select id="arraySelector"></select>
+    </div>
+    <div>
+        <label for="elementList">Elementer i array:</label>
+        <select id="elementList" multiple></select>
+    </div>
+    <div>
+        <label for="editField">Rediger element:</label>
+        <input type="text" id="editField">
+    </div>
+    <div>
+        <button id="updateButton">Oppdater</button>
+        <button id="deleteButton">Slett</button>
+        <button id="addArrayButton">Legg til Array</button>
+        <button id="addElementButton">Legg til Element</button>
+    </div>
+    <div>
+        <label for="jsonOutput">JSON-data:</label>
+        <textarea id="jsonOutput" rows="10"></textarea>
+    </div>
+
+    <script>
+        let json = {};
+
+        const jsonInput = document.getElementById('jsonInput');
+        const loadButton = document.getElementById('loadButton');
+        const arraySelector = document.getElementById('arraySelector');
+        const elementList = document.getElementById('elementList');
+        const editField = document.getElementById('editField');
+        const updateButton = document.getElementById('updateButton');
+        const deleteButton = document.getElementById('deleteButton');
+        const addArrayButton = document.getElementById('addArrayButton');
+        const addElementButton = document.getElementById('addElementButton');
+        const jsonOutput = document.getElementById('jsonOutput');
+
+        // Last inn JSON-data fra tekststrengen
+        loadButton.addEventListener('click', () => {
+            try {
+                json = JSON.parse(jsonInput.value);
+                updateArraySelector();
+                updateJsonOutput();
+            } catch (error) {
+                console.error('Feil ved innlesning av JSON:', error);
+            }
+        });
+
+        // Oppdater dropdown med arraynavn
+        function updateArraySelector() {
+            arraySelector.innerHTML = '';
+            for (const key in json) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = key;
+                arraySelector.appendChild(option);
+            }
+        }
+
+        // Oppdater listeboksen med elementer når array endres
+        arraySelector.addEventListener('change', () => {
+            const selectedArray = arraySelector.value;
+            const elements = json[selectedArray];
+            elementList.innerHTML = '';
+            elements.forEach((element) => {
+                const option = document.createElement('option');
+                option.value = element;
+                option.textContent = element;
+                elementList.appendChild(option);
+            });
+        });
+
+        // Oppdater JSON-data når elementer endres
+        updateButton.addEventListener('click', () => {
+            const selectedArray = arraySelector.value;
+            const selectedIndex = elementList.selectedIndex;
+            const newValue = editField.value;
+
+            if (selectedArray && selectedIndex >= 0) {
+                json[selectedArray][selectedIndex] = newValue;
+                updateJsonOutput();
+            }
+        });
+
+        // Slett valgte elementer
+        deleteButton.addEventListener('click', () => {
+            const selectedArray = arraySelector.value;
+            const selectedIndex = elementList.selectedIndex;
+
+            if (selectedArray && selectedIndex >= 0) {
+                json[selectedArray].splice(selectedIndex, 1);
+                elementList.remove(selectedIndex);
+                updateJsonOutput();
+            }
+        });
+
+        // Legg til nytt array
+        addArrayButton.addEventListener('click', () => {
+            const newArrayName = prompt('Skriv inn navnet på det nye arrayet:');
+            if (newArrayName) {
+                json[newArrayName] = [];
+                updateArraySelector();
+                updateJsonOutput();
+            }
+        });
+
+        // Legg til nytt element
+        addElementButton.addEventListener('click', () => {
+            const selectedArray = arraySelector.value;
+            const newValue = prompt('Skriv inn det nye elementet:');
+            if (selectedArray && newValue) {
+                json[selectedArray].push(newValue);
+                updateArraySelector();
+                updateJsonOutput();
+            }
+        });
+
+        // Oppdater JSON-utdata
+        function updateJsonOutput() {
+            jsonOutput.value = JSON.stringify(json, null, 2);
+            jsonInput.value = jsonOutput.value;
+        }
+    </script>
+</body>
+</html>

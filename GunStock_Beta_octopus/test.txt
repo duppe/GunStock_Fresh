@@ -1,0 +1,3 @@
+Bestilt == MottaksDato
+Dato  == Status oppdatert
+DatoOprettet == 'Oppretteet Dato'

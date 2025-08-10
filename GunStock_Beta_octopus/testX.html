@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generate XLSX File from HTML</title>
+</head>
+<body>
+    <h1>Generate XLSX File from HTML</h1>
+    <p>Enter your HTML code below:</p>
+    <textarea id="html-input" rows="10" cols="50"></textarea>
+    <br>
+    <button id="generate-button">Generate XLSX File</button>
+
+    <script>
+        const generateButton = document.getElementById('generate-button');
+
+        generateButton.addEventListener('click', function () {
+            const html = document.getElementById('html-input').value;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://infoteknikk.net/api/Xlsx/');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    const blob = new Blob([xhr.response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                    const url = window.URL.createObjectURL(blob);
+
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'file.xlsx';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            };
+
+            xhr.send(JSON.stringify(html));
+        });
+    </script>
+</body>
+</html> 

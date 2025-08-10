@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="view" v-cloak>
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-10">
+                    <h5>Dokumentasjon Upload</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <dropzone id="uploadDropZone" url="/Home/SubmitFile?Dokumentasjon=w"
+                      :use-custom-dropzone-options="useUploadOptions"
+                      :dropzone-options="uploadOptions" v-on:vdropzone-success="onUploaded"
+                      v-on:vdropzone-error="onUploadError">
+                <!-- Optional parameters if any! -->
+                <input type="hidden" name="token" value="xxx">
+                <input type="text" name="Dokumentasjon" value="Test">
+            </dropzone>
+        </div>
+    </div>
+   
+</div>
+<script type="text/javascript">
+</script>
+<script type="text/javascript" src="~/dest/js/home.bundle.js" asp-append-version="true"></script>

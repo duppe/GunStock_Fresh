@@ -1,0 +1,65 @@
+﻿	
+					<div id="Rapport" class="article">
+
+						<section class="panel">
+							<header class="panel-heading">
+								<div class="panel-actions">
+									<a href="#" class="fa fa-caret-down"></a>
+									<a href="#" class="fa fa-times"></a>
+								</div>
+
+								<h2 class="panel-title">Rapport</h2>
+								<div id="RapportID0">
+									Type Rapport
+									<select id="drpRapportLager" name="D11">
+										<option></option>
+									</select>&nbsp;Periode
+									<select id="drpRapportPeriode" name="D12">
+										<option value="1">Kvartal 1 (Jan - Mar)</option>
+										<option value="2">Kvartal 2 (Apr - Jun)</option>
+										<option value="3">Kvartal 3 (Jul - Sep)</option>
+										<option value="4">Kvartal 4 (Okt - Des)</option>
+										<option value="5">År</option>
+									</select> År
+									<select id="drpRapportAr" name="D13">
+										<option value="%">Alle</option>
+										<option value="2017">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019">2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+										<option value="2022">2022</option>
+										<option value="2023">2023</option>
+										<option value="2024">2024</option>
+										<option value="2025">2025</option>
+									</select>
+									<br />
+									<select hidden="hidden" id="drpKunde" name="D14">
+
+										<option value="Sør-Øst Politidistrikt">Sør-Øst Politidistrikt</option>
+										<option value="Brownells Norge A/S">Brownells Norge A/S</option>
+										<option value="">Velg</option>
+									</select>
+									<br />
+									<div>
+										<input id="Button3" onclick="DoFillRapport()" type="button" value="Skriv Skjerm" />
+										<input id="Button2" onclick="DoPrintRapport()" type="button" value="Skriv ut" />
+										<input id="Button21" onclick="DoXlsx()" type="button" value="Skriv Excel fil" />
+										<input id="BtnShowCustomers" onclick="toggleCustomersDropdown()" type="button" value="Velg kunde" />
+										<input hidden="hidden" id="Button4" onclick="DoFill('drpRapportLager', 7, '', 1)" type="button" value="Send til mail" />
+									</div>
+
+
+								</div>
+
+
+							</header>
+					
+							<div style="font-size:6px" id="Rapporten"></div>
+
+						</section>
+
+
+
+
+					</div>

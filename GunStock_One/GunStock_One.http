@@ -1,0 +1,6 @@
+@GunStock_One_HostAddress = http://localhost:5033
+
+GET {{GunStock_One_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
